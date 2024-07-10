@@ -1,6 +1,6 @@
 //
-//  MKLoRaWAN-MTETests.m
-//  MKLoRaWAN-MTETests
+//  MKLoRaWAN-MTEETests.m
+//  MKLoRaWAN-MTEETests
 //
 //  Created by lovexiaoxia on 07/02/2024.
 //  Copyright (c) 2024 lovexiaoxia. All rights reserved.

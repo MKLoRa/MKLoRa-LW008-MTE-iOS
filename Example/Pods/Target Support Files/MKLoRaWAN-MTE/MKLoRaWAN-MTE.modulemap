@@ -1,0 +1,6 @@
+framework module MKLoRaWAN_MTE {
+  umbrella header "MKLoRaWAN-MTE-umbrella.h"
+
+  export *
+  module * { export * }
+}

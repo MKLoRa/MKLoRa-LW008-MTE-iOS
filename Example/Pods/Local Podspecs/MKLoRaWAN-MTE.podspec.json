@@ -1,0 +1,1124 @@
+{
+  "name": "MKLoRaWAN-MTE",
+  "version": "0.0.3",
+  "summary": "LW008-MT.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/MKLoRa/LW008-MT-iOS",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "aadyx2007@163.com": "aadyx2007@163.com"
+  },
+  "source": {
+    "git": "https://github.com/MKLoRa/LW008-MT-iOS.git",
+    "tag": "0.0.3"
+  },
+  "platforms": {
+    "ios": "14.0"
+  },
+  "resource_bundles": {
+    "MKLoRaWAN-MTE": [
+      "MKLoRaWAN-MTE/Assets/*.png"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "CTMediator",
+      "source_files": "MKLoRaWAN-MTE/Classes/CTMediator/**",
+      "dependencies": {
+        "MKBaseModuleLibrary": [
+
+        ],
+        "CTMediator": [
+
+        ]
+      }
+    },
+    {
+      "name": "DatabaseManager",
+      "dependencies": {
+        "MKBaseModuleLibrary": [
+
+        ],
+        "FMDB": [
+
+        ]
+      },
+      "subspecs": [
+        {
+          "name": "SyncDatabase",
+          "source_files": "MKLoRaWAN-MTE/Classes/DatabaseManager/SyncDatabase/**"
+        },
+        {
+          "name": "LogDatabase",
+          "source_files": "MKLoRaWAN-MTE/Classes/DatabaseManager/LogDatabase/**"
+        }
+      ]
+    },
+    {
+      "name": "SDK",
+      "source_files": "MKLoRaWAN-MTE/Classes/SDK/**",
+      "dependencies": {
+        "MKBaseBleModule": [
+
+        ]
+      }
+    },
+    {
+      "name": "Target",
+      "source_files": "MKLoRaWAN-MTE/Classes/Target/**",
+      "dependencies": {
+        "MKLoRaWAN-MTE/Functions": [
+
+        ]
+      }
+    },
+    {
+      "name": "ConnectModule",
+      "source_files": "MKLoRaWAN-MTE/Classes/ConnectModule/**",
+      "dependencies": {
+        "MKLoRaWAN-MTE/SDK": [
+
+        ],
+        "MKBaseModuleLibrary": [
+
+        ]
+      }
+    },
+    {
+      "name": "Expand",
+      "dependencies": {
+        "MKBaseModuleLibrary": [
+
+        ],
+        "MKCustomUIModule": [
+
+        ]
+      },
+      "subspecs": [
+        {
+          "name": "TextButtonCell",
+          "source_files": "MKLoRaWAN-MTE/Classes/Expand/TextButtonCell/**"
+        },
+        {
+          "name": "FilterCell",
+          "subspecs": [
+            {
+              "name": "FilterBeaconCell",
+              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterBeaconCell/**"
+            },
+            {
+              "name": "FilterByRawDataCell",
+              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterByRawDataCell/**"
+            },
+            {
+              "name": "FilterEditSectionHeaderView",
+              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterEditSectionHeaderView/**"
+            },
+            {
+              "name": "FilterNormalTextFieldCell",
+              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterNormalTextFieldCell/**"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Functions",
+      "dependencies": {
+        "MKLoRaWAN-MTE/SDK": [
+
+        ],
+        "MKLoRaWAN-MTE/DatabaseManager": [
+
+        ],
+        "MKLoRaWAN-MTE/CTMediator": [
+
+        ],
+        "MKLoRaWAN-MTE/ConnectModule": [
+
+        ],
+        "MKLoRaWAN-MTE/Expand": [
+
+        ],
+        "MKBaseModuleLibrary": [
+
+        ],
+        "MKCustomUIModule": [
+
+        ],
+        "HHTransition": [
+
+        ],
+        "MLInputDodger": [
+
+        ],
+        "iOSDFULibrary": [
+          "4.13.0"
+        ]
+      },
+      "subspecs": [
+        {
+          "name": "AboutPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/AboutPage/Controller/**"
+            }
+          ]
+        },
+        {
+          "name": "AuxiliaryPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/AuxiliaryPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/DownlinkPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/VibrationPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/ManDownPage/Controller": [
+
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "AxisSettingPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/AxisSettingPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/AxisSettingPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/AxisSettingPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "BatteryConsumptionPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BatteryConsumptionPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/BatteryConsumptionPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/BatteryConsumptionPage/View": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BatteryConsumptionPage/Model/**"
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BatteryConsumptionPage/View/**"
+            }
+          ]
+        },
+        {
+          "name": "BleFixPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BleFixPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/BleFixPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/BleFixPage/View": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/FilterPages": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BleFixPage/Model/**"
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BleFixPage/View/**"
+            }
+          ]
+        },
+        {
+          "name": "BleSettingsPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BleSettingsPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/BleSettingsPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/BleSettingsPage/View": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BleSettingsPage/Model/**"
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/BleSettingsPage/View/**"
+            }
+          ]
+        },
+        {
+          "name": "DebuggerPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DebuggerPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/DebuggerPage/View": [
+
+                ]
+              }
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DebuggerPage/View/**"
+            }
+          ]
+        },
+        {
+          "name": "DeviceInfoPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DeviceInfoPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/DeviceInfoPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/UpdatePage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/SelftestPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/DebuggerPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/BatteryConsumptionPage/Controller": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DeviceInfoPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "DeviceModePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DeviceModePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/StandbyModePage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/TimingModePage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/PeriodicModePage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/MotionModePage/Controller": [
+
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "DeviceSettingPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DeviceSettingPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/DeviceSettingPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/SynDataPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/IndicatorSettingsPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/DeviceInfoPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/OnOffSettingsPage/Controller": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DeviceSettingPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "DownlinkPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DownlinkPage/Controller/**"
+            }
+          ]
+        },
+        {
+          "name": "FilterPages",
+          "subspecs": [
+            {
+              "name": "FilterByAdvNamePage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByAdvNamePage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByAdvNamePage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByAdvNamePage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByBeaconPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBeaconPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Header": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Header",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBeaconPage/Header/**"
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBeaconPage/Model/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Header": [
+
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "FilterByMacPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByMacPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByMacPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByMacPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByOtherPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByOtherPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByOtherPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByOtherPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByPirPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByPirPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByPirPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByPirPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByRawDataPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByRawDataPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByRawDataPage/Model": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByUIDPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByURLPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTLMPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTofPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPButtonPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPTagPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByOtherPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByPirPage/Controller": [
+
+                    ],
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByRawDataPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByTofPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTofPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTofPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTofPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByTLMPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTLMPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTLMPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTLMPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByUIDPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByUIDPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByUIDPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByUIDPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByURLPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByURLPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByURLPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByURLPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByBXPButtonPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPButtonPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPButtonPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPButtonPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByBXPSensorInfoPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPSensorInfoPage/Model/**"
+                }
+              ]
+            },
+            {
+              "name": "FilterByBXPTagPage",
+              "subspecs": [
+                {
+                  "name": "Controller",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPTagPage/Controller/**",
+                  "dependencies": {
+                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPTagPage/Model": [
+
+                    ]
+                  }
+                },
+                {
+                  "name": "Model",
+                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPTagPage/Model/**"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "GeneralPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/GeneralPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/GeneralPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/DeviceModePage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/AuxiliaryPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/BleSettingsPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/AxisSettingPage/Controller": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/GeneralPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "IndicatorSettingsPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/IndicatorSettingsPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/IndicatorSettingsPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/IndicatorSettingsPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "LCGpsFixPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LCGpsFixPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/LCGpsFixPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LCGpsFixPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "LoRaApplicationPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LoRaApplicationPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/LoRaApplicationPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/MessageTypePage/Controller": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LoRaApplicationPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "LoRaPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LoRaPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/LoRaPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/LoRaSettingPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/LoRaApplicationPage/Controller": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LoRaPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "LoRaSettingPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LoRaSettingPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/LoRaSettingPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/LoRaSettingPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "ManDownPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/ManDownPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/ManDownPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/ManDownPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "MessageTypePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/MessageTypePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/MessageTypePage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/MessageTypePage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "MotionModePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/MotionModePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/MotionModePage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/MotionModePage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "OnOffSettingsPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/OnOffSettingsPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/OnOffSettingsPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/OnOffSettingsPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "OutdoorFixPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/OutdoorFixPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/OutdoorFixPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/OutdoorFixPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "PeriodicModePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/PeriodicModePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/PeriodicModePage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/PeriodicModePage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "PositionPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/PositionPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/PositionPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/BleFixPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/LCGpsFixPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/OutdoorFixPage/Controller": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/PositionPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "ScanPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/ScanPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/ScanPage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/ScanPage/View": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/TabBarPage/Controller": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/ScanPage/Model/**"
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/ScanPage/View/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/ScanPage/Model": [
+
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "SelftestPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/SelftestPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/SelftestPage/View": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/SelftestPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/SelftestPage/View/**"
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/SelftestPage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "StandbyModePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/StandbyModePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/StandbyModePage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/StandbyModePage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "SynDataPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/SynDataPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/SynDataPage/View": [
+
+                ]
+              }
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/SynDataPage/View/**"
+            }
+          ]
+        },
+        {
+          "name": "TabBarPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TabBarPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/LoRaPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/PositionPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/GeneralPage/Controller": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/DeviceSettingPage/Controller": [
+
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "TimingModePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimingModePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/TimingModePage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/TimingModePage/View": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimingModePage/Model/**"
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimingModePage/View/**"
+            }
+          ]
+        },
+        {
+          "name": "UpdatePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/UpdatePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/UpdatePage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/UpdatePage/Model/**"
+            }
+          ]
+        },
+        {
+          "name": "VibrationPage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/VibrationPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/VibrationPage/Model": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/VibrationPage/Model/**"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

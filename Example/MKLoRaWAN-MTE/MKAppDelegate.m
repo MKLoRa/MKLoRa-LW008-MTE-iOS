@@ -1,6 +1,6 @@
 //
 //  MKAppDelegate.m
-//  MKLoRaWAN-MTE
+//  MKLoRaWAN-MTEE
 //
 //  Created by lovexiaoxia on 07/02/2024.
 //  Copyright (c) 2024 lovexiaoxia. All rights reserved.
@@ -8,11 +8,19 @@
 
 #import "MKAppDelegate.h"
 
+#import "MKMUScanController.h"
+
 @implementation MKAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    _window.backgroundColor = [UIColor whiteColor];
+    MKMUScanController *vc = [[MKMUScanController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    _window.rootViewController = nav;
+    [_window makeKeyAndVisible];
     return YES;
 }
 
