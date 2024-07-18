@@ -173,7 +173,7 @@ MKTextButtonCellDelegate>
     MKTextButtonCellModel *cellModel = [[MKTextButtonCellModel alloc] init];
     cellModel.index = 0;
     cellModel.msg = @"Device Mode";
-    cellModel.dataList = @[@"Standby Mode",@"Timing Mode",@"Periodic Mode",@"Motion Mode"];
+    cellModel.dataList = @[@"Standby Mode",@"Periodic Mode",@"Timing Mode",@"Motion Mode"];
     cellModel.dataListIndex = 2;
     [self.section0List addObject:cellModel];
 }

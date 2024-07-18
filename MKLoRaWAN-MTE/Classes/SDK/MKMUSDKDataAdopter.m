@@ -303,9 +303,9 @@
     switch (deviceMode) {
         case mk_mu_deviceMode_standbyMode:
             return @"01";
-        case mk_mu_deviceMode_timingMode:
-            return @"02";
         case mk_mu_deviceMode_periodicMode:
+            return @"02";
+        case mk_mu_deviceMode_timingMode:
             return @"03";
         case mk_mu_deviceMode_motionMode:
             return @"04";

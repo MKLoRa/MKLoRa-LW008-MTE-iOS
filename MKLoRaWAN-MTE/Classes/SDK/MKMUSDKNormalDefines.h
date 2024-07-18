@@ -17,8 +17,8 @@ typedef NS_ENUM(NSInteger, mk_mu_centralManagerStatus) {
 
 typedef NS_ENUM(NSInteger, mk_mu_deviceMode) {
     mk_mu_deviceMode_standbyMode,         //Standby mode
-    mk_mu_deviceMode_timingMode,          //Timing mode
     mk_mu_deviceMode_periodicMode,        //Periodic mode
+    mk_mu_deviceMode_timingMode,          //Timing mode
     mk_mu_deviceMode_motionMode,          //Motion Mode
 };
 
