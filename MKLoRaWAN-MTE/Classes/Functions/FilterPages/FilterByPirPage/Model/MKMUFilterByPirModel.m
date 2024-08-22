@@ -41,6 +41,10 @@
             [self operationFailedBlockWithMsg:@"Read Detection Status Error" block:failedBlock];
             return;
         }
+        if (![self readPirDoorStatus]) {
+            [self operationFailedBlockWithMsg:@"Read Pir Door Status Error" block:failedBlock];
+            return;
+        }
         if (![self readFilterMajor]) {
             [self operationFailedBlockWithMsg:@"Read Filter By Major Error" block:failedBlock];
             return;
@@ -78,6 +82,10 @@
         }
         if (![self configDetection]) {
             [self operationFailedBlockWithMsg:@"Config Detection Status Error" block:failedBlock];
+            return;
+        }
+        if (![self configPirDoorStatus]) {
+            [self operationFailedBlockWithMsg:@"Config Pir Door Status Error" block:failedBlock];
             return;
         }
         if (![self configFilterMajor]) {
@@ -190,6 +198,31 @@
 - (BOOL)configDetection {
     __block BOOL success = NO;
     [MKMUInterface mu_configFilterByPirDetectionStatus:self.detection sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readPirDoorStatus {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readFilterByPirDoorStatusWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.doorStatus = [returnData[@"result"][@"status"] integerValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configPirDoorStatus {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configFilterByPirDoorStatus:self.doorStatus sucBlock:^{
         success = YES;
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {

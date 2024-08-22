@@ -14,7 +14,7 @@
 
 #import "MKCustomUIAdopter.h"
 
-static CGFloat const buttonWidth = 40.f;
+static CGFloat const buttonWidth = 45.f;
 static CGFloat const buttonHeight = 50.f;
 static CGFloat const offset_X = 15.f;
 static CGFloat const buttonSpace = 10.f;

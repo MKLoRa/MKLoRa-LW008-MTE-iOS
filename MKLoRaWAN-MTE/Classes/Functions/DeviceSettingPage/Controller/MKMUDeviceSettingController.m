@@ -235,8 +235,8 @@ MKTextFieldCellDelegate>
     if (index == 0) {
         //Current Time Zone
         MKTextButtonCellModel *cellModel = self.section2List[0];
-        cellModel.dataListIndex = index;
-        self.dataModel.timeZone = index;
+        cellModel.dataListIndex = dataListIndex;
+        self.dataModel.timeZone = dataListIndex;
         return;
     }
 }
@@ -251,6 +251,20 @@ MKTextFieldCellDelegate>
         MKTextSwitchCellModel *cellModel = self.section3List[0];
         cellModel.isOn = isOn;
         self.dataModel.lowPowerPayload = isOn;
+        return;
+    }
+}
+
+#pragma mark - MKTextFieldCellDelegate
+/// textField内容发送改变时的回调事件
+/// @param index 当前cell所在的index
+/// @param value 当前textField的值
+- (void)mk_deviceTextCellValueChanged:(NSInteger)index textValue:(NSString *)value {
+    if (index == 0) {
+        //Low-power Report Interval
+        self.dataModel.interval = value;
+        MKTextFieldCellModel *cellModel = self.section4List[0];
+        cellModel.textFieldValue = value;
         return;
     }
 }

@@ -1835,7 +1835,7 @@ static NSInteger const maxDataLen = 100;
 + (void)mu_configBlePositioningNumberOfMac:(NSInteger)number
                                   sucBlock:(void (^)(void))sucBlock
                                failedBlock:(void (^)(NSError *error))failedBlock {
-    if (number < 1 || number > 5) {
+    if (number < 1 || number > 15) {
         [MKBLEBaseSDKAdopter operationParamsErrorBlock:failedBlock];
         return;
     }
