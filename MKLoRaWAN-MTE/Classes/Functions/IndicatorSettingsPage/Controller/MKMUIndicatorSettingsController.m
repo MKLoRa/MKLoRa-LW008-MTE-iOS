@@ -116,20 +116,27 @@ mk_textSwitchCellDelegate>
         return;
     }
     if (index == 2) {
+        //Bluetooth Broadcast
+        self.dataModel.Broadcast = isOn;
+        MKTextSwitchCellModel *cellModel = self.section0List[2];
+        cellModel.isOn = isOn;
+        return;
+    }
+    if (index == 3) {
         //In  Fix
         self.dataModel.InFix = isOn;
         MKTextSwitchCellModel *cellModel = self.section1List[0];
         cellModel.isOn = isOn;
         return;
     }
-    if (index == 3) {
+    if (index == 4) {
         //Fix Successful
         self.dataModel.FixSuccessful = isOn;
         MKTextSwitchCellModel *cellModel = self.section1List[1];
         cellModel.isOn = isOn;
         return;
     }
-    if (index == 4) {
+    if (index == 5) {
         //Fail To Fix
         self.dataModel.FailToFix = isOn;
         MKTextSwitchCellModel *cellModel = self.section1List[2];
@@ -192,23 +199,29 @@ mk_textSwitchCellDelegate>
     cellModel2.msg = @"Network Check";
     cellModel2.isOn = self.dataModel.NetworkCheck;
     [self.section0List addObject:cellModel2];
+    
+    MKTextSwitchCellModel *cellModel3 = [[MKTextSwitchCellModel alloc] init];
+    cellModel3.index = 2;
+    cellModel3.msg = @"Bluetooth Broadcast";
+    cellModel3.isOn = self.dataModel.Broadcast;
+    [self.section0List addObject:cellModel3];
 }
 
 - (void)loadSection1Datas {
     MKTextSwitchCellModel *cellModel1 = [[MKTextSwitchCellModel alloc] init];
-    cellModel1.index = 2;
+    cellModel1.index = 3;
     cellModel1.msg = @"In Fix";
     cellModel1.isOn = self.dataModel.InFix;
     [self.section1List addObject:cellModel1];
     
     MKTextSwitchCellModel *cellModel2 = [[MKTextSwitchCellModel alloc] init];
-    cellModel2.index = 3;
+    cellModel2.index = 4;
     cellModel2.msg = @"Fix Successful";
     cellModel2.isOn = self.dataModel.FixSuccessful;
     [self.section1List addObject:cellModel2];
     
     MKTextSwitchCellModel *cellModel3 = [[MKTextSwitchCellModel alloc] init];
-    cellModel3.index = 4;
+    cellModel3.index = 5;
     cellModel3.msg = @"Fail To Fix";
     cellModel3.isOn = self.dataModel.FailToFix;
     [self.section1List addObject:cellModel3];

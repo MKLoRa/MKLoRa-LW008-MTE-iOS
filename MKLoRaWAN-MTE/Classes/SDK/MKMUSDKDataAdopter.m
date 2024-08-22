@@ -389,12 +389,14 @@
     BOOL inFix = [[binary substringWithRange:NSMakeRange(5, 1)] isEqualToString:@"1"];
     BOOL fixSuccessful = [[binary substringWithRange:NSMakeRange(4, 1)] isEqualToString:@"1"];
     BOOL failToFix = [[binary substringWithRange:NSMakeRange(3, 1)] isEqualToString:@"1"];
+    BOOL broadcast = [[binary substringWithRange:NSMakeRange(2, 1)] isEqualToString:@"1"];
     return @{
         @"lowPower":@(LowPower),
         @"networkCheck":@(networkCheck),
         @"inFix":@(inFix),
         @"fixSuccessful":@(fixSuccessful),
         @"failToFix":@(failToFix),
+        @"broadcast":@(broadcast)
     };
 }
 
@@ -407,8 +409,9 @@
     NSString *InFix = (protocol.InFix ? @"1" : @"0");
     NSString *FixSuccessful = (protocol.FixSuccessful ? @"1" : @"0");
     NSString *FailToFix = (protocol.FailToFix ? @"1" : @"0");
+    NSString *Broadcast = (protocol.Broadcast ? @"1" : @"0");
     
-    NSString *string = [NSString stringWithFormat:@"%@%@%@%@%@%@",@"000",FailToFix,FixSuccessful,InFix,NetworkCheck,LowPower];
+    NSString *string = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",@"00",Broadcast,FailToFix,FixSuccessful,InFix,NetworkCheck,LowPower];
     
     return [MKBLEBaseSDKAdopter getHexByBinary:string];
 }

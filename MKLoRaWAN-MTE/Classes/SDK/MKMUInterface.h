@@ -84,6 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
     @"inFix":@(YES),
     @"fixSuccessful":@(NO),
     @"failToFix":@(YES),
+    @"broadcast":@(YES),
  }
  */
 /// @param sucBlock Success callback

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign)BOOL LowPower;
 @property (nonatomic, assign)BOOL NetworkCheck;
+@property (nonatomic, assign)BOOL Broadcast;
 @property (nonatomic, assign)BOOL InFix;
 @property (nonatomic, assign)BOOL FixSuccessful;
 @property (nonatomic, assign)BOOL FailToFix;

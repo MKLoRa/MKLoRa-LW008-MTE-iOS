@@ -1,5 +1,5 @@
 //
-//  Target_LoRaWANmu_Module.h
+//  Target_LoRaWANMU_Module.h
 //  MKLoRaWAN-MTE_Example
 //
 //  Created by aa on 2024/7/2.
@@ -10,13 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Target_LoRaWANmu_Module : NSObject
+@interface Target_LoRaWANMU_Module : NSObject
 
 /// 扫描页面
-- (UIViewController *)Action_LoRaWANmu_Module_ScanController:(NSDictionary *)params;
+- (UIViewController *)Action_LoRaWANMU_Module_ScanController:(NSDictionary *)params;
 
 /// 关于页面
-- (UIViewController *)Action_LoRaWANmu_Module_AboutController:(NSDictionary *)params;
+- (UIViewController *)Action_LoRaWANMU_Module_AboutController:(NSDictionary *)params;
 
 @end
 

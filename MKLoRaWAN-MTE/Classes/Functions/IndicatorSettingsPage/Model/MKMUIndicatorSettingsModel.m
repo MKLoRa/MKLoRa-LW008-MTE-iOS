@@ -60,6 +60,7 @@
         self.InFix = [returnData[@"result"][@"indicatorSettings"][@"inFix"] boolValue];
         self.FixSuccessful = [returnData[@"result"][@"indicatorSettings"][@"fixSuccessful"] boolValue];
         self.FailToFix = [returnData[@"result"][@"indicatorSettings"][@"failToFix"] boolValue];
+        self.Broadcast = [returnData[@"result"][@"indicatorSettings"][@"broadcast"] boolValue];
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {
         dispatch_semaphore_signal(self.semaphore);

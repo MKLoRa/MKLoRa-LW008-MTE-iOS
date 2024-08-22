@@ -149,6 +149,7 @@ typedef NS_ENUM(NSInteger, mk_mu_delayResponseStatus) {
 
 @property (nonatomic, assign)BOOL LowPower;
 @property (nonatomic, assign)BOOL NetworkCheck;
+@property (nonatomic, assign)BOOL Broadcast;
 @property (nonatomic, assign)BOOL InFix;
 @property (nonatomic, assign)BOOL FixSuccessful;
 @property (nonatomic, assign)BOOL FailToFix;
