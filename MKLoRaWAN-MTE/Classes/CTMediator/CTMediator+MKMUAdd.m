@@ -12,7 +12,7 @@
 
 @implementation CTMediator (MKMUAdd)
 
-- (UIViewController *)CTMediator_LORAWAN_mu_AboutPage {
+- (UIViewController *)CTMediator_LORAWAN_MU_AboutPage {
     UIViewController *viewController = [self performTarget:kTarget_loRaApp_la_module
                                                     action:kAction_loRaApp_la_aboutPage
                                                     params:@{}
