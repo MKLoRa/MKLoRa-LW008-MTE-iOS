@@ -12,7 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MKMUOnOffSettingsModel : NSObject
 
+/// 0:Multiple approaches   1:Continuous approach
+@property (nonatomic, assign)NSInteger onOffMethod;
+
+@property (nonatomic, assign)BOOL shutDownPayload;
+
 @property (nonatomic, assign)BOOL offByButton;
+
+@property (nonatomic, assign)BOOL autoPowerOn;
 
 - (void)readDataWithSucBlock:(void (^)(void))sucBlock failedBlock:(void (^)(NSError *error))failedBlock;
 

@@ -18,20 +18,16 @@
 
 #import "MKHudManager.h"
 #import "MKTextFieldCell.h"
-#import "MKTextSwitchCell.h"
 
 #import "MKMULCGpsFixModel.h"
 
 @interface MKMULCGpsFixController ()<UITableViewDelegate,
 UITableViewDataSource,
-MKTextFieldCellDelegate,
-mk_textSwitchCellDelegate>
+MKTextFieldCellDelegate>
 
 @property (nonatomic, strong)MKBaseTableView *tableView;
 
-@property (nonatomic, strong)NSMutableArray *section0List;
-
-@property (nonatomic, strong)NSMutableArray *section1List;
+@property (nonatomic, strong)NSMutableArray *dataList;
 
 @property (nonatomic, strong)MKMULCGpsFixModel *dataModel;
 
@@ -67,28 +63,20 @@ mk_textSwitchCellDelegate>
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return self.section0List.count;
+        return self.dataList.count;
     }
-    if (section == 1) {
-        return self.section1List.count;
-    }
+    
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        MKTextFieldCell *cell = [MKTextFieldCell initCellWithTableView:tableView];
-        cell.dataModel = self.section0List[indexPath.row];
-        cell.delegate = self;
-        return cell;
-    }
-    MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
-    cell.dataModel = self.section1List[indexPath.row];
+    MKTextFieldCell *cell = [MKTextFieldCell initCellWithTableView:tableView];
+    cell.dataModel = self.dataList[indexPath.row];
     cell.delegate = self;
     return cell;
 }
@@ -101,29 +89,15 @@ mk_textSwitchCellDelegate>
     if (index == 0) {
         //Positioning Timeout
         self.dataModel.timeout = value;
-        MKTextFieldCellModel *cellModel = self.section0List[0];
+        MKTextFieldCellModel *cellModel = self.dataList[0];
         cellModel.textFieldValue = value;
         return;
     }
     if (index == 1) {
         //PDOP
         self.dataModel.pdop = value;
-        MKTextFieldCellModel *cellModel = self.section0List[1];
+        MKTextFieldCellModel *cellModel = self.dataList[1];
         cellModel.textFieldValue = value;
-        return;
-    }
-}
-
-#pragma mark - mk_textSwitchCellDelegate
-/// 开关状态发生改变了
-/// @param isOn 当前开关状态
-/// @param index 当前cell所在的index
-- (void)mk_textSwitchCellStatusChanged:(BOOL)isOn index:(NSInteger)index {
-    if (index == 0) {
-        //Extrme Mode
-        self.dataModel.extrmeMode = isOn;
-        MKTextSwitchCellModel *cellModel = self.section1List[0];
-        cellModel.isOn = isOn;
         return;
     }
 }
@@ -160,7 +134,6 @@ mk_textSwitchCellDelegate>
 #pragma mark - loadSections
 - (void)loadSectionDatas {
     [self loadSection0Datas];
-    [self loadSection1Datas];
     
     [self.tableView reloadData];
 }
@@ -174,7 +147,7 @@ mk_textSwitchCellDelegate>
     cellModel1.textFieldType = mk_realNumberOnly;
     cellModel1.unit = @"s";
     cellModel1.maxLength = 3;
-    [self.section0List addObject:cellModel1];
+    [self.dataList addObject:cellModel1];
     
     MKTextFieldCellModel *cellModel2 = [[MKTextFieldCellModel alloc] init];
     cellModel2.index = 1;
@@ -184,15 +157,7 @@ mk_textSwitchCellDelegate>
     cellModel2.textFieldType = mk_realNumberOnly;
     cellModel2.unit = @"x0.1";
     cellModel2.maxLength = 3;
-    [self.section0List addObject:cellModel2];
-}
-
-- (void)loadSection1Datas {
-    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
-    cellModel.index = 0;
-    cellModel.msg = @"Extrme Mode";
-    cellModel.isOn = self.dataModel.extrmeMode;
-    [self.section1List addObject:cellModel];
+    [self.dataList addObject:cellModel2];
 }
 
 #pragma mark - UI
@@ -218,18 +183,11 @@ mk_textSwitchCellDelegate>
     return _tableView;
 }
 
-- (NSMutableArray *)section0List {
-    if (!_section0List) {
-        _section0List = [NSMutableArray array];
+- (NSMutableArray *)dataList {
+    if (!_dataList) {
+        _dataList = [NSMutableArray array];
     }
-    return _section0List;
-}
-
-- (NSMutableArray *)section1List {
-    if (!_section1List) {
-        _section1List = [NSMutableArray array];
-    }
-    return _section1List;
+    return _dataList;
 }
 
 - (MKMULCGpsFixModel *)dataModel {

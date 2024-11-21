@@ -33,10 +33,7 @@
             [self operationFailedBlockWithMsg:@"Read PDOP Error" block:failedBlock];
             return;
         }
-        if (![self readExtrmeMode]) {
-            [self operationFailedBlockWithMsg:@"Read Extrme Mode Error" block:failedBlock];
-            return;
-        }
+        
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();
@@ -59,10 +56,7 @@
             [self operationFailedBlockWithMsg:@"Config PDOP Error" block:failedBlock];
             return;
         }
-        if (![self configExtrmeMode]) {
-            [self operationFailedBlockWithMsg:@"Config Extrme Mode Error" block:failedBlock];
-            return;
-        }
+        
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();
@@ -113,31 +107,6 @@
 - (BOOL)configPDOP {
     __block BOOL success = NO;
     [MKMUInterface mu_configGPSFixPDOP:[self.pdop integerValue] sucBlock:^{
-        success = YES;
-        dispatch_semaphore_signal(self.semaphore);
-    } failedBlock:^(NSError * _Nonnull error) {
-        dispatch_semaphore_signal(self.semaphore);
-    }];
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    return success;
-}
-
-- (BOOL)readExtrmeMode {
-    __block BOOL success = NO;
-    [MKMUInterface mu_readGpsLimitUploadStatusWithSucBlock:^(id  _Nonnull returnData) {
-        success = YES;
-        self.extrmeMode = [returnData[@"result"][@"isOn"] boolValue];
-        dispatch_semaphore_signal(self.semaphore);
-    } failedBlock:^(NSError * _Nonnull error) {
-        dispatch_semaphore_signal(self.semaphore);
-    }];
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    return success;
-}
-
-- (BOOL)configExtrmeMode {
-    __block BOOL success = NO;
-    [MKMUInterface mu_configGpsLimitUploadStatus:self.extrmeMode sucBlock:^{
         success = YES;
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {

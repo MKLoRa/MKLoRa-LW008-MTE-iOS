@@ -41,6 +41,10 @@
             [self operationFailedBlockWithMsg:@"Read Tx Power Error" block:failedBlock];
             return;
         }
+        if (![self readAdvInterval]) {
+            [self operationFailedBlockWithMsg:@"Read Adv Interval Error" block:failedBlock];
+            return;
+        }
         if (![self readBeaconMode]) {
             [self operationFailedBlockWithMsg:@"Read Beacon Mode Error" block:failedBlock];
             return;
@@ -73,6 +77,10 @@
         }
         if (![self configTxPower]) {
             [self operationFailedBlockWithMsg:@"Config Tx Power Error" block:failedBlock];
+            return;
+        }
+        if (![self configAdvInterval]) {
+            [self operationFailedBlockWithMsg:@"Config Adv Interval Error" block:failedBlock];
             return;
         }
         if (![self configBeaconMode]) {
@@ -188,6 +196,31 @@
     return success;
 }
 
+- (BOOL)readAdvInterval {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readAdvIntervalWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.interval = returnData[@"result"][@"interval"];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configAdvInterval {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configAdvInterval:[self.interval integerValue] sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
 - (BOOL)readBeaconMode {
     __block BOOL success = NO;
     [MKMUInterface mu_readBeaconStatusWithSucBlock:^(id  _Nonnull returnData) {
@@ -228,6 +261,9 @@
         return NO;
     }
     if (!ValidStr(self.timeout) || [self.timeout integerValue] < 1 || [self.timeout integerValue] > 60) {
+        return NO;
+    }
+    if (!ValidStr(self.interval) || [self.interval integerValue] < 1 || [self.interval integerValue] > 100) {
         return NO;
     }
     return YES;

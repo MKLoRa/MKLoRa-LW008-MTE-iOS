@@ -13,8 +13,6 @@
 #import "MKMUInterface.h"
 #import "MKMUInterface+MKMUConfig.h"
 
-@implementation MKMUMotionModeEventsModel
-@end
 
 @interface MKMUMotionModeModel ()
 
@@ -28,8 +26,32 @@
 
 - (void)readDataWithSucBlock:(void (^)(void))sucBlock failedBlock:(void (^)(NSError *error))failedBlock {
     dispatch_async(self.readQueue, ^{
-        if (![self readMotionModeEvents]) {
-            [self operationFailedBlockWithMsg:@"Read Motion Mode Events Error" block:failedBlock];
+        if (![self readNotifyEventOnStart]) {
+            [self operationFailedBlockWithMsg:@"Read Notify Event On Start Error" block:failedBlock];
+            return;
+        }
+        if (![self readFixOnStart]) {
+            [self operationFailedBlockWithMsg:@"Read Fix On Start Error" block:failedBlock];
+            return;
+        }
+        if (![self readNotifyEventInTrip]) {
+            [self operationFailedBlockWithMsg:@"Read Notify Event In Trip Error" block:failedBlock];
+            return;
+        }
+        if (![self readFixInTrip]) {
+            [self operationFailedBlockWithMsg:@"Read Fix In Trip Error" block:failedBlock];
+            return;
+        }
+        if (![self readNotifyEventOnEnd]) {
+            [self operationFailedBlockWithMsg:@"Read Notify Event On End Error" block:failedBlock];
+            return;
+        }
+        if (![self readFixOnEnd]) {
+            [self operationFailedBlockWithMsg:@"Read Fix On End Error" block:failedBlock];
+            return;
+        }
+        if (![self readFixOnStationary]) {
+            [self operationFailedBlockWithMsg:@"Read Fix On Stationary Error" block:failedBlock];
             return;
         }
         if (![self readNumberOfFixOnStart]) {
@@ -86,8 +108,32 @@
             [self operationFailedBlockWithMsg:@"Opps！Save failed. Please check the input characters and try again." block:failedBlock];
             return;
         }
-        if (![self configMotionModeEvents]) {
-            [self operationFailedBlockWithMsg:@"Config Motion Mode Events Error" block:failedBlock];
+        if (![self configNotifyEventOnStart]) {
+            [self operationFailedBlockWithMsg:@"Config Notify Event On Start Error" block:failedBlock];
+            return;
+        }
+        if (![self configFixOnStart]) {
+            [self operationFailedBlockWithMsg:@"Config Fix On Start Error" block:failedBlock];
+            return;
+        }
+        if (![self configNotifyEventInTrip]) {
+            [self operationFailedBlockWithMsg:@"Config Notify Event In Trip Error" block:failedBlock];
+            return;
+        }
+        if (![self configFixInTrip]) {
+            [self operationFailedBlockWithMsg:@"Config Fix In Trip Error" block:failedBlock];
+            return;
+        }
+        if (![self configNotifyEventOnEnd]) {
+            [self operationFailedBlockWithMsg:@"Config Notify Event On End Error" block:failedBlock];
+            return;
+        }
+        if (![self configFixOnEnd]) {
+            [self operationFailedBlockWithMsg:@"Config Fix On End Error" block:failedBlock];
+            return;
+        }
+        if (![self configFixOnStationary]) {
+            [self operationFailedBlockWithMsg:@"Config Fix On Stationary Error" block:failedBlock];
             return;
         }
         if (![self configNumberOfFixOnStart]) {
@@ -139,17 +185,11 @@
 }
 
 #pragma mark - interface
-- (BOOL)readMotionModeEvents {
+- (BOOL)readNotifyEventOnStart {
     __block BOOL success = NO;
-    [MKMUInterface mu_readMotionModeEventsWithSucBlock:^(id  _Nonnull returnData) {
+    [MKMUInterface mu_readMotionModeEventsNotifyEventOnStartWithSucBlock:^(id  _Nonnull returnData) {
         success = YES;
-        self.notifyEventOnStart = [returnData[@"result"][@"notifyEventOnStart"] boolValue];
-        self.fixOnStart = [returnData[@"result"][@"fixOnStart"] boolValue];
-        self.notifyEventInTrip = [returnData[@"result"][@"notifyEventInTrip"] boolValue];
-        self.fixInTrip = [returnData[@"result"][@"fixInTrip"] boolValue];
-        self.notifyEventOnEnd = [returnData[@"result"][@"notifyEventOnEnd"] boolValue];
-        self.fixOnEnd = [returnData[@"result"][@"fixOnEnd"] boolValue];
-        self.fixOnStationary = [returnData[@"result"][@"fixOnStationaryState"] boolValue];
+        self.notifyEventOnStart = [returnData[@"result"][@"isOn"] boolValue];
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {
         dispatch_semaphore_signal(self.semaphore);
@@ -158,17 +198,159 @@
     return success;
 }
 
-- (BOOL)configMotionModeEvents {
+- (BOOL)configNotifyEventOnStart {
     __block BOOL success = NO;
-    MKMUMotionModeEventsModel *eventModel = [[MKMUMotionModeEventsModel alloc] init];
-    eventModel.notifyEventOnStart = self.notifyEventOnStart;
-    eventModel.fixOnStart = self.fixOnStart;
-    eventModel.notifyEventInTrip = self.notifyEventInTrip;
-    eventModel.fixInTrip = self.fixInTrip;
-    eventModel.notifyEventOnEnd = self.notifyEventOnEnd;
-    eventModel.fixOnEnd = self.fixOnEnd;
-    eventModel.fixOnStationaryState = self.fixOnStationary;
-    [MKMUInterface mu_configMotionModeEvents:eventModel sucBlock:^{
+    [MKMUInterface mu_configMotionModeEventsNotifyEventOnStart:self.notifyEventOnStart sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readFixOnStart {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readMotionModeEventsFixOnStartWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.fixOnStart = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configFixOnStart {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configMotionModeEventsFixOnStart:self.fixOnStart sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readNotifyEventInTrip {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readMotionModeEventsNotifyEventInTripWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.notifyEventInTrip = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configNotifyEventInTrip {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configMotionModeEventsNotifyEventInTrip:self.notifyEventInTrip sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readFixInTrip {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readMotionModeEventsFixInTripWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.fixInTrip = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configFixInTrip {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configMotionModeEventsFixInTrip:self.fixInTrip sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readNotifyEventOnEnd {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readMotionModeEventsNotifyEventOnEndWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.notifyEventOnEnd = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configNotifyEventOnEnd {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configMotionModeEventsNotifyEventOnEnd:self.notifyEventOnEnd sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readFixOnEnd {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readMotionModeEventsFixOnEndWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.fixOnEnd = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configFixOnEnd {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configMotionModeEventsFixOnEnd:self.fixOnEnd sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readFixOnStationary {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readMotionModeEventsFixOnStationaryStateWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.fixOnStationary = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configFixOnStationary {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configMotionModeEventsFixOnStationaryState:self.fixOnStationary sucBlock:^{
         success = YES;
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {

@@ -229,6 +229,7 @@ TODO: Add long description of the pod here.
         ssss.dependency 'MKLoRaWAN-MTE/Functions/TimingModePage/Controller'
         ssss.dependency 'MKLoRaWAN-MTE/Functions/PeriodicModePage/Controller'
         ssss.dependency 'MKLoRaWAN-MTE/Functions/MotionModePage/Controller'
+        ssss.dependency 'MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Controller'
       end
     end
     
@@ -345,7 +346,6 @@ TODO: Add long description of the pod here.
           sssss.dependency 'MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPTagPage/Controller'
           sssss.dependency 'MKLoRaWAN-MTE/Functions/FilterPages/FilterByOtherPage/Controller'
           sssss.dependency 'MKLoRaWAN-MTE/Functions/FilterPages/FilterByPirPage/Controller'
-          sssss.dependency 'MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller'
           
         end
       
@@ -416,19 +416,6 @@ TODO: Add long description of the pod here.
       
         ssss.subspec 'Model' do |sssss|
           sssss.source_files = 'MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPButtonPage/Model/**'
-        end
-      end
-      
-      sss.subspec 'FilterByBXPSensorInfoPage' do |ssss|
-        ssss.subspec 'Controller' do |sssss|
-          sssss.source_files = 'MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller/**'
-        
-          sssss.dependency 'MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Model'
-          
-        end
-      
-        ssss.subspec 'Model' do |sssss|
-          sssss.source_files = 'MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPSensorInfoPage/Model/**'
         end
       end
       
@@ -697,6 +684,24 @@ TODO: Add long description of the pod here.
         ssss.dependency 'MKLoRaWAN-MTE/Functions/PositionPage/Controller'
         ssss.dependency 'MKLoRaWAN-MTE/Functions/GeneralPage/Controller'
         ssss.dependency 'MKLoRaWAN-MTE/Functions/DeviceSettingPage/Controller'
+      end
+    end
+    
+    ss.subspec 'TimeSegmentedModePage' do |sss|
+      sss.subspec 'Controller' do |ssss|
+        ssss.source_files = 'MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/Controller/**'
+        
+        ssss.dependency 'MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Model'
+        ssss.dependency 'MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/View'
+        
+      end
+      
+      sss.subspec 'Model' do |ssss|
+        ssss.source_files = 'MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/Model/**'
+      end
+      
+      sss.subspec 'View' do |ssss|
+        ssss.source_files = 'MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/View/**'
       end
     end
     

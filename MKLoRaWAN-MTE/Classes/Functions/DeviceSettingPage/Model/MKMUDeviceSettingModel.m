@@ -37,6 +37,10 @@
             [self operationFailedBlockWithMsg:@"Read Low-power Report Interval Error" block:failedBlock];
             return;
         }
+        if (![self readLowPowerPrompt]) {
+            [self operationFailedBlockWithMsg:@"Read Low-power Prompt Error" block:failedBlock];
+            return;
+        }
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();
@@ -61,6 +65,10 @@
         }
         if (![self configLowPowerPayloadInterval]) {
             [self operationFailedBlockWithMsg:@"Config Low-power Report Interval Error" block:failedBlock];
+            return;
+        }
+        if (![self configLowPowerPrompt]) {
+            [self operationFailedBlockWithMsg:@"Config Low-power Prompt Error" block:failedBlock];
             return;
         }
         moko_dispatch_main_safe(^{
@@ -138,6 +146,31 @@
 - (BOOL)configLowPowerPayloadInterval {
     __block BOOL success = NO;
     [MKMUInterface mu_configLowPowerPayloadInterval:[self.interval integerValue] sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readLowPowerPrompt {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readLowPowerPromptWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.prompt = [returnData[@"result"][@"prompt"] integerValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configLowPowerPrompt {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configLowPowerPrompt:self.prompt sucBlock:^{
         success = YES;
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {

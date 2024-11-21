@@ -26,6 +26,7 @@
 #import "MKMUTimingModeController.h"
 #import "MKMUPeriodicModeController.h"
 #import "MKMUMotionModeController.h"
+#import "MKMUTimeSegmentedController.h"
 
 @interface MKMUDeviceModeController ()<UITableViewDelegate,
 UITableViewDataSource,
@@ -84,6 +85,12 @@ MKTextButtonCellDelegate>
     if (indexPath.section == 1 && indexPath.row == 3) {
         //Motion Mode
         MKMUMotionModeController *vc = [[MKMUMotionModeController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    if (indexPath.section == 1 && indexPath.row == 4) {
+        //Time-Segmented Mode
+        MKMUTimeSegmentedController *vc = [[MKMUTimeSegmentedController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
@@ -173,8 +180,9 @@ MKTextButtonCellDelegate>
     MKTextButtonCellModel *cellModel = [[MKTextButtonCellModel alloc] init];
     cellModel.index = 0;
     cellModel.msg = @"Device Mode";
-    cellModel.dataList = @[@"Standby Mode",@"Periodic Mode",@"Timing Mode",@"Motion Mode"];
+    cellModel.dataList = @[@"Standby Mode",@"Periodic Mode",@"Timing Mode",@"Motion Mode",@"Time-Segmented Mode"];
     cellModel.dataListIndex = 2;
+    cellModel.buttonLabelFont = MKFont(11.f);
     [self.section0List addObject:cellModel];
 }
 
@@ -198,6 +206,11 @@ MKTextButtonCellDelegate>
     cellModel4.leftMsg = @"Motion Mode";
     cellModel4.showRightIcon = YES;
     [self.section1List addObject:cellModel4];
+    
+    MKNormalTextCellModel *cellModel5 = [[MKNormalTextCellModel alloc] init];
+    cellModel5.leftMsg = @"Time-Segmented Mode";
+    cellModel5.showRightIcon = YES;
+    [self.section1List addObject:cellModel5];
 }
 
 #pragma mark - UI

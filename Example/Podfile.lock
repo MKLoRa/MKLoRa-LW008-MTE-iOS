@@ -561,6 +561,7 @@ PODS:
     - MKLoRaWAN-MTE/Functions/StandbyModePage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/SynDataPage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/TabBarPage (= 0.0.3)
+    - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/TimingModePage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/UpdatePage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/VibrationPage (= 0.0.3)
@@ -899,6 +900,7 @@ PODS:
     - MKLoRaWAN-MTE/Functions/MotionModePage/Controller
     - MKLoRaWAN-MTE/Functions/PeriodicModePage/Controller
     - MKLoRaWAN-MTE/Functions/StandbyModePage/Controller
+    - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Controller
     - MKLoRaWAN-MTE/Functions/TimingModePage/Controller
     - MKLoRaWAN-MTE/SDK
     - MLInputDodger
@@ -977,7 +979,6 @@ PODS:
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByAdvNamePage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPButtonPage (= 0.0.3)
-    - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPTagPage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByMacPage (= 0.0.3)
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByOtherPage (= 0.0.3)
@@ -1101,42 +1102,6 @@ PODS:
     - MKLoRaWAN-MTE/SDK
     - MLInputDodger
   - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPButtonPage/Model (0.0.3):
-    - HHTransition
-    - iOSDFULibrary (= 4.13.0)
-    - MKBaseModuleLibrary
-    - MKCustomUIModule
-    - MKLoRaWAN-MTE/ConnectModule
-    - MKLoRaWAN-MTE/CTMediator
-    - MKLoRaWAN-MTE/DatabaseManager
-    - MKLoRaWAN-MTE/Expand
-    - MKLoRaWAN-MTE/SDK
-    - MLInputDodger
-  - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage (0.0.3):
-    - HHTransition
-    - iOSDFULibrary (= 4.13.0)
-    - MKBaseModuleLibrary
-    - MKCustomUIModule
-    - MKLoRaWAN-MTE/ConnectModule
-    - MKLoRaWAN-MTE/CTMediator
-    - MKLoRaWAN-MTE/DatabaseManager
-    - MKLoRaWAN-MTE/Expand
-    - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller (= 0.0.3)
-    - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Model (= 0.0.3)
-    - MKLoRaWAN-MTE/SDK
-    - MLInputDodger
-  - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller (0.0.3):
-    - HHTransition
-    - iOSDFULibrary (= 4.13.0)
-    - MKBaseModuleLibrary
-    - MKCustomUIModule
-    - MKLoRaWAN-MTE/ConnectModule
-    - MKLoRaWAN-MTE/CTMediator
-    - MKLoRaWAN-MTE/DatabaseManager
-    - MKLoRaWAN-MTE/Expand
-    - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Model
-    - MKLoRaWAN-MTE/SDK
-    - MLInputDodger
-  - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Model (0.0.3):
     - HHTransition
     - iOSDFULibrary (= 4.13.0)
     - MKBaseModuleLibrary
@@ -1315,7 +1280,6 @@ PODS:
     - MKLoRaWAN-MTE/Expand
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Controller
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPButtonPage/Controller
-    - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPTagPage/Controller
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByOtherPage/Controller
     - MKLoRaWAN-MTE/Functions/FilterPages/FilterByPirPage/Controller
@@ -2158,6 +2122,55 @@ PODS:
     - MKLoRaWAN-MTE/Functions/PositionPage/Controller
     - MKLoRaWAN-MTE/SDK
     - MLInputDodger
+  - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage (0.0.3):
+    - HHTransition
+    - iOSDFULibrary (= 4.13.0)
+    - MKBaseModuleLibrary
+    - MKCustomUIModule
+    - MKLoRaWAN-MTE/ConnectModule
+    - MKLoRaWAN-MTE/CTMediator
+    - MKLoRaWAN-MTE/DatabaseManager
+    - MKLoRaWAN-MTE/Expand
+    - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Controller (= 0.0.3)
+    - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Model (= 0.0.3)
+    - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/View (= 0.0.3)
+    - MKLoRaWAN-MTE/SDK
+    - MLInputDodger
+  - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Controller (0.0.3):
+    - HHTransition
+    - iOSDFULibrary (= 4.13.0)
+    - MKBaseModuleLibrary
+    - MKCustomUIModule
+    - MKLoRaWAN-MTE/ConnectModule
+    - MKLoRaWAN-MTE/CTMediator
+    - MKLoRaWAN-MTE/DatabaseManager
+    - MKLoRaWAN-MTE/Expand
+    - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Model
+    - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/View
+    - MKLoRaWAN-MTE/SDK
+    - MLInputDodger
+  - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Model (0.0.3):
+    - HHTransition
+    - iOSDFULibrary (= 4.13.0)
+    - MKBaseModuleLibrary
+    - MKCustomUIModule
+    - MKLoRaWAN-MTE/ConnectModule
+    - MKLoRaWAN-MTE/CTMediator
+    - MKLoRaWAN-MTE/DatabaseManager
+    - MKLoRaWAN-MTE/Expand
+    - MKLoRaWAN-MTE/SDK
+    - MLInputDodger
+  - MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/View (0.0.3):
+    - HHTransition
+    - iOSDFULibrary (= 4.13.0)
+    - MKBaseModuleLibrary
+    - MKCustomUIModule
+    - MKLoRaWAN-MTE/ConnectModule
+    - MKLoRaWAN-MTE/CTMediator
+    - MKLoRaWAN-MTE/DatabaseManager
+    - MKLoRaWAN-MTE/Expand
+    - MKLoRaWAN-MTE/SDK
+    - MLInputDodger
   - MKLoRaWAN-MTE/Functions/TimingModePage (0.0.3):
     - HHTransition
     - iOSDFULibrary (= 4.13.0)
@@ -2329,7 +2342,7 @@ SPEC CHECKSUMS:
   MKBaseBleModule: 15aa067c4e408a473e025b1a768ebce00a7e5949
   MKBaseModuleLibrary: 2b79bcae588c755588413fbb643b510253271b23
   MKCustomUIModule: bbc862397ad4ffad0a88de756265a29aad5ddaab
-  MKLoRaWAN-MTE: e429ddb4cb6207a39945861322e34cadc2819491
+  MKLoRaWAN-MTE: 70152947c0fdc91a3ff354d612a1a835a7cc3c42
   MLInputDodger: 79a0e420a80d0d3bba122bf2639603cc76609ba8
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
@@ -2338,4 +2351,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: fbad77608ee4ea164c27ecbb2d3768988b620055
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.16.1

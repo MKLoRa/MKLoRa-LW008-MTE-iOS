@@ -251,12 +251,14 @@ MKMUReportTimePointCellDelegate>
     MKMUReportTimePointCellModel *cellModel = self.section2List[index];
     
     MKPickerView *pickView = [[MKPickerView alloc] init];
-    NSArray *dataList = @[@"00",@"01",@"02",@"03",
-                          @"04",@"05",@"06",@"07",
-                          @"08",@"09",@"10",@"11",
-                          @"12",@"13",@"14",@"15",
-                          @"16",@"17",@"18",@"19",
-                          @"20",@"21",@"22",@"23"];
+    NSMutableArray *dataList = [NSMutableArray array];
+    for (NSInteger i = 0; i < 24; i ++) {
+        NSString *hour = [NSString stringWithFormat:@"%@",@(i)];
+        if (hour.length == 1) {
+            hour = [@"0" stringByAppendingString:hour];
+        }
+        [dataList addObject:hour];
+    }
     [pickView showPickViewWithDataList:dataList selectedRow:cellModel.hourIndex block:^(NSInteger currentRow) {
         cellModel.hourIndex = currentRow;
         [self.tableView mk_reloadRow:index inSection:2 withRowAnimation:UITableViewRowAnimationNone];
@@ -267,7 +269,15 @@ MKMUReportTimePointCellDelegate>
     MKMUReportTimePointCellModel *cellModel = self.section2List[index];
     
     MKPickerView *pickView = [[MKPickerView alloc] init];
-    NSArray *dataList = @[@"00",@"15",@"30",@"45"];
+    NSMutableArray *dataList = [NSMutableArray array];
+    for (NSInteger i = 0; i < 60; i ++) {
+        NSString *minute = [NSString stringWithFormat:@"%@",@(i)];
+        if (minute.length == 1) {
+            minute = [@"0" stringByAppendingString:minute];
+        }
+        [dataList addObject:minute];
+    }
+    
     [pickView showPickViewWithDataList:dataList selectedRow:cellModel.timeSpaceIndex block:^(NSInteger currentRow) {
         cellModel.timeSpaceIndex = currentRow;
         [self.tableView mk_reloadRow:index inSection:2 withRowAnimation:UITableViewRowAnimationNone];

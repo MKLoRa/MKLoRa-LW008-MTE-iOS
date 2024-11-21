@@ -29,6 +29,10 @@
             [self operationFailedBlockWithMsg:@"Read Vibration Detection Error" block:failedBlock];
             return;
         }
+        if (![self readVibrationThresholds]) {
+            [self operationFailedBlockWithMsg:@"Read Shock  Thresholds Error" block:failedBlock];
+            return;
+        }
         if (![self readReportInterval]) {
             [self operationFailedBlockWithMsg:@"Read Report Interval Error" block:failedBlock];
             return;
@@ -53,6 +57,10 @@
         }
         if (![self configVibrationDetection]) {
             [self operationFailedBlockWithMsg:@"Config Vibration Detection Error" block:failedBlock];
+            return;
+        }
+        if (![self configVibrationThresholds]) {
+            [self operationFailedBlockWithMsg:@"Config Shock  Thresholds Error" block:failedBlock];
             return;
         }
         if (![self configReportInterval]) {
@@ -88,6 +96,31 @@
 - (BOOL)configVibrationDetection {
     __block BOOL success = NO;
     [MKMUInterface mu_configShockDetectionStatus:self.isOn sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readVibrationThresholds {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readShockThresholdsWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.vibrationThresholds = returnData[@"result"][@"threshold"];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configVibrationThresholds {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configShockThresholds:[self.vibrationThresholds integerValue] sucBlock:^{
         success = YES;
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {
@@ -158,6 +191,9 @@
 }
 
 - (BOOL)checkParams {
+    if (!ValidStr(self.vibrationThresholds) || [self.vibrationThresholds integerValue] < 10 || [self.reportInterval integerValue] > 255) {
+        return NO;
+    }
     if (!ValidStr(self.reportInterval) || [self.reportInterval integerValue] < 3 || [self.reportInterval integerValue] > 255) {
         return NO;
     }

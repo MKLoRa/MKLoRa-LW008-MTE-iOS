@@ -14,11 +14,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign)BOOL offline;
 
+@property (nonatomic, assign)BOOL gpsExtremeMode;
+
+@property (nonatomic, assign)BOOL bleFix;
+
 - (void)readDataWithSucBlock:(void (^)(void))sucBlock failedBlock:(void (^)(NSError *error))failedBlock;
 
 - (void)configOffline:(BOOL)offline
              sucBlock:(void (^)(void))sucBlock
           failedBlock:(void (^)(NSError *error))failedBlock;
+
+- (void)configGpsLimitUploadStatus:(BOOL)isOn
+                          sucBlock:(void (^)(void))sucBlock
+                       failedBlock:(void (^)(NSError *error))failedBlock;
+
+- (void)configBeaconVoltageStatus:(BOOL)isOn
+                         sucBlock:(void (^)(void))sucBlock
+                      failedBlock:(void (^)(NSError *error))failedBlock;
 
 @end
 

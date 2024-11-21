@@ -33,10 +33,7 @@
             [self operationFailedBlockWithMsg:@"Read Motion Conditions Error" block:failedBlock];
             return;
         }
-        if (![self readVibrationThresholds]) {
-            [self operationFailedBlockWithMsg:@"Read Vibration  Thresholds Error" block:failedBlock];
-            return;
-        }
+        
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();
@@ -59,10 +56,7 @@
             [self operationFailedBlockWithMsg:@"Config Motion Conditions Error" block:failedBlock];
             return;
         }
-        if (![self configVibrationThresholds]) {
-            [self operationFailedBlockWithMsg:@"Config Vibration  Thresholds Error" block:failedBlock];
-            return;
-        }
+    
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();
@@ -123,31 +117,6 @@
     return success;
 }
 
-- (BOOL)readVibrationThresholds {
-    __block BOOL success = NO;
-    [MKMUInterface mu_readShockThresholdsWithSucBlock:^(id  _Nonnull returnData) {
-        success = YES;
-        self.vibrationThresholds = returnData[@"result"][@"threshold"];
-        dispatch_semaphore_signal(self.semaphore);
-    } failedBlock:^(NSError * _Nonnull error) {
-        dispatch_semaphore_signal(self.semaphore);
-    }];
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    return success;
-}
-
-- (BOOL)configVibrationThresholds {
-    __block BOOL success = NO;
-    [MKMUInterface mu_configShockThresholds:[self.vibrationThresholds integerValue] sucBlock:^{
-        success = YES;
-        dispatch_semaphore_signal(self.semaphore);
-    } failedBlock:^(NSError * _Nonnull error) {
-        dispatch_semaphore_signal(self.semaphore);
-    }];
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    return success;
-}
-
 #pragma mark - private method
 - (void)operationFailedBlockWithMsg:(NSString *)msg block:(void (^)(NSError *error))block {
     moko_dispatch_main_safe(^{
@@ -171,9 +140,7 @@
     if (!ValidStr(self.motionDuration) || [self.motionDuration integerValue] < 1 || [self.motionDuration integerValue] > 50) {
         return NO;
     }
-    if (!ValidStr(self.vibrationThresholds) || [self.vibrationThresholds integerValue] < 10 || [self.vibrationThresholds integerValue] > 255) {
-        return NO;
-    }
+    
     return YES;
 }
 

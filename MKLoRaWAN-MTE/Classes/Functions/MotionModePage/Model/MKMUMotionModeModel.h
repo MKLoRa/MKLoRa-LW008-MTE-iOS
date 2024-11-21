@@ -12,24 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MKMUMotionModeEventsModel : NSObject<mk_mu_motionModeEventsProtocol>
-
-@property (nonatomic, assign)BOOL fixOnStart;
-
-@property (nonatomic, assign)BOOL fixInTrip;
-
-@property (nonatomic, assign)BOOL fixOnEnd;
-
-@property (nonatomic, assign)BOOL notifyEventOnStart;
-
-@property (nonatomic, assign)BOOL notifyEventInTrip;
-
-@property (nonatomic, assign)BOOL notifyEventOnEnd;
-
-@property (nonatomic, assign)BOOL fixOnStationaryState;
-
-@end
-
 @interface MKMUMotionModeModel : NSObject
 
 @property (nonatomic, assign)BOOL fixOnStart;

@@ -66,26 +66,18 @@
 
 #pragma mark ****************************************System************************************************
 
++ (void)mu_readMacAddressWithSucBlock:(void (^)(id returnData))sucBlock
+                          failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMacAddressOperation
+                     cmdFlag:@"0015"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
 + (void)mu_readTimeZoneWithSucBlock:(void (^)(id returnData))sucBlock
                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadTimeZoneOperation
-                     cmdFlag:@"14"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readWorkModeWithSucBlock:(void (^)(id returnData))sucBlock
-                        failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadWorkModeOperation
-                     cmdFlag:@"15"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readIndicatorSettingsWithSucBlock:(void (^)(id returnData))sucBlock
-                                 failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadIndicatorSettingsOperation
-                     cmdFlag:@"16"
+                     cmdFlag:@"0021"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -93,39 +85,23 @@
 + (void)mu_readHeartbeatIntervalWithSucBlock:(void (^)(id returnData))sucBlock
                                  failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadHeartbeatIntervalOperation
-                     cmdFlag:@"17"
+                     cmdFlag:@"0022"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readShutdownPayloadStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadShutdownPayloadStatusOperation
-                     cmdFlag:@"19"
++ (void)mu_readIndicatorSettingsWithSucBlock:(void (^)(id returnData))sucBlock
+                                 failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadIndicatorSettingsOperation
+                     cmdFlag:@"0023"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readOfflineFixStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadOfflineFixStatusOperation
-                     cmdFlag:@"1a"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLowPowerPayloadStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLowPowerPayloadStatusOperation
-                     cmdFlag:@"1b"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLowPowerPromptWithSucBlock:(void (^)(id returnData))sucBlock
-                              failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLowPowerPromptOperation
-                     cmdFlag:@"1c"
++ (void)mu_readMagnetTurnOnMethodWithSucBlock:(void (^)(id returnData))sucBlock
+                                  failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMagnetTurnOnMethodOperation
+                     cmdFlag:@"0024"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -133,7 +109,31 @@
 + (void)mu_readHallPowerOffStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadHallPowerOffStatusOperation
-                     cmdFlag:@"1e"
+                     cmdFlag:@"0025"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readShutdownPayloadStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadShutdownPayloadStatusOperation
+                     cmdFlag:@"0026"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readThreeAxisWakeupConditionsWithSucBlock:(void (^)(id returnData))sucBlock
+                                         failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadThreeAxisWakeupConditionsOperation
+                     cmdFlag:@"0028"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readThreeAxisMotionParametersWithSucBlock:(void (^)(id returnData))sucBlock
+                                         failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadThreeAxisMotionParametersOperation
+                     cmdFlag:@"0029"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -141,15 +141,7 @@
 + (void)mu_readBatteryVoltageWithSucBlock:(void (^)(id returnData))sucBlock
                               failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBatteryVoltageOperation
-                     cmdFlag:@"20"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readMacAddressWithSucBlock:(void (^)(id returnData))sucBlock
-                          failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadMacAddressOperation
-                     cmdFlag:@"21"
+                     cmdFlag:@"0040"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -157,7 +149,7 @@
 + (void)mu_readPCBAStatusWithSucBlock:(void (^)(id returnData))sucBlock
                           failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadPCBAStatusOperation
-                     cmdFlag:@"22"
+                     cmdFlag:@"0041"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -165,23 +157,17 @@
 + (void)mu_readSelftestStatusWithSucBlock:(void (^)(id returnData))sucBlock
                               failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadSelftestStatusOperation
-                     cmdFlag:@"23"
+                     cmdFlag:@"0042"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readAutoPowerOnAfterChargingWithSucBlock:(void (^)(id returnData))sucBlock
-                                        failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadAutoPowerOnAfterChargingOperation
-                     cmdFlag:@"24"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
+#pragma mark **************************************** Battery ************************************************
 
 + (void)mu_readBatteryInformationWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBatteryInformationOperation
-                     cmdFlag:@"25"
+                     cmdFlag:@"0101"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -189,7 +175,7 @@
 + (void)mu_readLastCycleBatteryInformationWithSucBlock:(void (^)(id returnData))sucBlock
                                            failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLastCycleBatteryInformationOperation
-                     cmdFlag:@"27"
+                     cmdFlag:@"0102"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -197,7 +183,23 @@
 + (void)mu_readAllCycleBatteryInformationWithSucBlock:(void (^)(id returnData))sucBlock
                                           failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadAllCycleBatteryInformationOperation
-                     cmdFlag:@"28"
+                     cmdFlag:@"0103"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLowPowerPromptWithSucBlock:(void (^)(id returnData))sucBlock
+                              failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLowPowerPromptOperation
+                     cmdFlag:@"0104"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLowPowerPayloadStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLowPowerPayloadStatusOperation
+                     cmdFlag:@"0106"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -205,15 +207,15 @@
 + (void)mu_readLowPowerPayloadIntervalWithSucBlock:(void (^)(id returnData))sucBlock
                                        failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLowPowerPayloadIntervalOperation
-                     cmdFlag:@"29"
+                     cmdFlag:@"0107"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readGpsLimitUploadStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                    failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadGpsLimitUploadStatusOperation
-                     cmdFlag:@"2a"
++ (void)mu_readAutoPowerOnAfterChargingWithSucBlock:(void (^)(id returnData))sucBlock
+                                        failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadAutoPowerOnAfterChargingOperation
+                     cmdFlag:@"0108"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -223,7 +225,7 @@
 + (void)mu_readConnectationNeedPasswordWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadConnectationNeedPasswordOperation
-                     cmdFlag:@"30"
+                     cmdFlag:@"0200"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -231,7 +233,7 @@
 + (void)mu_readPasswordWithSucBlock:(void (^)(id returnData))sucBlock
                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadPasswordOperation
-                     cmdFlag:@"31"
+                     cmdFlag:@"0201"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -239,31 +241,7 @@
 + (void)mu_readBroadcastTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
                                 failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBroadcastTimeoutOperation
-                     cmdFlag:@"32"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readTxPowerWithSucBlock:(void (^)(id returnData))sucBlock
-                       failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadTxPowerOperation
-                     cmdFlag:@"33"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readDeviceNameWithSucBlock:(void (^)(id returnData))sucBlock
-                          failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadDeviceNameOperation
-                     cmdFlag:@"34"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readAdvIntervalWithSucBlock:(void (^)(id returnData))sucBlock
-                           failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadAdvIntervalOperation
-                     cmdFlag:@"35"
+                     cmdFlag:@"0202"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -271,16 +249,48 @@
 + (void)mu_readBeaconStatusWithSucBlock:(void (^)(id returnData))sucBlock
                             failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBeaconStatusOperation
-                     cmdFlag:@"37"
+                     cmdFlag:@"0203"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readAdvIntervalWithSucBlock:(void (^)(id returnData))sucBlock
+                           failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadAdvIntervalOperation
+                     cmdFlag:@"0204"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readTxPowerWithSucBlock:(void (^)(id returnData))sucBlock
+                       failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadTxPowerOperation
+                     cmdFlag:@"0205"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readDeviceNameWithSucBlock:(void (^)(id returnData))sucBlock
+                          failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadDeviceNameOperation
+                     cmdFlag:@"0206"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
 #pragma mark ****************************************模式相关参数************************************************
++ (void)mu_readWorkModeWithSucBlock:(void (^)(id returnData))sucBlock
+                        failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadWorkModeOperation
+                     cmdFlag:@"0300"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
 + (void)mu_readStandbyModePositioningStrategyWithSucBlock:(void (^)(id returnData))sucBlock
                                               failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadStandbyModePositioningStrategyOperation
-                     cmdFlag:@"39"
+                     cmdFlag:@"0310"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -288,7 +298,7 @@
 + (void)mu_readPeriodicModePositioningStrategyWithSucBlock:(void (^)(id returnData))sucBlock
                                                failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadPeriodicModePositioningStrategyOperation
-                     cmdFlag:@"40"
+                     cmdFlag:@"0320"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -296,7 +306,7 @@
 + (void)mu_readPeriodicModeReportIntervalWithSucBlock:(void (^)(id returnData))sucBlock
                                           failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadPeriodicModeReportIntervalOperation
-                     cmdFlag:@"41"
+                     cmdFlag:@"0321"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -304,7 +314,7 @@
 + (void)mu_readTimingModePositioningStrategyWithSucBlock:(void (^)(id returnData))sucBlock
                                              failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadTimingModePositioningStrategyOperation
-                     cmdFlag:@"42"
+                     cmdFlag:@"0330"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -312,23 +322,23 @@
 + (void)mu_readTimingModeReportingTimePointWithSucBlock:(void (^)(id returnData))sucBlock
                                             failedBlock:(void (^)(NSError * error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadTimingModeReportingTimePointOperation
-                     cmdFlag:@"43"
+                     cmdFlag:@"0331"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readMotionModeEventsWithSucBlock:(void (^)(id returnData))sucBlock
-                                failedBlock:(void (^)(NSError * error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsOperation
-                     cmdFlag:@"44"
++ (void)mu_readMotionModeEventsNotifyEventOnStartWithSucBlock:(void (^)(id returnData))sucBlock
+                                                  failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsNotifyEventOnStartOperation
+                     cmdFlag:@"0340"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readMotionModeNumberOfFixOnStartWithSucBlock:(void (^)(id returnData))sucBlock
-                                            failedBlock:(void (^)(NSError * error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadMotionModeNumberOfFixOnStartOperation
-                     cmdFlag:@"45"
++ (void)mu_readMotionModeEventsFixOnStartWithSucBlock:(void (^)(id returnData))sucBlock
+                                          failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsFixOnStartOperation
+                     cmdFlag:@"0341"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -336,15 +346,31 @@
 + (void)mu_readMotionModePosStrategyOnStartWithSucBlock:(void (^)(id returnData))sucBlock
                                             failedBlock:(void (^)(NSError * error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadMotionModePosStrategyOnStartOperation
-                     cmdFlag:@"46"
+                     cmdFlag:@"0342"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readMotionModeReportIntervalInTripWithSucBlock:(void (^)(id returnData))sucBlock
-                                              failedBlock:(void (^)(NSError * error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadMotionModeReportIntervalInTripOperation
-                     cmdFlag:@"47"
++ (void)mu_readMotionModeNumberOfFixOnStartWithSucBlock:(void (^)(id returnData))sucBlock
+                                            failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeNumberOfFixOnStartOperation
+                     cmdFlag:@"0343"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeEventsNotifyEventInTripWithSucBlock:(void (^)(id returnData))sucBlock
+                                                 failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsNotifyEventInTripOperation
+                     cmdFlag:@"0350"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeEventsFixInTripWithSucBlock:(void (^)(id returnData))sucBlock
+                                         failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsFixInTripOperation
+                     cmdFlag:@"0351"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -352,31 +378,31 @@
 + (void)mu_readMotionModePosStrategyInTripWithSucBlock:(void (^)(id returnData))sucBlock
                                            failedBlock:(void (^)(NSError * error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadMotionModePosStrategyInTripOperation
-                     cmdFlag:@"48"
+                     cmdFlag:@"0352"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readMotionModeTripEndTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
++ (void)mu_readMotionModeReportIntervalInTripWithSucBlock:(void (^)(id returnData))sucBlock
+                                              failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeReportIntervalInTripOperation
+                     cmdFlag:@"0353"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeEventsNotifyEventOnEndWithSucBlock:(void (^)(id returnData))sucBlock
+                                                failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsNotifyEventOnEndOperation
+                     cmdFlag:@"0360"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeEventsFixOnEndWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError * error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadMotionModeTripEndTimeoutOperation
-                     cmdFlag:@"49"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readMotionModeNumberOfFixOnEndWithSucBlock:(void (^)(id returnData))sucBlock
-                                          failedBlock:(void (^)(NSError * error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadMotionModeNumberOfFixOnEndOperation
-                     cmdFlag:@"4a"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readMotionModeReportIntervalOnEndWithSucBlock:(void (^)(id returnData))sucBlock
-                                             failedBlock:(void (^)(NSError * error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadMotionModeReportIntervalOnEndOperation
-                     cmdFlag:@"4b"
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsFixOnEndOperation
+                     cmdFlag:@"0361"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -384,7 +410,39 @@
 + (void)mu_readMotionModePosStrategyOnEndWithSucBlock:(void (^)(id returnData))sucBlock
                                           failedBlock:(void (^)(NSError * error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadMotionModePosStrategyOnEndOperation
-                     cmdFlag:@"4c"
+                     cmdFlag:@"0362"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeReportIntervalOnEndWithSucBlock:(void (^)(id returnData))sucBlock
+                                             failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeReportIntervalOnEndOperation
+                     cmdFlag:@"0363"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeNumberOfFixOnEndWithSucBlock:(void (^)(id returnData))sucBlock
+                                          failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeNumberOfFixOnEndOperation
+                     cmdFlag:@"0364"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeTripEndTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
+                                        failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeTripEndTimeoutOperation
+                     cmdFlag:@"0365"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readMotionModeEventsFixOnStationaryStateWithSucBlock:(void (^)(id returnData))sucBlock
+                                                    failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadMotionModeEventsFixOnStationaryStateOperation
+                     cmdFlag:@"0370"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -392,7 +450,7 @@
 + (void)mu_readPosStrategyOnStationaryWithSucBlock:(void (^)(id returnData))sucBlock
                                        failedBlock:(void (^)(NSError * error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadPosStrategyOnStationaryOperation
-                     cmdFlag:@"4d"
+                     cmdFlag:@"0371"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -400,7 +458,23 @@
 + (void)mu_readReportIntervalOnStationaryWithSucBlock:(void (^)(id returnData))sucBlock
                                           failedBlock:(void (^)(NSError * error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadReportIntervalOnStationaryOperation
-                     cmdFlag:@"4e"
+                     cmdFlag:@"0372"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readTimeSegmentedModeStrategyWithSucBlock:(void (^)(id returnData))sucBlock
+                                         failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadTimeSegmentedModeStrategyOperation
+                     cmdFlag:@"0380"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readTimeSegmentedModeTimePeriodSettingWithSucBlock:(void (^)(id returnData))sucBlock
+                                                  failedBlock:(void (^)(NSError * error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadTimeSegmentedModeTimePeriodSettingOperation
+                     cmdFlag:@"0381"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -410,7 +484,7 @@
 + (void)mu_readRssiFilterValueWithSucBlock:(void (^)(id returnData))sucBlock
                                failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadRssiFilterValueOperation
-                     cmdFlag:@"51"
+                     cmdFlag:@"0401"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -418,7 +492,15 @@
 + (void)mu_readFilterRelationshipWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterRelationshipOperation
-                     cmdFlag:@"52"
+                     cmdFlag:@"0402"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readFilterTypeStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterTypeStatusOperation
+                     cmdFlag:@"0403"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -426,7 +508,7 @@
 + (void)mu_readFilterByMacPreciseMatchWithSucBlock:(void (^)(id returnData))sucBlock
                                        failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByMacPreciseMatchOperation
-                     cmdFlag:@"53"
+                     cmdFlag:@"0410"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -434,7 +516,7 @@
 + (void)mu_readFilterByMacReverseFilterWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByMacReverseFilterOperation
-                     cmdFlag:@"54"
+                     cmdFlag:@"0411"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -442,7 +524,7 @@
 + (void)mu_readFilterMACAddressListWithSucBlock:(void (^)(id returnData))sucBlock
                                     failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterMACAddressListOperation
-                     cmdFlag:@"55"
+                     cmdFlag:@"0412"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -450,7 +532,7 @@
 + (void)mu_readFilterByAdvNamePreciseMatchWithSucBlock:(void (^)(id returnData))sucBlock
                                            failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByAdvNamePreciseMatchOperation
-                     cmdFlag:@"56"
+                     cmdFlag:@"0418"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -458,14 +540,14 @@
 + (void)mu_readFilterByAdvNameReverseFilterWithSucBlock:(void (^)(id returnData))sucBlock
                                             failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByAdvNameReverseFilterOperation
-                     cmdFlag:@"57"
+                     cmdFlag:@"0419"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
 + (void)mu_readFilterAdvNameListWithSucBlock:(void (^)(id returnData))sucBlock
                                  failedBlock:(void (^)(NSError *error))failedBlock {
-    NSString *commandString = @"ee005800";
+    NSString *commandString = @"ee00041a00";
     [centralManager addTaskWithTaskID:mk_mu_taskReadFilterAdvNameListOperation
                        characteristic:peripheral.mu_custom
                           commandData:commandString
@@ -486,18 +568,12 @@
     } failureBlock:failedBlock];
 }
 
-+ (void)mu_readFilterTypeStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterTypeStatusOperation
-                     cmdFlag:@"59"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
+
 
 + (void)mu_readFilterByBeaconStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                     failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBeaconStatusOperation
-                     cmdFlag:@"5a"
+                     cmdFlag:@"0420"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -505,7 +581,7 @@
 + (void)mu_readFilterByBeaconMajorRangeWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBeaconMajorRangeOperation
-                     cmdFlag:@"5b"
+                     cmdFlag:@"0421"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -513,7 +589,7 @@
 + (void)mu_readFilterByBeaconMinorRangeWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBeaconMinorRangeOperation
-                     cmdFlag:@"5c"
+                     cmdFlag:@"0422"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -521,7 +597,7 @@
 + (void)mu_readFilterByBeaconUUIDWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBeaconUUIDOperation
-                     cmdFlag:@"5d"
+                     cmdFlag:@"0423"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -529,7 +605,7 @@
 + (void)mu_readFilterByUIDStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                  failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByUIDStatusOperation
-                     cmdFlag:@"5e"
+                     cmdFlag:@"0428"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -537,7 +613,7 @@
 + (void)mu_readFilterByUIDNamespaceIDWithSucBlock:(void (^)(id returnData))sucBlock
                                       failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByUIDNamespaceIDOperation
-                     cmdFlag:@"5f"
+                     cmdFlag:@"0429"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -545,7 +621,7 @@
 + (void)mu_readFilterByUIDInstanceIDWithSucBlock:(void (^)(id returnData))sucBlock
                                      failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByUIDInstanceIDOperation
-                     cmdFlag:@"60"
+                     cmdFlag:@"042a"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -553,7 +629,7 @@
 + (void)mu_readFilterByURLStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                  failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByURLStatusOperation
-                     cmdFlag:@"61"
+                     cmdFlag:@"0430"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -561,7 +637,7 @@
 + (void)mu_readFilterByURLContentWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByURLContentOperation
-                     cmdFlag:@"62"
+                     cmdFlag:@"0431"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -569,7 +645,7 @@
 + (void)mu_readFilterByTLMStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                  failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByTLMStatusOperation
-                     cmdFlag:@"63"
+                     cmdFlag:@"0438"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -577,7 +653,7 @@
 + (void)mu_readFilterByTLMVersionWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByTLMVersionOperation
-                     cmdFlag:@"64"
+                     cmdFlag:@"0439"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -585,7 +661,7 @@
 + (void)mu_readFilterByBXPBeaconStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                        failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBXPBeaconStatusOperation
-                     cmdFlag:@"65"
+                     cmdFlag:@"0440"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -593,7 +669,7 @@
 + (void)mu_readFilterByBXPBeaconMajorRangeWithSucBlock:(void (^)(id returnData))sucBlock
                                            failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBXPBeaconMajorRangeOperation
-                     cmdFlag:@"66"
+                     cmdFlag:@"0441"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -601,7 +677,7 @@
 + (void)mu_readFilterByBXPBeaconMinorRangeWithSucBlock:(void (^)(id returnData))sucBlock
                                            failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBXPBeaconMinorRangeOperation
-                     cmdFlag:@"67"
+                     cmdFlag:@"0442"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -609,15 +685,7 @@
 + (void)mu_readFilterByBXPBeaconUUIDWithSucBlock:(void (^)(id returnData))sucBlock
                                      failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBXPBeaconUUIDOperation
-                     cmdFlag:@"68"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByBXPDeviceInfoStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                           failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBXPDeviceInfoFilterStatusOperation
-                     cmdFlag:@"69"
+                     cmdFlag:@"0443"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -625,7 +693,7 @@
 + (void)mu_readBXPAccFilterStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBXPAccFilterStatusOperation
-                     cmdFlag:@"6a"
+                     cmdFlag:@"0450"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -633,7 +701,15 @@
 + (void)mu_readBXPTHFilterStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                  failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBXPTHFilterStatusOperation
-                     cmdFlag:@"6b"
+                     cmdFlag:@"0458"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readFilterByBXPDeviceInfoStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                           failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadBXPDeviceInfoFilterStatusOperation
+                     cmdFlag:@"0460"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -641,7 +717,7 @@
 + (void)mu_readBXPButtonFilterStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                      failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBXPButtonFilterStatusOperation
-                     cmdFlag:@"6c"
+                     cmdFlag:@"0468"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -649,7 +725,7 @@
 + (void)mu_readBXPButtonAlarmFilterStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                           failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadBXPButtonAlarmFilterStatusOperation
-                     cmdFlag:@"6d"
+                     cmdFlag:@"0469"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -657,7 +733,7 @@
 + (void)mu_readFilterByBXPTagIDStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                       failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByBXPTagIDStatusOperation
-                     cmdFlag:@"6e"
+                     cmdFlag:@"0470"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -665,7 +741,7 @@
 + (void)mu_readPreciseMatchTagIDStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                        failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadPreciseMatchTagIDStatusOperation
-                     cmdFlag:@"6f"
+                     cmdFlag:@"0471"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -673,7 +749,7 @@
 + (void)mu_readReverseFilterTagIDStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadReverseFilterTagIDStatusOperation
-                     cmdFlag:@"70"
+                     cmdFlag:@"0472"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -681,63 +757,7 @@
 + (void)mu_readFilterBXPTagIDListWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterBXPTagIDListOperation
-                     cmdFlag:@"71"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByPirStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                 failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterByPirStatusOperation
-                     cmdFlag:@"72"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByPirDetectionStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                          failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterByPirDetectionStatusOperation
-                     cmdFlag:@"73"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByPirSensorSensitivityWithSucBlock:(void (^)(id returnData))sucBlock
-                                            failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterByPirSensorSensitivityOperation
-                     cmdFlag:@"74"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByPirDoorStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterByPirDoorStatusOperation
-                     cmdFlag:@"75"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByPirDelayResponseStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                              failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterByPirDelayResponseStatusOperation
-                     cmdFlag:@"76"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByPirMajorRangeWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterByPirMajorRangeOperation
-                     cmdFlag:@"77"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readFilterByPirMinorRangeWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadFilterByPirMinorRangeOperation
-                     cmdFlag:@"78"
+                     cmdFlag:@"0473"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -745,7 +765,7 @@
 + (void)mu_readFilterBXPTofStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterBXPTofStatusOperation
-                     cmdFlag:@"79"
+                     cmdFlag:@"0478"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -753,39 +773,63 @@
 + (void)mu_readFilterBXPTofMfgCodeListWithSucBlock:(void (^)(id returnData))sucBlock
                                        failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterBXPTofMfgCodeListOperation
-                     cmdFlag:@"7a"
+                     cmdFlag:@"0479"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readBXPSensorInfoFilterByTagIDStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                                failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBXPSensorInfoFilterByTagIDStatusOperation
-                     cmdFlag:@"7b"
++ (void)mu_readFilterByPirStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                 failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterByPirStatusOperation
+                     cmdFlag:@"0480"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readBXPSensorInfoPreciseMatchTagIDStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                                    failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBXPSensorInfoPreciseMatchTagIDStatusOperation
-                     cmdFlag:@"7c"
++ (void)mu_readFilterByPirDetectionStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                          failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterByPirDetectionStatusOperation
+                     cmdFlag:@"0481"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readBXPSensorInfoReverseFilterTagIDStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBXPSensorInfoReverseFilterTagIDStatusOperation
-                     cmdFlag:@"7d"
++ (void)mu_readFilterByPirSensorSensitivityWithSucBlock:(void (^)(id returnData))sucBlock
+                                            failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterByPirSensorSensitivityOperation
+                     cmdFlag:@"0482"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readBXPSensorInfoFilterBXPTagIDListWithSucBlock:(void (^)(id returnData))sucBlock
-                                               failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBXPSensorInfoFilterBXPTagIDListOperation
-                     cmdFlag:@"7e"
++ (void)mu_readFilterByPirDoorStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterByPirDoorStatusOperation
+                     cmdFlag:@"0483"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readFilterByPirDelayResponseStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                              failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterByPirDelayResponseStatusOperation
+                     cmdFlag:@"0484"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readFilterByPirMajorRangeWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterByPirMajorRangeOperation
+                     cmdFlag:@"0485"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readFilterByPirMinorRangeWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadFilterByPirMinorRangeOperation
+                     cmdFlag:@"0486"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -793,7 +837,7 @@
 + (void)mu_readFilterByOtherStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                    failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByOtherStatusOperation
-                     cmdFlag:@"8b"
+                     cmdFlag:@"04f8"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -801,7 +845,7 @@
 + (void)mu_readFilterByOtherRelationshipWithSucBlock:(void (^)(id returnData))sucBlock
                                          failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByOtherRelationshipOperation
-                     cmdFlag:@"8c"
+                     cmdFlag:@"04f9"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -809,7 +853,7 @@
 + (void)mu_readFilterByOtherConditionsWithSucBlock:(void (^)(id returnData))sucBlock
                                        failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadFilterByOtherConditionsOperation
-                     cmdFlag:@"8d"
+                     cmdFlag:@"04fa"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -819,7 +863,7 @@
 + (void)mu_readLorawanNetworkStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                     failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanNetworkStatusOperation
-                     cmdFlag:@"90"
+                     cmdFlag:@"0500"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -827,7 +871,7 @@
 + (void)mu_readLorawanRegionWithSucBlock:(void (^)(id returnData))sucBlock
                              failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanRegionOperation
-                     cmdFlag:@"91"
+                     cmdFlag:@"0501"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -835,7 +879,7 @@
 + (void)mu_readLorawanModemWithSucBlock:(void (^)(id returnData))sucBlock
                             failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanModemOperation
-                     cmdFlag:@"92"
+                     cmdFlag:@"0502"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -843,7 +887,7 @@
 + (void)mu_readLorawanDEVEUIWithSucBlock:(void (^)(id returnData))sucBlock
                              failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanDEVEUIOperation
-                     cmdFlag:@"93"
+                     cmdFlag:@"0503"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -851,7 +895,7 @@
 + (void)mu_readLorawanAPPEUIWithSucBlock:(void (^)(id returnData))sucBlock
                              failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanAPPEUIOperation
-                     cmdFlag:@"94"
+                     cmdFlag:@"0504"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -859,7 +903,7 @@
 + (void)mu_readLorawanAPPKEYWithSucBlock:(void (^)(id returnData))sucBlock
                              failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanAPPKEYOperation
-                     cmdFlag:@"95"
+                     cmdFlag:@"0505"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -867,7 +911,7 @@
 + (void)mu_readLorawanDEVADDRWithSucBlock:(void (^)(id returnData))sucBlock
                               failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanDEVADDROperation
-                     cmdFlag:@"96"
+                     cmdFlag:@"0506"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -875,7 +919,7 @@
 + (void)mu_readLorawanAPPSKEYWithSucBlock:(void (^)(id returnData))sucBlock
                               failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanAPPSKEYOperation
-                     cmdFlag:@"97"
+                     cmdFlag:@"0507"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -883,55 +927,7 @@
 + (void)mu_readLorawanNWKSKEYWithSucBlock:(void (^)(id returnData))sucBlock
                               failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanNWKSKEYOperation
-                     cmdFlag:@"98"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLorawanCHWithSucBlock:(void (^)(id returnData))sucBlock
-                         failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLorawanCHOperation
-                     cmdFlag:@"9a"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLorawanDRWithSucBlock:(void (^)(id returnData))sucBlock
-                         failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLorawanDROperation
-                     cmdFlag:@"9b"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLorawanUplinkStrategyWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLorawanUplinkStrategyOperation
-                     cmdFlag:@"9c"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLorawanDutyCycleStatusWithSucBlock:(void (^)(id returnData))sucBlock
-                                      failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLorawanDutyCycleStatusOperation
-                     cmdFlag:@"9d"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLorawanTimeSyncIntervalWithSucBlock:(void (^)(id returnData))sucBlock
-                                       failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLorawanDevTimeSyncIntervalOperation
-                     cmdFlag:@"9e"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readLorawanNetworkCheckIntervalWithSucBlock:(void (^)(id returnData))sucBlock
-                                           failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadLorawanNetworkCheckIntervalOperation
-                     cmdFlag:@"9f"
+                     cmdFlag:@"0508"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -939,7 +935,7 @@
 + (void)mu_readLorawanADRACKLimitWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanADRACKLimitOperation
-                     cmdFlag:@"a0"
+                     cmdFlag:@"050a"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -947,7 +943,55 @@
 + (void)mu_readLorawanADRACKDelayWithSucBlock:(void (^)(id returnData))sucBlock
                                   failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLorawanADRACKDelayOperation
-                     cmdFlag:@"a1"
+                     cmdFlag:@"050b"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLorawanCHWithSucBlock:(void (^)(id returnData))sucBlock
+                         failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLorawanCHOperation
+                     cmdFlag:@"0520"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLorawanDRWithSucBlock:(void (^)(id returnData))sucBlock
+                         failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLorawanDROperation
+                     cmdFlag:@"0521"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLorawanUplinkStrategyWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLorawanUplinkStrategyOperation
+                     cmdFlag:@"0522"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLorawanDutyCycleStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                      failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLorawanDutyCycleStatusOperation
+                     cmdFlag:@"0523"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLorawanTimeSyncIntervalWithSucBlock:(void (^)(id returnData))sucBlock
+                                       failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLorawanDevTimeSyncIntervalOperation
+                     cmdFlag:@"0540"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readLorawanNetworkCheckIntervalWithSucBlock:(void (^)(id returnData))sucBlock
+                                           failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadLorawanNetworkCheckIntervalOperation
+                     cmdFlag:@"0541"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -955,15 +999,7 @@
 + (void)mu_readHeartbeatPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
                                     failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadHeartbeatPayloadDataOperation
-                     cmdFlag:@"a2"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readPositioningPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
-                                      failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadPositioningPayloadDataOperation
-                     cmdFlag:@"a3"
+                     cmdFlag:@"0551"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -971,23 +1007,7 @@
 + (void)mu_readLowPowerPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
                                    failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadLowPowerPayloadDataOperation
-                     cmdFlag:@"a4"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readShockPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
-                                failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadShockPayloadDataOperation
-                     cmdFlag:@"a5"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readManDownDetectionPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
-                                           failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadManDownDetectionPayloadDataOperation
-                     cmdFlag:@"a6"
+                     cmdFlag:@"0552"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -995,15 +1015,41 @@
 + (void)mu_readEventPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
                                 failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadEventPayloadDataOperation
-                     cmdFlag:@"a7"
+                     cmdFlag:@"0554"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
++ (void)mu_readPositioningPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
+                                      failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadPositioningPayloadDataOperation
+                     cmdFlag:@"0555"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readShockPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
+                                failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadShockPayloadDataOperation
+                     cmdFlag:@"0557"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readManDownDetectionPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
+                                           failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadManDownDetectionPayloadDataOperation
+                     cmdFlag:@"0558"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
+
+
 + (void)mu_readGPSLimitPayloadDataWithSucBlock:(void (^)(id returnData))sucBlock
                                    failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadGPSLimitPayloadDataOperation
-                     cmdFlag:@"ab"
+                     cmdFlag:@"055b"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1013,23 +1059,7 @@
 + (void)mu_readDownlinkPositioningStrategyWithSucBlock:(void (^)(id returnData))sucBlock
                                            failedBlock:(void (^)(NSError * error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadDownlinkPositioningStrategyOperation
-                     cmdFlag:@"b0"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readThreeAxisWakeupConditionsWithSucBlock:(void (^)(id returnData))sucBlock
-                                         failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadThreeAxisWakeupConditionsOperation
-                     cmdFlag:@"b1"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readThreeAxisMotionParametersWithSucBlock:(void (^)(id returnData))sucBlock
-                                         failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadThreeAxisMotionParametersOperation
-                     cmdFlag:@"b2"
+                     cmdFlag:@"0600"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1037,7 +1067,7 @@
 + (void)mu_readShockDetectionStatusWithSucBlock:(void (^)(id returnData))sucBlock
                                     failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadShockDetectionStatusOperation
-                     cmdFlag:@"b3"
+                     cmdFlag:@"0610"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1045,7 +1075,7 @@
 + (void)mu_readShockThresholdsWithSucBlock:(void (^)(id returnData))sucBlock
                                failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadShockThresholdsOperation
-                     cmdFlag:@"b4"
+                     cmdFlag:@"0611"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1053,7 +1083,7 @@
 + (void)mu_readShockDetectionReportIntervalWithSucBlock:(void (^)(id returnData))sucBlock
                                             failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadShockDetectionReportIntervalOperation
-                     cmdFlag:@"b5"
+                     cmdFlag:@"0612"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1061,7 +1091,7 @@
 + (void)mu_readShockTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
                             failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadShockTimeoutOperation
-                     cmdFlag:@"b6"
+                     cmdFlag:@"0613"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1069,7 +1099,7 @@
 + (void)mu_readManDownDetectionWithSucBlock:(void (^)(id returnData))sucBlock
                                 failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadManDownDetectionOperation
-                     cmdFlag:@"b7"
+                     cmdFlag:@"0620"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1077,49 +1107,24 @@
 + (void)mu_readIdleDetectionTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
                                     failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadIdleDetectionTimeoutOperation
-                     cmdFlag:@"b8"
+                     cmdFlag:@"0621"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
 #pragma mark ****************************************蓝牙定位参数************************************************
-+ (void)mu_readBluetoothFixMechanismWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBluetoothFixMechanismOperation
-                     cmdFlag:@"d8"
++ (void)mu_readOfflineFixStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadOfflineFixStatusOperation
+                     cmdFlag:@"0800"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
 
-+ (void)mu_readBlePositioningTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
-                                     failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBlePositioningTimeoutOperation
-                     cmdFlag:@"d9"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readBlePositioningNumberOfMacWithSucBlock:(void (^)(id returnData))sucBlock
-                                         failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadBlePositioningNumberOfMacOperation
-                     cmdFlag:@"da"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-#pragma mark ****************************************GPS定位参数************************************************
-+ (void)mu_readGPSFixPositioningTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
-                                        failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadGPSFixPositioningTimeoutOperation
-                     cmdFlag:@"e0"
-                    sucBlock:sucBlock
-                 failedBlock:failedBlock];
-}
-
-+ (void)mu_readGPSFixPDOPWithSucBlock:(void (^)(id returnData))sucBlock
-                          failedBlock:(void (^)(NSError *error))failedBlock {
-    [self readDataWithTaskID:mk_mu_taskReadGPSFixPDOPOperation
-                     cmdFlag:@"e1"
++ (void)mu_readGpsLimitUploadStatusWithSucBlock:(void (^)(id returnData))sucBlock
+                                    failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadGpsLimitUploadStatusOperation
+                     cmdFlag:@"0801"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1127,7 +1132,7 @@
 + (void)mu_readOutdoorBLEReportIntervalWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadOutdoorBLEReportIntervalOperation
-                     cmdFlag:@"ee"
+                     cmdFlag:@"0808"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
@@ -1135,10 +1140,60 @@
 + (void)mu_readOutdoorGPSReportIntervalWithSucBlock:(void (^)(id returnData))sucBlock
                                         failedBlock:(void (^)(NSError *error))failedBlock {
     [self readDataWithTaskID:mk_mu_taskReadOutdoorGPSReportIntervalOperation
-                     cmdFlag:@"ef"
+                     cmdFlag:@"0809"
                     sucBlock:sucBlock
                  failedBlock:failedBlock];
 }
+
++ (void)mu_readBluetoothFixMechanismWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadBluetoothFixMechanismOperation
+                     cmdFlag:@"0820"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readBlePositioningTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
+                                     failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadBlePositioningTimeoutOperation
+                     cmdFlag:@"0821"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readBlePositioningNumberOfMacWithSucBlock:(void (^)(id returnData))sucBlock
+                                         failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadBlePositioningNumberOfMacOperation
+                     cmdFlag:@"0822"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readBeaconVoltageReportInBleFixWithSucBlock:(void (^)(id returnData))sucBlock
+                                           failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadBeaconVoltageReportInBleFixOperation
+                     cmdFlag:@"0823"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readGPSFixPositioningTimeoutWithSucBlock:(void (^)(id returnData))sucBlock
+                                        failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadGPSFixPositioningTimeoutOperation
+                     cmdFlag:@"0830"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
++ (void)mu_readGPSFixPDOPWithSucBlock:(void (^)(id returnData))sucBlock
+                          failedBlock:(void (^)(NSError *error))failedBlock {
+    [self readDataWithTaskID:mk_mu_taskReadGPSFixPDOPOperation
+                     cmdFlag:@"0831"
+                    sucBlock:sucBlock
+                 failedBlock:failedBlock];
+}
+
+
 
 #pragma mark - private method
 

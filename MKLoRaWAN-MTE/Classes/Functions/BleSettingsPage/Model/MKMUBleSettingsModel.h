@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign)NSInteger txPower;
 
+@property (nonatomic, copy)NSString *interval;
+
 @property (nonatomic, assign)BOOL beaconMode;
 
 @property (nonatomic, copy)NSString *timeout;

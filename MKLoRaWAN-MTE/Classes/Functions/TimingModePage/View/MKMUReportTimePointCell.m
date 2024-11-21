@@ -73,6 +73,8 @@ static CGFloat const hourButtonHeight = 25.f;
         
         [self.deleteBackView addSubview:self.deleteButton];
         
+        [self updateTimeValues];
+        
         [self addSwipeRecognizer];
     }
     return self;
@@ -240,6 +242,24 @@ static CGFloat const hourButtonHeight = 25.f;
     [self.contentPanel addGestureRecognizer:swipeRight];
 }
 
+- (void)updateTimeValues {
+    for (NSInteger i = 0; i < 60; i ++) {
+        NSString *minute = [NSString stringWithFormat:@"%@",@(i)];
+        if (minute.length == 1) {
+            minute = [@"0" stringByAppendingString:minute];
+        }
+        [self.timeSpaceList addObject:minute];
+    }
+    
+    for (NSInteger i = 0; i < 24; i ++) {
+        NSString *hour = [NSString stringWithFormat:@"%@",@(i)];
+        if (hour.length == 1) {
+            hour = [@"0" stringByAppendingString:hour];
+        }
+        [self.hourList addObject:hour];
+    }
+}
+
 #pragma mark - getter
 - (UIView *)contentPanel {
     if (!_contentPanel) {
@@ -311,19 +331,14 @@ static CGFloat const hourButtonHeight = 25.f;
 
 - (NSMutableArray *)hourList {
     if (!_hourList) {
-        _hourList = [NSMutableArray arrayWithObjects:@"00",@"01",@"02",@"03",
-                     @"04",@"05",@"06",@"07",
-                     @"08",@"09",@"10",@"11",
-                     @"12",@"13",@"14",@"15",
-                     @"16",@"17",@"18",@"19",
-                     @"20",@"21",@"22",@"23", nil];
+        _hourList = [NSMutableArray array];
     }
     return _hourList;
 }
 
 - (NSMutableArray *)timeSpaceList {
     if (!_timeSpaceList) {
-        _timeSpaceList = [NSMutableArray arrayWithObjects:@"00",@"15",@"30",@"45", nil];
+        _timeSpaceList = [NSMutableArray array];
     }
     return _timeSpaceList;
 }

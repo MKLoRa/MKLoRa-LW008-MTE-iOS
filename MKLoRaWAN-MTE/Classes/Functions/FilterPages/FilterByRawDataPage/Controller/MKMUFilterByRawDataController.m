@@ -31,7 +31,6 @@
 #import "MKMUFilterByBXPTagController.h"
 #import "MKMUFilterByPirController.h"
 #import "MKMUFilterByTofController.h"
-#import "MKMUFilterByBXPSensorInfoController.h"
 #import "MKMUFilterByOtherController.h"
 
 @interface MKMUFilterByRawDataController ()<UITableViewDelegate,
@@ -130,12 +129,6 @@ mk_textSwitchCellDelegate>
         return;
     }
     if (indexPath.section == 2 && indexPath.row == 4) {
-        //BXP-Sensor Info
-        MKMUFilterByBXPSensorInfoController *vc = [[MKMUFilterByBXPSensorInfoController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    if (indexPath.section == 2 && indexPath.row == 5) {
         //Other
         MKMUFilterByOtherController *vc = [[MKMUFilterByOtherController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -296,10 +289,7 @@ mk_textSwitchCellDelegate>
     cellModel12.rightMsg = (self.dataModel.tof ? @"ON" : @"OFF");
     
     MKNormalTextCellModel *cellModel13 = self.section2List[4];
-    cellModel13.rightMsg = (self.dataModel.sensorInfo ? @"ON" : @"OFF");
-    
-    MKNormalTextCellModel *cellModel14 = self.section2List[5];
-    cellModel14.rightMsg = (self.dataModel.other ? @"ON" : @"OFF");
+    cellModel13.rightMsg = (self.dataModel.other ? @"ON" : @"OFF");
     
     [self.tableView reloadData];
 }
@@ -364,7 +354,7 @@ mk_textSwitchCellDelegate>
     
     MKNormalTextCellModel *cellModel2 = [[MKNormalTextCellModel alloc] init];
     cellModel2.showRightIcon = YES;
-    cellModel2.leftMsg = @"BXP - Tag";
+    cellModel2.leftMsg = @"BXP - T&S";
     [self.section2List addObject:cellModel2];
     
     MKNormalTextCellModel *cellModel3 = [[MKNormalTextCellModel alloc] init];
@@ -379,13 +369,8 @@ mk_textSwitchCellDelegate>
     
     MKNormalTextCellModel *cellModel5 = [[MKNormalTextCellModel alloc] init];
     cellModel5.showRightIcon = YES;
-    cellModel5.leftMsg = @"BXP-Sensor Info";
+    cellModel5.leftMsg = @"Other";
     [self.section2List addObject:cellModel5];
-    
-    MKNormalTextCellModel *cellModel6 = [[MKNormalTextCellModel alloc] init];
-    cellModel6.showRightIcon = YES;
-    cellModel6.leftMsg = @"Other";
-    [self.section2List addObject:cellModel6];
 }
 
 #pragma mark - UI

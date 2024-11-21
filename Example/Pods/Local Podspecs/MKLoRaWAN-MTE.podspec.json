@@ -351,6 +351,9 @@
                 ],
                 "MKLoRaWAN-MTE/Functions/MotionModePage/Controller": [
 
+                ],
+                "MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Controller": [
+
                 ]
               }
             }
@@ -536,9 +539,6 @@
                     ],
                     "MKLoRaWAN-MTE/Functions/FilterPages/FilterByPirPage/Controller": [
 
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller": [
-
                     ]
                   }
                 },
@@ -635,24 +635,6 @@
                 {
                   "name": "Model",
                   "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPButtonPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByBXPSensorInfoPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPSensorInfoPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPSensorInfoPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPSensorInfoPage/Model/**"
                 }
               ]
             },
@@ -1054,6 +1036,31 @@
 
                 ]
               }
+            }
+          ]
+        },
+        {
+          "name": "TimeSegmentedModePage",
+          "subspecs": [
+            {
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Model": [
+
+                ],
+                "MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/View": [
+
+                ]
+              }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/Model/**"
+            },
+            {
+              "name": "View",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/View/**"
             }
           ]
         },

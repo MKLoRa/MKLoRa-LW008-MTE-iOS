@@ -24,8 +24,23 @@
 
 - (void)readDataWithSucBlock:(void (^)(void))sucBlock failedBlock:(void (^)(NSError *error))failedBlock {
     dispatch_async(self.readQueue, ^{
+        if (![self readOnOffMethod]) {
+            [self operationFailedBlockWithMsg:@"Read ON/Off Method Error" block:failedBlock];
+            return;
+        }
+        
+        if (![self readShutDownPayload]) {
+            [self operationFailedBlockWithMsg:@"Read Shut-Down Payload Error" block:failedBlock];
+            return;
+        }
+        
         if (![self readOffByButton]) {
             [self operationFailedBlockWithMsg:@"Read Off By Button Error" block:failedBlock];
+            return;
+        }
+        
+        if (![self readAutoPowerOn]) {
+            [self operationFailedBlockWithMsg:@"Read Auto Power On Error" block:failedBlock];
             return;
         }
         
@@ -39,11 +54,50 @@
 
 #pragma mark - interface
 
+- (BOOL)readOnOffMethod {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readMagnetTurnOnMethodWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.onOffMethod = [returnData[@"result"][@"method"] integerValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readShutDownPayload {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readShutdownPayloadStatusWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.shutDownPayload = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
 - (BOOL)readOffByButton {
     __block BOOL success = NO;
     [MKMUInterface mu_readHallPowerOffStatusWithSucBlock:^(id  _Nonnull returnData) {
         success = YES;
         self.offByButton = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readAutoPowerOn {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readAutoPowerOnAfterChargingWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.autoPowerOn = [returnData[@"result"][@"isOn"] boolValue];
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {
         dispatch_semaphore_signal(self.semaphore);

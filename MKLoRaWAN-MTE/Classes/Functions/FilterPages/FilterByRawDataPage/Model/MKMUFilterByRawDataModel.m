@@ -51,10 +51,9 @@
         self.bxpAcc = [returnData[@"result"][@"bxp_acc"] boolValue];
         self.bxpTH = [returnData[@"result"][@"bxp_th"] boolValue];
         self.bxpButton = [returnData[@"result"][@"bxp_button"] boolValue];
-        self.bxpTag = [returnData[@"result"][@"bxp_tag"] boolValue];
+        self.bxpTag = [returnData[@"result"][@"bxp_ts"] boolValue];
         self.pir = [returnData[@"result"][@"bxp_pir"] boolValue];
         self.tof = [returnData[@"result"][@"bxp_tof"] boolValue];
-        self.sensorInfo = [returnData[@"result"][@"bxp_sensorInfo"] boolValue];
         self.other = [returnData[@"result"][@"other"] boolValue];
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {

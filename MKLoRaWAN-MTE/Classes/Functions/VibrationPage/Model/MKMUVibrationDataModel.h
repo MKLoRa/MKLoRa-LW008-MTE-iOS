@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign)BOOL isOn;
 
+@property (nonatomic, copy)NSString *vibrationThresholds;
+
 @property (nonatomic, copy)NSString *reportInterval;
 
 @property (nonatomic, copy)NSString *vibrationTimeout;

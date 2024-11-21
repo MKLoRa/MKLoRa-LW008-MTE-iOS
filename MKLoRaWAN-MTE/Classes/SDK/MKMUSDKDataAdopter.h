@@ -52,9 +52,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSArray <NSDictionary *>*)parseTimingModeReportingTimePoint:(NSString *)content;
 
++ (NSArray <NSDictionary *>*)parseTimeSegmentedModeTimePeriodSetting:(NSString *)content;
+
 + (NSString *)fetchPositioningStrategyCommand:(mk_mu_positioningStrategy)strategy;
 
 + (NSString *)fetchTimingModeReportingTimePoint:(NSArray <mk_mu_timingModeReportingTimePointProtocol>*)dataList;
+
++ (NSString *)fetchimeSegmentedModeTimePeriodSetting:(NSArray <mk_mu_timeSegmentedModeTimePeriodSettingProtocol>*)dataList;
 
 + (NSDictionary *)fetchIndicatorSettings:(NSString *)content;
 

@@ -36,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign)BOOL tof;
 
-@property (nonatomic, assign)BOOL sensorInfo;
-
 @property (nonatomic, assign)BOOL other;
 
 - (void)readDataWithSucBlock:(void (^)(void))sucBlock failedBlock:(void (^)(NSError *error))failedBlock;

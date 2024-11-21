@@ -152,7 +152,7 @@
 - (MKSlider *)slider {
     if (!_slider) {
         _slider = [[MKSlider alloc] init];
-        _slider.maximumValue = 9.0;
+        _slider.maximumValue = 8.0;
         _slider.minimumValue = 0.f;
         _slider.value = 6.f;
         [_slider addTarget:self

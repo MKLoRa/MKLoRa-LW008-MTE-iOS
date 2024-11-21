@@ -175,16 +175,16 @@ MKLoRaSettingCHCellDelegate>
     }
     if (section == 4) {
         //CH
-        if (self.dataModel.region == 1 || self.dataModel.region == 2 || self.dataModel.region == 8) {
-            //US915、AU915、CN470
+        if (self.dataModel.region == 1 || self.dataModel.region == 5) {
+            //AU915、US915
             return self.optionsList1.count;
         }
         return 0;
     }
     if (section == 5) {
         //Duty-cycle
-        if (self.dataModel.region == 3 || self.dataModel.region == 4 || self.dataModel.region == 5 || self.dataModel.region == 9) {
-            //EU868,CN779, EU433,RU864
+        if (self.dataModel.region == 2 || self.dataModel.region == 6) {
+            //EU868,RU864
             return self.optionsList2.count;
         }
         return 0;
@@ -192,9 +192,8 @@ MKLoRaSettingCHCellDelegate>
     if (section == 6) {
         //DR For Join
         if (self.dataModel.region == 2 || self.dataModel.region == 3 || self.dataModel.region == 4
-            || self.dataModel.region == 5 || self.dataModel.region == 6 || self.dataModel.region == 7
-            || self.dataModel.region == 9) {
-            //CN470, CN779, EU433, EU868,KR920, IN865, RU864
+            || self.dataModel.region == 6) {
+            //EU868,KR920, IN865, RU864
             return self.optionsList3.count;
         }
         return 0;
@@ -729,7 +728,7 @@ MKLoRaSettingCHCellDelegate>
     MKTextButtonCellModel *regionModel = [[MKTextButtonCellModel alloc] init];
     regionModel.index = 1;
     regionModel.msg = @"Region/Subnet";
-    regionModel.dataList = @[@"AS923",@"AU915",@"CN470",@"CN779",@"EU433",@"EU868",@"KR920",@"IN865",@"US915",@"RU864",@"AS923-1",@"AS923-2",@"AS923-3",@"AS923-4"];
+    regionModel.dataList = @[@"AS923",@"AU915",@"EU868",@"KR920",@"IN865",@"US915",@"RU864",@"AS923-1",@"AS923-2",@"AS923-3",@"AS923-4"];
     regionModel.buttonLabelFont = MKFont(13.f);
     regionModel.dataListIndex = self.dataModel.region;
     [self.section2List addObject:regionModel];
@@ -754,7 +753,7 @@ MKLoRaSettingCHCellDelegate>
     MKLoRaSettingCHCellModel *cellModel = [[MKLoRaSettingCHCellModel alloc] init];
     cellModel.index = 0;
     cellModel.msg = @"CH";
-    cellModel.noteMsg = @"*It is only used for US915,AU915,CN470";
+    cellModel.noteMsg = @"*It is only used for US915,AU915";
     cellModel.noteMsgColor = RGBCOLOR(102, 102, 102);
     cellModel.chLowValueList = [self.dataModel CHLValueList];
     cellModel.chLowIndex = [self getCurrentCHLIndex];
@@ -767,7 +766,7 @@ MKLoRaSettingCHCellDelegate>
     MKTextSwitchCellModel *dutyModel = [[MKTextSwitchCellModel alloc] init];
     dutyModel.index = 0;
     dutyModel.msg = @"Duty-cycle";
-    dutyModel.noteMsg = @"*It is only used for EU868,CN779, EU433,and RU864. Off: The uplink report interval will not be limit by region freqency. On:The uplink report interval will be limit by region freqency.";
+    dutyModel.noteMsg = @"*It is only used for EU868 and RU864. Off: The uplink report interval will not be limit by region freqency. On:The uplink report interval will be limit by region freqency.";
     dutyModel.noteMsgColor = RGBCOLOR(102, 102, 102);
     dutyModel.isOn = self.dataModel.dutyIsOn;
     [self.optionsList2 addObject:dutyModel];
@@ -780,7 +779,7 @@ MKLoRaSettingCHCellDelegate>
     joinModel.dataList = [self.dataModel DRValueList];
     joinModel.buttonLabelFont = MKFont(13.f);
     joinModel.dataListIndex = self.dataModel.join;
-    joinModel.noteMsg = @"*It is only used for CN470, CN779, EU433, EU868,KR920, IN865, RU864.";
+    joinModel.noteMsg = @"*It is only used for EU868,KR920, IN865, RU864.";
     joinModel.noteMsgColor = RGBCOLOR(102, 102, 102);
     [self.optionsList3 addObject:joinModel];
 }

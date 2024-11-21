@@ -96,11 +96,6 @@ MKTextFieldCellDelegate>
         self.dataModel.motionDuration = value;
         return;
     }
-    if (index == 4) {
-        //Vibration  Thresholds
-        self.dataModel.vibrationThresholds = value;
-        return;
-    }
 }
 
 #pragma mark - interface
@@ -179,16 +174,6 @@ MKTextFieldCellDelegate>
     cellModel4.unit = @"x5ms";
     cellModel4.textFieldValue = self.dataModel.motionDuration;
     [self.section0List addObject:cellModel4];
-    
-    MKTextFieldCellModel *cellModel5 = [[MKTextFieldCellModel alloc] init];
-    cellModel5.index = 4;
-    cellModel5.msg = @"Shock Thresholds";
-    cellModel5.textPlaceholder = @"10~255";
-    cellModel5.textFieldType = mk_realNumberOnly;
-    cellModel5.maxLength = 3;
-    cellModel5.unit = @"x10mg";
-    cellModel5.textFieldValue = self.dataModel.vibrationThresholds;
-    [self.section0List addObject:cellModel5];
     
     [self.tableView reloadData];
 }

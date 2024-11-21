@@ -15,11 +15,18 @@ typedef NS_ENUM(NSInteger, mk_mu_centralManagerStatus) {
     mk_mu_centralManagerStatusEnable,                           //可用状态
 };
 
+
+typedef NS_ENUM(NSInteger, mk_mu_magnetTurnOnMethod) {
+    mk_mu_magnetTurnOnMethod_multipleApproaches,                           //Multiple approaches
+    mk_mu_magnetTurnOnMethod_continuousApproach,                           //Continuous approach
+};
+
 typedef NS_ENUM(NSInteger, mk_mu_deviceMode) {
     mk_mu_deviceMode_standbyMode,         //Standby mode
     mk_mu_deviceMode_periodicMode,        //Periodic mode
     mk_mu_deviceMode_timingMode,          //Timing mode
     mk_mu_deviceMode_motionMode,          //Motion Mode
+    mk_mu_deviceMode_timeSegmentedMode,   //Time-Segmented Mode
 };
 
 typedef NS_ENUM(NSInteger, mk_mu_lowPowerPrompt) {
@@ -78,9 +85,6 @@ typedef NS_ENUM(NSInteger, mk_mu_positioningSystem) {
 typedef NS_ENUM(NSInteger, mk_mu_loraWanRegion) {
     mk_mu_loraWanRegionAS923,
     mk_mu_loraWanRegionAU915,
-    mk_mu_loraWanRegionCN470,
-    mk_mu_loraWanRegionCN779,
-    mk_mu_loraWanRegionEU433,
     mk_mu_loraWanRegionEU868,
     mk_mu_loraWanRegionKR920,
     mk_mu_loraWanRegionIN865,
@@ -161,26 +165,27 @@ typedef NS_ENUM(NSInteger, mk_mu_delayResponseStatus) {
 /// 0~23
 @property (nonatomic, assign)NSInteger hour;
 
-/// 0:00   1:15   2:30   3:45
+/// 0-59
 @property (nonatomic, assign)NSInteger minuteGear;
 
 @end
 
-@protocol mk_mu_motionModeEventsProtocol <NSObject>
+@protocol mk_mu_timeSegmentedModeTimePeriodSettingProtocol <NSObject>
 
-@property (nonatomic, assign)BOOL notifyEventOnStart;
+/// 0~23
+@property (nonatomic, assign)NSInteger startHour;
 
-@property (nonatomic, assign)BOOL fixOnStart;
+/// 0-59
+@property (nonatomic, assign)NSInteger startMinuteGear;
 
-@property (nonatomic, assign)BOOL notifyEventInTrip;
+/// 0~23
+@property (nonatomic, assign)NSInteger endHour;
 
-@property (nonatomic, assign)BOOL fixInTrip;
+/// 0-59
+@property (nonatomic, assign)NSInteger endMinuteGear;
 
-@property (nonatomic, assign)BOOL notifyEventOnEnd;
-
-@property (nonatomic, assign)BOOL fixOnEnd;
-
-@property (nonatomic, assign)BOOL fixOnStationaryState;
+/// Report Interval   30s - 86400s
+@property (nonatomic, assign)NSInteger interval;
 
 @end
 

@@ -39,6 +39,10 @@ mk_textSwitchCellDelegate>
 
 @property (nonatomic, strong)NSMutableArray *section2List;
 
+@property (nonatomic, strong)NSMutableArray *section3List;
+
+@property (nonatomic, strong)NSMutableArray *section4List;
+
 @property (nonatomic, strong)NSMutableArray *headerList;
 
 @property (nonatomic, strong)MKMUPositionPageModel *dataModel;
@@ -71,6 +75,10 @@ mk_textSwitchCellDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         MKTextSwitchCellModel *cellModel = self.section1List[0];
+        return [cellModel cellHeightWithContentWidth:kViewWidth];
+    }
+    if (indexPath.section == 4) {
+        MKTextSwitchCellModel *cellModel = self.section4List[0];
         return [cellModel cellHeightWithContentWidth:kViewWidth];
     }
     return 44.f;
@@ -122,6 +130,12 @@ mk_textSwitchCellDelegate>
     if (section == 2) {
         return self.section2List.count;
     }
+    if (section == 3) {
+        return self.section3List.count;
+    }
+    if (section == 4) {
+        return self.section4List.count;
+    }
     
     return 0;
 }
@@ -138,8 +152,20 @@ mk_textSwitchCellDelegate>
         cell.delegate = self;
         return cell;
     }
-    MKNormalTextCell *cell = [MKNormalTextCell initCellWithTableView:tableView];
-    cell.dataModel = self.section2List[indexPath.row];
+    if (indexPath.section == 2) {
+        MKNormalTextCell *cell = [MKNormalTextCell initCellWithTableView:tableView];
+        cell.dataModel = self.section2List[indexPath.row];
+        return cell;
+    }
+    if (indexPath.section == 3) {
+        MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
+        cell.dataModel = self.section3List[indexPath.row];
+        cell.delegate = self;
+        return cell;
+    }
+    MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
+    cell.dataModel = self.section4List[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
@@ -150,7 +176,15 @@ mk_textSwitchCellDelegate>
 - (void)mk_textSwitchCellStatusChanged:(BOOL)isOn index:(NSInteger)index {
     if (index == 0) {
         //Offline Fix
-        [self saveDataToDevice:isOn];
+        [self saveOfflineToDevice:isOn];
+        return;
+    }
+    if (index == 1) {
+        [self saveGPSExtremeModeToDevice:isOn];
+        return;
+    }
+    if (index == 2) {
+        [self saveBeaconVoltageReportToDevice:isOn];
         return;
     }
 }
@@ -162,8 +196,15 @@ mk_textSwitchCellDelegate>
     [self.dataModel readDataWithSucBlock:^{
         @strongify(self);
         [[MKHudManager share] hide];
-        MKTextSwitchCellModel *cellModel = self.section1List[0];
-        cellModel.isOn = self.dataModel.offline;
+        MKTextSwitchCellModel *cellModel1 = self.section1List[0];
+        cellModel1.isOn = self.dataModel.offline;
+        
+        MKTextSwitchCellModel *cellModel2 = self.section3List[0];
+        cellModel2.isOn = self.dataModel.gpsExtremeMode;
+        
+        MKTextSwitchCellModel *cellModel3 = self.section4List[0];
+        cellModel3.isOn = self.dataModel.bleFix;
+        
         [self.tableView reloadData];
     } failedBlock:^(NSError * _Nonnull error) {
         @strongify(self);
@@ -172,7 +213,7 @@ mk_textSwitchCellDelegate>
     }];
 }
 
-- (void)saveDataToDevice:(BOOL)offline {
+- (void)saveOfflineToDevice:(BOOL)offline {
     [[MKHudManager share] showHUDWithTitle:@"Config..." inView:self.view isPenetration:NO];
     @weakify(self);
     [self.dataModel configOffline:offline sucBlock:^{
@@ -191,13 +232,53 @@ mk_textSwitchCellDelegate>
     }];
 }
 
+- (void)saveGPSExtremeModeToDevice:(BOOL)isOn {
+    [[MKHudManager share] showHUDWithTitle:@"Config..." inView:self.view isPenetration:NO];
+    @weakify(self);
+    [self.dataModel configGpsLimitUploadStatus:isOn sucBlock:^{
+        @strongify(self);
+        [[MKHudManager share] hide];
+        [self.view showCentralToast:@"Success"];
+        
+        self.dataModel.gpsExtremeMode = isOn;
+        MKTextSwitchCellModel *cellModel = self.section3List[0];
+        cellModel.isOn = isOn;
+    } failedBlock:^(NSError * _Nonnull error) {
+        @strongify(self);
+        [[MKHudManager share] hide];
+        [self.view showCentralToast:error.userInfo[@"errorInfo"]];
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)saveBeaconVoltageReportToDevice:(BOOL)isOn {
+    [[MKHudManager share] showHUDWithTitle:@"Config..." inView:self.view isPenetration:NO];
+    @weakify(self);
+    [self.dataModel configBeaconVoltageStatus:isOn sucBlock:^{
+        @strongify(self);
+        [[MKHudManager share] hide];
+        [self.view showCentralToast:@"Success"];
+        
+        self.dataModel.bleFix = isOn;
+        MKTextSwitchCellModel *cellModel = self.section4List[0];
+        cellModel.isOn = isOn;
+    } failedBlock:^(NSError * _Nonnull error) {
+        @strongify(self);
+        [[MKHudManager share] hide];
+        [self.view showCentralToast:error.userInfo[@"errorInfo"]];
+        [self.tableView reloadData];
+    }];
+}
+
 #pragma mark - loadSections
 - (void)loadSectionDatas {
     [self loadSection0Datas];
     [self loadSection1Datas];
     [self loadSection2Datas];
+    [self loadSection3Datas];
+    [self loadSection4Datas];
     
-    for (NSInteger i = 0; i < 3; i ++) {
+    for (NSInteger i = 0; i < 5; i ++) {
         MKTableSectionLineHeaderModel *headerModel = [[MKTableSectionLineHeaderModel alloc] init];
         [self.headerList addObject:headerModel];
     }
@@ -230,6 +311,20 @@ mk_textSwitchCellDelegate>
     cellModel.showRightIcon = YES;
     cellModel.leftMsg = @"BLE&GPS";
     [self.section2List addObject:cellModel];
+}
+
+- (void)loadSection3Datas {
+    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
+    cellModel.index = 1;
+    cellModel.msg = @"GPS Extreme Mode";
+    [self.section3List addObject:cellModel];
+}
+
+- (void)loadSection4Datas {
+    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
+    cellModel.index = 2;
+    cellModel.msg = @"Beacon Voltage Report in Bluetooth Fix";
+    [self.section4List addObject:cellModel];
 }
 
 #pragma mark - UI
@@ -273,6 +368,20 @@ mk_textSwitchCellDelegate>
         _section2List = [NSMutableArray array];
     }
     return _section2List;
+}
+
+- (NSMutableArray *)section3List {
+    if (!_section3List) {
+        _section3List = [NSMutableArray array];
+    }
+    return _section3List;
+}
+
+- (NSMutableArray *)section4List {
+    if (!_section4List) {
+        _section4List = [NSMutableArray array];
+    }
+    return _section4List;
 }
 
 - (NSMutableArray *)headerList {

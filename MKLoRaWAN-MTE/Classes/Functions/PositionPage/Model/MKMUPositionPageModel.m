@@ -29,6 +29,14 @@
             [self operationFailedBlockWithMsg:@"Read Offline Fix Error" block:failedBlock];
             return;
         }
+        if (![self readGpsLimitUploadStatus]) {
+            [self operationFailedBlockWithMsg:@"Read Gps Limit Upload Status Error" block:failedBlock];
+            return;
+        }
+        if (![self readBluetoothFix]) {
+            [self operationFailedBlockWithMsg:@"Read Beacon Voltage Report in Bluetooth Fix Error" block:failedBlock];
+            return;
+        }
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();
@@ -43,6 +51,38 @@
     dispatch_async(self.readQueue, ^{
         if (![self configOfflineFix:offline]) {
             [self operationFailedBlockWithMsg:@"Config Offline Fix Error" block:failedBlock];
+            return;
+        }
+        moko_dispatch_main_safe(^{
+            if (sucBlock) {
+                sucBlock();
+            }
+        });
+    });
+}
+
+- (void)configGpsLimitUploadStatus:(BOOL)isOn
+                          sucBlock:(void (^)(void))sucBlock
+                       failedBlock:(void (^)(NSError *error))failedBlock {
+    dispatch_async(self.readQueue, ^{
+        if (![self configGpsLimitUploadStatus:isOn]) {
+            [self operationFailedBlockWithMsg:@"Config Gps Limit Upload Status Error" block:failedBlock];
+            return;
+        }
+        moko_dispatch_main_safe(^{
+            if (sucBlock) {
+                sucBlock();
+            }
+        });
+    });
+}
+
+- (void)configBeaconVoltageStatus:(BOOL)isOn
+                         sucBlock:(void (^)(void))sucBlock
+                      failedBlock:(void (^)(NSError *error))failedBlock {
+    dispatch_async(self.readQueue, ^{
+        if (![self configBluetoothFix:isOn]) {
+            [self operationFailedBlockWithMsg:@"Config Beacon Voltage Report in Bluetooth Fix Error" block:failedBlock];
             return;
         }
         moko_dispatch_main_safe(^{
@@ -79,6 +119,58 @@
     dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     return success;
 }
+
+- (BOOL)readGpsLimitUploadStatus {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readGpsLimitUploadStatusWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.gpsExtremeMode = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configGpsLimitUploadStatus:(BOOL)isOn {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configGpsLimitUploadStatus:isOn sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)readBluetoothFix {
+    __block BOOL success = NO;
+    [MKMUInterface mu_readBeaconVoltageReportInBleFixWithSucBlock:^(id  _Nonnull returnData) {
+        success = YES;
+        self.bleFix = [returnData[@"result"][@"isOn"] boolValue];
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+- (BOOL)configBluetoothFix:(BOOL)isOn {
+    __block BOOL success = NO;
+    [MKMUInterface mu_configBeaconVoltageReportInBleFixStatus:isOn sucBlock:^{
+        success = YES;
+        dispatch_semaphore_signal(self.semaphore);
+    } failedBlock:^(NSError * _Nonnull error) {
+        dispatch_semaphore_signal(self.semaphore);
+    }];
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    return success;
+}
+
+
 
 #pragma mark - private method
 - (void)operationFailedBlockWithMsg:(NSString *)msg block:(void (^)(NSError *error))block {

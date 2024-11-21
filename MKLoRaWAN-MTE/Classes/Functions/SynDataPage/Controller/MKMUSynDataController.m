@@ -158,11 +158,11 @@ mk_mu_storageDataDelegate>
 
 #pragma mark - mk_mu_storageDataDelegate
 - (void)mk_mu_receiveStorageData:(NSString *)content {
-    NSInteger number = [MKBLEBaseSDKAdopter getDecimalWithHex:content range:NSMakeRange(8, 2)];
+    NSInteger number = [MKBLEBaseSDKAdopter getDecimalWithHex:content range:NSMakeRange(10, 2)];
     NSLog(@"接收到数据了:+++++++++++%@",content);
     if (number == 0) {
         //最后一条数据
-        self.totalSum = [MKBLEBaseSDKAdopter getDecimalStringWithHex:content range:NSMakeRange(10, 4)];
+        self.totalSum = [MKBLEBaseSDKAdopter getDecimalStringWithHex:content range:NSMakeRange(12, 4)];
         self.headerView.sumLabel.text = [NSString stringWithFormat:@"Sum:%@",self.totalSum];
         if ([self.totalSum integerValue] == 0) {
             self.headerView.countLabel.text = @"Count:0";

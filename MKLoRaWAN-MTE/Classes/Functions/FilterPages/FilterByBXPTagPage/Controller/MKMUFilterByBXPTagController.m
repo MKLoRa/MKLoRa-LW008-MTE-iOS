@@ -248,7 +248,7 @@ MKMUFilterEditSectionHeaderViewDelegate>
 - (void)loadSection0Datas {
     MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
     cellModel.index = 0;
-    cellModel.msg = @"BXP-Tag";
+    cellModel.msg = @"BXP-T&S";
     cellModel.isOn = self.dataModel.isOn;
     [self.section0List addObject:cellModel];
 }
@@ -284,7 +284,7 @@ MKMUFilterEditSectionHeaderViewDelegate>
 
 #pragma mark - UI
 - (void)loadSubViews {
-    self.defaultTitle = @"BXP-Tag Filter";
+    self.defaultTitle = @"BXP-T&S";
     [self.rightButton setImage:LOADICON(@"MKLoRaWAN-MTE", @"MKMUFilterByBXPTagController", @"mu_slotSaveIcon.png") forState:UIControlStateNormal];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

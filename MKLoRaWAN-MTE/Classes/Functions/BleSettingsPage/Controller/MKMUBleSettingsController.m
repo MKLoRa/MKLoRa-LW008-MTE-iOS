@@ -52,6 +52,8 @@ MKMUBroadcastTxPowerCellDelegate>
 
 @property (nonatomic, strong)NSMutableArray *section5List;
 
+@property (nonatomic, strong)NSMutableArray *section6List;
+
 @property (nonatomic, strong)NSMutableArray *headerList;
 
 @property (nonatomic, strong)MKMUBleSettingsModel *dataModel;
@@ -114,7 +116,7 @@ MKMUBroadcastTxPowerCellDelegate>
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 5 && indexPath.row == 0 && [MKMUConnectModel shared].hasPassword) {
+    if (indexPath.section == 6 && indexPath.row == 0 && [MKMUConnectModel shared].hasPassword) {
         //有登录密码进来的才能修改密码，无登录密码进来的点击修改密码不响应
         [self configPassword];
         return;
@@ -137,13 +139,16 @@ MKMUBroadcastTxPowerCellDelegate>
         return self.section2List.count;
     }
     if (section == 3) {
-        return (self.dataModel.beaconMode ? 0 : self.section3List.count);
+        return self.section3List.count;
     }
     if (section == 4) {
-        return self.section4List.count;
+        return (self.dataModel.beaconMode ? 0 : self.section4List.count);
     }
     if (section == 5) {
-        return (self.dataModel.needPassword ? self.section5List.count : 0);
+        return self.section5List.count;
+    }
+    if (section == 6) {
+        return (self.dataModel.needPassword ? self.section6List.count : 0);
     }
     return 0;
 }
@@ -162,25 +167,31 @@ MKMUBroadcastTxPowerCellDelegate>
         return cell;
     }
     if (indexPath.section == 2) {
-        MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
+        MKTextFieldCell *cell = [MKTextFieldCell initCellWithTableView:tableView];
         cell.dataModel = self.section2List[indexPath.row];
         cell.delegate = self;
         return cell;
     }
     if (indexPath.section == 3) {
-        MKTextFieldCell *cell = [MKTextFieldCell initCellWithTableView:tableView];
+        MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
         cell.dataModel = self.section3List[indexPath.row];
         cell.delegate = self;
         return cell;
     }
     if (indexPath.section == 4) {
-        MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
+        MKTextFieldCell *cell = [MKTextFieldCell initCellWithTableView:tableView];
         cell.dataModel = self.section4List[indexPath.row];
         cell.delegate = self;
         return cell;
     }
+    if (indexPath.section == 5) {
+        MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
+        cell.dataModel = self.section5List[indexPath.row];
+        cell.delegate = self;
+        return cell;
+    }
     MKNormalTextCell *cell = [MKNormalTextCell initCellWithTableView:tableView];
-    cell.dataModel = self.section5List[indexPath.row];
+    cell.dataModel = self.section6List[indexPath.row];
     return cell;
 }
 
@@ -197,9 +208,16 @@ MKMUBroadcastTxPowerCellDelegate>
         return;
     }
     if (index == 1) {
+        //ADV Interval
+        self.dataModel.interval = value;
+        MKTextFieldCellModel *cellModel = self.section2List[0];
+        cellModel.textFieldValue = value;
+        return;
+    }
+    if (index == 2) {
         //Broadcast Timeout
         self.dataModel.timeout = value;
-        MKTextFieldCellModel *cellModel = self.section3List[0];
+        MKTextFieldCellModel *cellModel = self.section4List[0];
         cellModel.textFieldValue = value;
         return;
     }
@@ -213,17 +231,17 @@ MKMUBroadcastTxPowerCellDelegate>
     if (index == 0) {
         //Beacon Mode
         self.dataModel.beaconMode = isOn;
-        MKTextSwitchCellModel *cellModel = self.section2List[0];
+        MKTextSwitchCellModel *cellModel = self.section3List[0];
         cellModel.isOn = isOn;
-        [self.tableView mk_reloadSection:3 withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView mk_reloadSection:4 withRowAnimation:UITableViewRowAnimationNone];
         return;
     }
     if (index == 1) {
         //Login Password
         self.dataModel.needPassword = isOn;
-        MKTextSwitchCellModel *cellModel = self.section4List[0];
+        MKTextSwitchCellModel *cellModel = self.section5List[0];
         cellModel.isOn = isOn;
-        [self.tableView mk_reloadSection:5 withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView mk_reloadSection:6 withRowAnimation:UITableViewRowAnimationNone];
         return;
     }
 }
@@ -344,8 +362,9 @@ MKMUBroadcastTxPowerCellDelegate>
     [self loadSection3Datas];
     [self loadSection4Datas];
     [self loadSection5Datas];
+    [self loadSection6Datas];
     
-    for (NSInteger i = 0; i < 6; i ++) {
+    for (NSInteger i = 0; i < 7; i ++) {
         MKTableSectionLineHeaderModel *headerModel = [[MKTableSectionLineHeaderModel alloc] init];
         [self.headerList addObject:headerModel];
     }
@@ -371,38 +390,50 @@ MKMUBroadcastTxPowerCellDelegate>
 }
 
 - (void)loadSection2Datas {
-    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
-    cellModel.index = 0;
-    cellModel.msg = @"Beacon  Mode";
-    cellModel.isOn = self.dataModel.beaconMode;
+    MKTextFieldCellModel *cellModel = [[MKTextFieldCellModel alloc] init];
+    cellModel.index = 1;
+    cellModel.msg = @"ADV Interval";
+    cellModel.maxLength = 3;
+    cellModel.unit = @"×100ms";
+    cellModel.textPlaceholder = @"1 ~ 100";
+    cellModel.textFieldType = mk_realNumberOnly;
+    cellModel.textFieldValue = self.dataModel.interval;
     [self.section2List addObject:cellModel];
 }
 
 - (void)loadSection3Datas {
+    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
+    cellModel.index = 0;
+    cellModel.msg = @"Beacon  Mode";
+    cellModel.isOn = self.dataModel.beaconMode;
+    [self.section3List addObject:cellModel];
+}
+
+- (void)loadSection4Datas {
     MKTextFieldCellModel *cellModel = [[MKTextFieldCellModel alloc] init];
-    cellModel.index = 1;
+    cellModel.index = 2;
     cellModel.msg = @"Broadcast Timeout";
     cellModel.maxLength = 2;
     cellModel.unit = @"Mins";
     cellModel.textPlaceholder = @"1 ~ 60";
     cellModel.textFieldType = mk_realNumberOnly;
     cellModel.textFieldValue = self.dataModel.timeout;
-    [self.section3List addObject:cellModel];
-}
-
-- (void)loadSection4Datas {
-    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
-    cellModel.index = 1;
-    cellModel.msg = @"Login Password";
-    cellModel.isOn = self.dataModel.needPassword;
     [self.section4List addObject:cellModel];
 }
 
 - (void)loadSection5Datas {
+    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
+    cellModel.index = 1;
+    cellModel.msg = @"Login Password";
+    cellModel.isOn = self.dataModel.needPassword;
+    [self.section5List addObject:cellModel];
+}
+
+- (void)loadSection6Datas {
     MKNormalTextCellModel *cellModel = [[MKNormalTextCellModel alloc] init];
     cellModel.leftMsg = @"Change Password";
     cellModel.showRightIcon = YES;
-    [self.section5List addObject:cellModel];
+    [self.section6List addObject:cellModel];
 }
 
 #pragma mark - UI
@@ -470,6 +501,13 @@ MKMUBroadcastTxPowerCellDelegate>
         _section5List = [NSMutableArray array];
     }
     return _section5List;
+}
+
+- (NSMutableArray *)section6List {
+    if (!_section6List) {
+        _section6List = [NSMutableArray array];
+    }
+    return _section6List;
 }
 
 - (NSMutableArray *)headerList {

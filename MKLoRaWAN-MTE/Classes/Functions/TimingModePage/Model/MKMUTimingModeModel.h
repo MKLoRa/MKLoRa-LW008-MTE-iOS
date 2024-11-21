@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 0~23
 @property (nonatomic, assign)NSInteger hour;
 
-/// 0:00   1:15   2:30   3:45
+/// 0-59
 @property (nonatomic, assign)NSInteger minuteGear;
 
 @end

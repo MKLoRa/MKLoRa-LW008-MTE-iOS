@@ -73,25 +73,24 @@
             });
             return;
         }
-        if (self.region == 1 || self.region == 2 || self.region == 8) {
-            //US915、AU915、CN470
+        if (self.region == 1 || self.region == 5) {
+            //US915、AU915
             if (![self readCHValue]) {
                 [self operationFailedBlockWithMsg:@"Read CH Error" block:failedBlock];
                 return;
             }
         }
         //Duty-cycle
-        if (self.region == 3 || self.region == 4 || self.region == 5 || self.region == 9) {
-            //EU868,CN779, EU433,RU864
+        if (self.region == 2 || self.region == 6) {
+            //EU868,RU864
             if (![self readDutyStatus]) {
                 [self operationFailedBlockWithMsg:@"Read Duty Cycle Error" block:failedBlock];
                 return;
             }
         }
         if (self.region == 2 || self.region == 3
-            || self.region == 4 || self.region == 5 || self.region == 6
-            || self.region == 7 || self.region == 9) {
-            //CN470, CN779, EU433, EU868,KR920, IN865, RU864
+            || self.region == 4 || self.region == 6) {
+            //EU868,KR920, IN865, RU864
             if (![self readJoinValue]) {
                 [self operationFailedBlockWithMsg:@"Read Dr For Join Error" block:failedBlock];
                 return;
@@ -173,15 +172,15 @@
             });
             return;
         }
-        if (self.region == 1 || self.region == 2 || self.region == 8) {
-            //AU915、CN470、US915
+        if (self.region == 1 || self.region == 5) {
+            //AU915、US915
             if (![self configCHValue]) {
                 [self operationFailedBlockWithMsg:@"Config CH Error" block:failedBlock];
                 return;
             }
         }
-        if (self.region == 3 || self.region == 4 || self.region == 5 || self.region == 9) {
-            //EU868,CN779, EU433,RU864
+        if (self.region == 2 || self.region == 6) {
+            //EU868,RU864
             if (![self configDutyStatus]) {
                 [self operationFailedBlockWithMsg:@"Config Duty Cycle Error" block:failedBlock];
                 return;
@@ -189,9 +188,8 @@
         }
         
         if (self.region == 2 || self.region == 3
-            || self.region == 4 || self.region == 5 || self.region == 6
-            || self.region == 7 || self.region == 9) {
-            //CN470, CN779, EU433, EU868,KR920, IN865, RU864
+            || self.region == 4 || self.region == 6) {
+            //EU868,KR920, IN865, RU864
             if (![self configJoinValue]) {
                 [self operationFailedBlockWithMsg:@"Config DR For Join Error" block:failedBlock];
                 return;
@@ -224,26 +222,23 @@
 #pragma mark - public method
 - (void)configAdvanceSettingDefaultParams {
     self.CHL = 0;
-    if (self.region == 1 || self.region == 8) {
+    if (self.region == 1 || self.region == 5) {
         //AU915、US915
         self.CHL = 8;
         self.CHH = 15;
-    }else if (self.region == 2) {
-        //CN470
-        self.CHH = 7;
-    }else if (self.region == 3 || self.region == 4 || self.region == 5 || self.region == 6 || self.region == 7) {
-        //CN779、EU433、EU868、KR920、IN865
+    }else if (self.region == 2 || self.region == 3 || self.region == 4) {
+        //EU868、KR920、IN865
         self.CHH = 2;
-    }else if (self.region == 0 || self.region == 9 || self.region == 10
-              || self.region == 11 || self.region == 12 || self.region == 13) {
-        //RU864、AS923、AS923-1、AS923-2、AS923-3、AS923-4
+    }else if (self.region == 0 || self.region == 6 || self.region == 7
+              || self.region == 8 || self.region == 9 || self.region == 10) {
+        //AS923、RU864、AS923-1、AS923-2、AS923-3、AS923-4
         self.CHH = 1;
     }
     self.dutyIsOn = NO;
     
     self.adrIsOn = YES;
-    if (self.region == 0 || self.region == 1 || self.region == 10
-        || self.region == 11 || self.region == 12 || self.region == 13) {
+    if (self.region == 0 || self.region == 1 || self.region == 7
+        || self.region == 8 || self.region == 9 || self.region == 10) {
         //AS923、AU915、AS923-1、AS923-2、AS923-3、AS923-4
         self.join = 2;
         self.DRL = 2;
@@ -256,16 +251,12 @@
 }
 
 - (NSArray <NSString *>*)CHLValueList {
-    if (self.region == 1 || self.region == 8) {
+    if (self.region == 1 || self.region == 5) {
         //AU915、US915
         return [self loadStringWithMaxValue:63];
     }
-    if (self.region == 2) {
-        //CN470
-        return [self loadStringWithMaxValue:95];
-    }
-    if (self.region == 3 || self.region == 4 || self.region == 5 || self.region == 6 || self.region == 7) {
-        //CN779、EU433、EU868、KR920、IN865
+    if (self.region == 2 || self.region == 3 || self.region == 4) {
+        //EU868、KR920、IN865
         return [self loadStringWithMaxValue:2];
     }
     //RU864、AS923
@@ -278,8 +269,8 @@
 }
 
 - (NSArray <NSString *>*)DRValueList; {
-    if (self.region == 0 || self.region == 10
-        || self.region == 11 || self.region == 12 || self.region == 13) {
+    if (self.region == 0 || self.region == 7
+        || self.region == 8 || self.region == 9 || self.region == 10) {
         //AS923、AS923-1、AS923-2、AS923-3、AS923-4
         return @[@"2",@"3",@"4",@"5"];
     }
@@ -287,7 +278,7 @@
         //AU915
         return @[@"2",@"3",@"4",@"5",@"6"];
     }
-    if (self.region == 8) {
+    if (self.region == 5) {
         //US915
         return [self loadStringWithMaxValue:4];
     }
@@ -341,7 +332,8 @@
     __block BOOL success = NO;
     [MKMUInterface mu_readLorawanRegionWithSucBlock:^(id  _Nonnull returnData) {
         success = YES;
-        self.region = [returnData[@"result"][@"region"] integerValue];
+        NSInteger region = [returnData[@"result"][@"region"] integerValue];
+        self.region = [self exchangeRegion:region];
         dispatch_semaphore_signal(self.semaphore);
     } failedBlock:^(NSError * _Nonnull error) {
         dispatch_semaphore_signal(self.semaphore);
@@ -715,21 +707,20 @@
             return NO;
         }
     }
-    if (self.region < 0 || self.region > 13) {
+    if (self.region < 0 || self.region > 10) {
         return NO;
     }
 
     if (self.needAdvanceSetting) {
-        if (self.region == 1 || self.region == 2 || self.region == 8) {
+        if (self.region == 1 || self.region == 5) {
             if (self.CHL < 0 || self.CHL > 95 || self.CHH < self.CHL || self.CHH > 95) {
                 return NO;
             }
         }
-        if (self.region == 0 || self.region == 2 || self.region == 3
-            || self.region == 4 || self.region == 5 || self.region == 6 || self.region == 7
-            || self.region == 10
-            || self.region == 11 || self.region == 12 || self.region == 13) {
-            //CN470, CN779, EU433, EU868,KR920, IN865, RU864、AS923-1、AS923-2、AS923-3、AS923-4
+        if (self.region == 0 || self.region == 2 || self.region == 3 || self.region == 4
+            || self.region == 7
+            || self.region == 8 || self.region == 9 || self.region == 10) {
+            //EU868,KR920, IN865, RU864、AS923-1、AS923-2、AS923-3、AS923-4
             if (self.join < 0 || self.join > 5) {
                 return NO;
             }
@@ -746,31 +737,19 @@
     return YES;
 }
 
-- (NSDictionary *)RegionDic {
-    return @{
-        @"0":@"AS923",
-        @"1":@"AU915",
-        @"2":@"CN470",
-        @"3":@"CN779",
-        @"4":@"EU433",
-        @"5":@"EU868",
-        @"6":@"KR920",
-        @"7":@"IN865",
-        @"8":@"US915",
-        @"9":@"RU864",
-        @"10":@"AS923-1",
-        @"11":@"AS923-2",
-        @"12":@"AS923-3",
-        @"13":@"AS923-4"
-    };
-}
-
 - (NSArray *)loadStringWithMaxValue:(NSInteger)max {
     NSMutableArray *list = [NSMutableArray array];
     for (NSInteger i = 0; i <= max; i ++) {
         [list addObject:[NSString stringWithFormat:@"%ld",(long)i]];
     }
     return list;
+}
+
+- (NSInteger)exchangeRegion:(NSInteger)region {
+    if (region == 0 || region == 1) {
+        return region;
+    }
+    return (region - 3);
 }
 
 #pragma mark - getter

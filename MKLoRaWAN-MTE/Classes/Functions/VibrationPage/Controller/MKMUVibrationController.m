@@ -110,15 +110,22 @@ MKTextFieldCellDelegate>
 /// @param value 当前textField的值
 - (void)mk_deviceTextCellValueChanged:(NSInteger)index textValue:(NSString *)value {
     if (index == 0) {
-        //Report Interval
+        //Shock  Thresholds
         MKTextFieldCellModel *cellModel = self.section1List[0];
+        cellModel.textFieldValue = value;
+        self.dataModel.vibrationThresholds = value;
+        return;
+    }
+    if (index == 1) {
+        //Report Interval
+        MKTextFieldCellModel *cellModel = self.section1List[1];
         cellModel.textFieldValue = value;
         self.dataModel.reportInterval = value;
         return;
     }
-    if (index == 1) {
+    if (index == 2) {
         //Vibration Timeout
-        MKTextFieldCellModel *cellModel = self.section1List[1];
+        MKTextFieldCellModel *cellModel = self.section1List[2];
         cellModel.textFieldValue = value;
         self.dataModel.vibrationTimeout = value;
         return;
@@ -173,23 +180,33 @@ MKTextFieldCellDelegate>
 - (void)loadSection1Datas {
     MKTextFieldCellModel *cellModel1 = [[MKTextFieldCellModel alloc] init];
     cellModel1.index = 0;
-    cellModel1.msg = @"Report Interval";
-    cellModel1.textPlaceholder = @"3~255";
+    cellModel1.msg = @"Shock  Thresholds";
+    cellModel1.textPlaceholder = @"10~255";
     cellModel1.textFieldType = mk_realNumberOnly;
     cellModel1.maxLength = 3;
-    cellModel1.unit = @"s";
-    cellModel1.textFieldValue = self.dataModel.reportInterval;
+    cellModel1.unit = @"x10mg";
+    cellModel1.textFieldValue = self.dataModel.vibrationThresholds;
     [self.section1List addObject:cellModel1];
     
     MKTextFieldCellModel *cellModel2 = [[MKTextFieldCellModel alloc] init];
     cellModel2.index = 1;
-    cellModel2.msg = @"Shock Timeout";
-    cellModel2.textPlaceholder = @"1~20";
+    cellModel2.msg = @"Report Interval";
+    cellModel2.textPlaceholder = @"3~255";
     cellModel2.textFieldType = mk_realNumberOnly;
-    cellModel2.maxLength = 2;
+    cellModel2.maxLength = 3;
     cellModel2.unit = @"s";
-    cellModel2.textFieldValue = self.dataModel.vibrationTimeout;
+    cellModel2.textFieldValue = self.dataModel.reportInterval;
     [self.section1List addObject:cellModel2];
+    
+    MKTextFieldCellModel *cellModel3 = [[MKTextFieldCellModel alloc] init];
+    cellModel3.index = 2;
+    cellModel3.msg = @"Shock Timeout";
+    cellModel3.textPlaceholder = @"1~20";
+    cellModel3.textFieldType = mk_realNumberOnly;
+    cellModel3.maxLength = 2;
+    cellModel3.unit = @"s";
+    cellModel3.textFieldValue = self.dataModel.vibrationTimeout;
+    [self.section1List addObject:cellModel3];
 }
 
 #pragma mark - UI

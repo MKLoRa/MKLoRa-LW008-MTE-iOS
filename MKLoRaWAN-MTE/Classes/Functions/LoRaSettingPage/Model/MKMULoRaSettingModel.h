@@ -36,18 +36,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  0:AS923
  1:AU915
- 2:CN470
- 3:CN779
- 4:EU433
- 5:EU868
- 6:KR920
- 7:IN865
- 8:US915
- 9:RU864
- 10:AS923-1
- 11:AS923-2
- 12:AS923-3
- 13:AS923-4
+ 2:EU868
+ 3:KR920
+ 4:IN865
+ 5:US915
+ 6:RU864
+ 7:AS923-1
+ 8:AS923-2
+ 9:AS923-3
+ 10:AS923-4
  */
 @property (nonatomic, assign)NSInteger region;
 
@@ -57,16 +54,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// 底部高级选项是否打开(needAdvanceSetting == YES情况下)
 @property (nonatomic, assign)BOOL advancedStatus;
 
-/// 当频段选择为US915, AU915和CN470时，CH设置项显示。US915默认显示值为8-15；AU915默认显示值为8-15；CN470默认显示值为0-7.
+/// 当频段选择为US915和AU915时，CH设置项显示。US915默认显示值为8-15；AU915默认显示值为8-15.
 @property (nonatomic, assign)NSInteger CHL;
 
-/// 当频段选择为US915, AU915和CN470时，CH设置项显示。US915默认显示值为8-15；AU915默认显示值为8-15；CN470默认显示值为0-7.
+/// 当频段选择为US915,和AU915，CH设置项显示。US915默认显示值为8-15；AU915默认显示值为8-15.
 @property (nonatomic, assign)NSInteger CHH;
 
-//EU868,CN779, EU433,RU864
+//EU868,RU864
 @property (nonatomic, assign)BOOL dutyIsOn;
 
-/// It is only used for CN470, CN779, EU433, EU868,KR920, IN865, RU864
+/// It is only used for EU868,KR920, IN865, RU864
 /// 0~15
 @property (nonatomic, assign)NSInteger join;
 
