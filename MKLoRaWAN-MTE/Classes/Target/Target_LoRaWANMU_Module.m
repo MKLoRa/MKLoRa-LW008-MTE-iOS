@@ -16,6 +16,8 @@
 
 /// 扫描页面
 - (UIViewController *)Action_LoRaWANMU_Module_ScanController:(NSDictionary *)params {
+    MKMUScanController *vc = [[MKMUScanController alloc] init];
+    vc.deviceType = [params[@"deviceType"] integerValue];
     return [[MKMUScanController alloc] init];
 }
 

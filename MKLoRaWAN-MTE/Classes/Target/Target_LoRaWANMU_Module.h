@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Target_LoRaWANMU_Module : NSObject
 
+
 /// 扫描页面
+/// - Parameter params: @{@"deviceType":@"0"}
 - (UIViewController *)Action_LoRaWANMU_Module_ScanController:(NSDictionary *)params;
 
 /// 关于页面
