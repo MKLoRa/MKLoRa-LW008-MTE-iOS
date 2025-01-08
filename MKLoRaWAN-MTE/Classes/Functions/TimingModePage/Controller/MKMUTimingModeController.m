@@ -17,7 +17,6 @@
 
 #import "MKHudManager.h"
 #import "MKTextButtonCell.h"
-#import "MKPickerView.h"
 
 #import "MKMUTimingModeModel.h"
 
@@ -133,8 +132,8 @@ MKMUReportTimePointCellDelegate>
     MKMUReportTimePointCellModel *cellModel = [[MKMUReportTimePointCellModel alloc] init];
     cellModel.index = self.section2List.count;
     cellModel.msg = [NSString stringWithFormat:@"Time Point %ld",(long)(self.section2List.count + 1)];
-    cellModel.hourIndex = 0;
-    cellModel.timeSpaceIndex = 0;
+    cellModel.hour = 0;
+    cellModel.timeSpace = 0;
     [self.section2List addObject:cellModel];
     
     [self.tableView mk_reloadSection:2 withRowAnimation:UITableViewRowAnimationNone];
@@ -162,19 +161,21 @@ MKMUReportTimePointCellDelegate>
 }
 
 /// 用户选择了hour事件
-- (void)mu_hourButtonPressed:(NSInteger)index {
+- (void)mu_hourButtonPressed:(NSInteger)index hour:(NSInteger)hour {
     if (![self cellCanSelected]) {
         return;
     }
-    [self showTimePointHourPickView:index];
+    MKMUReportTimePointCellModel *cellModel = self.section2List[index];
+    cellModel.hour = hour;
 }
 
 /// 用户选择了时间间隔事件
-- (void)mu_timeSpaceButtonPressed:(NSInteger)index {
+- (void)mu_timeSpaceButtonPressed:(NSInteger)index timeSpace:(NSInteger)timeSpace {
     if (![self cellCanSelected]) {
         return;
     }
-    [self showTimePointTimeSpacePickView:index];
+    MKMUReportTimePointCellModel *cellModel = self.section2List[index];
+    cellModel.timeSpace = timeSpace;
 }
 
 /**
@@ -208,8 +209,12 @@ MKMUReportTimePointCellDelegate>
     for (NSInteger i = 0; i < self.section2List.count; i ++) {
         MKMUReportTimePointCellModel *cellModel = self.section2List[i];
         MKMUTimingModeTimePointModel *pointModel = [[MKMUTimingModeTimePointModel alloc] init];
-        pointModel.hour = cellModel.hourIndex;
-        pointModel.minuteGear = cellModel.timeSpaceIndex;
+        pointModel.hour = cellModel.hour;
+        if (cellModel.hour == 24) {
+            pointModel.minuteGear = 0;
+        }else {
+            pointModel.minuteGear = cellModel.timeSpace;
+        }
         [tempList addObject:pointModel];
     }
     [[MKHudManager share] showHUDWithTitle:@"Config..." inView:self.view isPenetration:NO];
@@ -247,43 +252,6 @@ MKMUReportTimePointCellDelegate>
     return canSelected;
 }
 
-- (void)showTimePointHourPickView:(NSInteger)index {
-    MKMUReportTimePointCellModel *cellModel = self.section2List[index];
-    
-    MKPickerView *pickView = [[MKPickerView alloc] init];
-    NSMutableArray *dataList = [NSMutableArray array];
-    for (NSInteger i = 0; i < 24; i ++) {
-        NSString *hour = [NSString stringWithFormat:@"%@",@(i)];
-        if (hour.length == 1) {
-            hour = [@"0" stringByAppendingString:hour];
-        }
-        [dataList addObject:hour];
-    }
-    [pickView showPickViewWithDataList:dataList selectedRow:cellModel.hourIndex block:^(NSInteger currentRow) {
-        cellModel.hourIndex = currentRow;
-        [self.tableView mk_reloadRow:index inSection:2 withRowAnimation:UITableViewRowAnimationNone];
-    }];
-}
-
-- (void)showTimePointTimeSpacePickView:(NSInteger)index {
-    MKMUReportTimePointCellModel *cellModel = self.section2List[index];
-    
-    MKPickerView *pickView = [[MKPickerView alloc] init];
-    NSMutableArray *dataList = [NSMutableArray array];
-    for (NSInteger i = 0; i < 60; i ++) {
-        NSString *minute = [NSString stringWithFormat:@"%@",@(i)];
-        if (minute.length == 1) {
-            minute = [@"0" stringByAppendingString:minute];
-        }
-        [dataList addObject:minute];
-    }
-    
-    [pickView showPickViewWithDataList:dataList selectedRow:cellModel.timeSpaceIndex block:^(NSInteger currentRow) {
-        cellModel.timeSpaceIndex = currentRow;
-        [self.tableView mk_reloadRow:index inSection:2 withRowAnimation:UITableViewRowAnimationNone];
-    }];
-}
-
 #pragma mark - loadSectionDatas
 - (void)loadSectionDatas {
     [self loadSection0Datas];
@@ -314,8 +282,8 @@ MKMUReportTimePointCellDelegate>
         MKMUReportTimePointCellModel *cellModel = [[MKMUReportTimePointCellModel alloc] init];
         cellModel.index = i;
         cellModel.msg = [NSString stringWithFormat:@"Time Point %ld",(long)(i + 1)];
-        cellModel.hourIndex = tempModel.hour;
-        cellModel.timeSpaceIndex = tempModel.minuteGear;
+        cellModel.hour = tempModel.hour;
+        cellModel.timeSpace = tempModel.minuteGear;
         [self.section2List addObject:cellModel];
     }
 }

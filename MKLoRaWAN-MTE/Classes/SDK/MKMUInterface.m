@@ -479,7 +479,7 @@
                  failedBlock:failedBlock];
 }
 
-#pragma mark ****************************************定位参数************************************************
+#pragma mark ****************************************蓝牙扫描过滤参数************************************************
 
 + (void)mu_readRssiFilterValueWithSucBlock:(void (^)(id returnData))sucBlock
                                failedBlock:(void (^)(NSError *error))failedBlock {

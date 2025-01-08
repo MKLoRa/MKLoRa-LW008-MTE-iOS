@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  1:GPS
  2:BLE+GPS
  3:BLE*GPS
+ 4:BLE&GPS
  */
 @property (nonatomic, assign)NSInteger strategy;
 

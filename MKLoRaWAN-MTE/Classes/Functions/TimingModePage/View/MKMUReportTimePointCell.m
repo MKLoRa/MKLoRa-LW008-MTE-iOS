@@ -12,6 +12,7 @@
 #import "UIView+MKAdd.h"
 
 #import "MKCustomUIAdopter.h"
+#import "MKPickerView.h"
 
 static CGFloat const deleteButtonWidth = 75.0f;
 
@@ -127,9 +128,22 @@ static CGFloat const hourButtonHeight = 25.f;
         }];
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(mu_hourButtonPressed:)]) {
-        [self.delegate mu_hourButtonPressed:self.dataModel.index];
+    
+    NSInteger selectedRow = 0;
+    for (NSInteger i = 0; i < self.hourList.count; i ++) {
+        if ([self.hourButton.titleLabel.text isEqualToString:self.hourList[i]]) {
+            selectedRow = i;
+            break;
+        }
     }
+    
+    MKPickerView *pickView = [[MKPickerView alloc] init];
+    [pickView showPickViewWithDataList:self.hourList selectedRow:selectedRow block:^(NSInteger currentRow) {
+        [self.hourButton setTitle:self.hourList[currentRow] forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(mu_hourButtonPressed:hour:)]) {
+            [self.delegate mu_hourButtonPressed:self.dataModel.index hour:currentRow];
+        }
+    }];
 }
 
 - (void)timeSpaceButtonPressed {
@@ -142,9 +156,22 @@ static CGFloat const hourButtonHeight = 25.f;
         }];
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(mu_timeSpaceButtonPressed:)]) {
-        [self.delegate mu_timeSpaceButtonPressed:self.dataModel.index];
+    
+    NSInteger selectedRow = 0;
+    for (NSInteger i = 0; i < self.timeSpaceList.count; i ++) {
+        if ([self.timeSpaceButton.titleLabel.text isEqualToString:self.timeSpaceList[i]]) {
+            selectedRow = i;
+            break;
+        }
     }
+    
+    MKPickerView *pickView = [[MKPickerView alloc] init];
+    [pickView showPickViewWithDataList:self.timeSpaceList selectedRow:selectedRow block:^(NSInteger currentRow) {
+        [self.timeSpaceButton setTitle:self.timeSpaceList[currentRow] forState:UIControlStateNormal];
+        if ([self.delegate respondsToSelector:@selector(mu_timeSpaceButtonPressed:timeSpace:)]) {
+            [self.delegate mu_timeSpaceButtonPressed:self.dataModel.index timeSpace:currentRow];
+        }
+    }];
 }
 
 - (void)contentPanelTapAction {
@@ -221,11 +248,11 @@ static CGFloat const hourButtonHeight = 25.f;
         return;
     }
     self.msgLabel.text = SafeStr(_dataModel.msg);
-    if (_dataModel.hourIndex < self.hourList.count) {
-        [self.hourButton setTitle:self.hourList[_dataModel.hourIndex] forState:UIControlStateNormal];
+    if (_dataModel.hour < self.hourList.count) {
+        [self.hourButton setTitle:self.hourList[_dataModel.hour] forState:UIControlStateNormal];
     }
-    if (_dataModel.timeSpaceIndex < self.timeSpaceList.count) {
-        [self.timeSpaceButton setTitle:self.timeSpaceList[_dataModel.timeSpaceIndex] forState:UIControlStateNormal];
+    if (_dataModel.timeSpace < self.timeSpaceList.count) {
+        [self.timeSpaceButton setTitle:self.timeSpaceList[_dataModel.timeSpace] forState:UIControlStateNormal];
     }
 }
 

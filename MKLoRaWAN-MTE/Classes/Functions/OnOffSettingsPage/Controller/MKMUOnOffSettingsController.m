@@ -250,7 +250,7 @@ mk_textSwitchCellDelegate>
     MKTextButtonCellModel *cellModel = [[MKTextButtonCellModel alloc] init];
     cellModel.index = 0;
     cellModel.msg = @"ON/Off Method";
-    cellModel.dataList = @[@"Multiple approaches",@"Continuous approach"];
+    cellModel.dataList = @[@"Continuous approach",@"Multiple approaches"];
     cellModel.dataListIndex = self.dataModel.onOffMethod;
     cellModel.buttonLabelFont = MKFont(12.f);
     [self.section0List addObject:cellModel];

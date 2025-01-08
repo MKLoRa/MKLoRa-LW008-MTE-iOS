@@ -338,19 +338,6 @@ static NSInteger const maxDataLen = 100;
                    failedBlock:failedBlock];
 }
 
-
-
-
-
-+ (void)mu_startBleAdvWithSucBlock:(void (^)(void))sucBlock
-                       failedBlock:(void (^)(NSError *error))failedBlock {
-    NSString *commandString = @"ed013600";
-    [self configDataWithTaskID:mk_mu_taskConfigStartBleAdvOperation
-                          data:commandString
-                      sucBlock:sucBlock
-                   failedBlock:failedBlock];
-}
-
 #pragma mark ****************************************模式相关参数************************************************
 + (void)mu_configWorkMode:(mk_mu_deviceMode)deviceMode
                  sucBlock:(void (^)(void))sucBlock

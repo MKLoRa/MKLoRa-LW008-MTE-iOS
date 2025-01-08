@@ -232,9 +232,19 @@ MKMUTimeSegmentedCellDelegate>
         }
         MKMUTimeSegmentedTimePeriodModel *pointModel = [[MKMUTimeSegmentedTimePeriodModel alloc] init];
         pointModel.startHour = cellModel.startHour;
-        pointModel.startMinuteGear = cellModel.startMinuteGear;
+        if (cellModel.startHour == 24) {
+            pointModel.startMinuteGear = 0;
+        }else {
+            pointModel.startMinuteGear = cellModel.startMinuteGear;
+        }
+        
         pointModel.endHour = cellModel.endHour;
-        pointModel.endMinuteGear = cellModel.endMinuteGear;
+        if (cellModel.endHour == 24) {
+            pointModel.endMinuteGear = 0;
+        }else {
+            pointModel.endMinuteGear = cellModel.endMinuteGear;
+        }
+        
         pointModel.interval = [cellModel.interval integerValue];
         [tempList addObject:pointModel];
     }
@@ -286,7 +296,7 @@ MKMUTimeSegmentedCellDelegate>
     MKTextButtonCellModel *cellModel = [[MKTextButtonCellModel alloc] init];
     cellModel.index = 0;
     cellModel.msg = @"Positioning Strategy";
-    cellModel.dataList = @[@"BLE",@"GPS",@"BLE+GPS",@"BLE*GPS"];
+    cellModel.dataList = @[@"BLE",@"GPS",@"BLE+GPS",@"BLE*GPS",@"BLE&GPS"];
     cellModel.dataListIndex = self.dataModel.strategy;
     [self.section0List addObject:cellModel];
 }

@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy)NSString *msg;
 
-@property (nonatomic, assign)NSInteger hourIndex;
+@property (nonatomic, assign)NSInteger hour;
 
-@property (nonatomic, assign)NSInteger timeSpaceIndex;
+@property (nonatomic, assign)NSInteger timeSpace;
 
 @end
 
@@ -32,10 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)mu_cellDeleteButtonPressed:(NSInteger)index;
 
 /// 用户选择了hour事件
-- (void)mu_hourButtonPressed:(NSInteger)index;
+- (void)mu_hourButtonPressed:(NSInteger)index hour:(NSInteger)hour;
 
 /// 用户选择了时间间隔事件
-- (void)mu_timeSpaceButtonPressed:(NSInteger)index;
+- (void)mu_timeSpaceButtonPressed:(NSInteger)index timeSpace:(NSInteger)timeSpace;
 
 /**
  重新设置cell的子控件位置，主要是删除按钮方面的处理

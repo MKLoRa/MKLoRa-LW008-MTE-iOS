@@ -164,8 +164,6 @@ typedef NS_ENUM(NSInteger, mk_mu_taskOperationID) {
     mk_mu_taskConfigTxPowerOperation,                   //配置蓝牙TX Power
     mk_mu_taskConfigDeviceNameOperation,                //配置蓝牙广播名称
     
-    mk_mu_taskConfigStartBleAdvOperation,               //配置开启蓝牙广播
-    
 #pragma mark - 配置模式相关参数
     mk_mu_taskConfigWorkModeOperation,                  //配置工作模式
     mk_mu_taskConfigStandbyModePositioningStrategyOperation,        //配置待机模式定位策略

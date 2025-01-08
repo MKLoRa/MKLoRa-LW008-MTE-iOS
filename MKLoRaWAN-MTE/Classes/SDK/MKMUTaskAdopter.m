@@ -1576,9 +1576,6 @@ NSString *const mk_mu_contentKey = @"mk_mu_contentKey";
     }else if ([cmd isEqualToString:@"0902"]) {
         //暂停/恢复数据传输
         operationID = mk_mu_taskPauseSendLocalDataOperation;
-    }else if ([cmd isEqualToString:@"36"]) {
-        //配置开启蓝牙广播
-        operationID = mk_mu_taskConfigStartBleAdvOperation;
     }
     
     return [self dataParserGetDataSuccess:@{@"success":@(success)} operationID:operationID];

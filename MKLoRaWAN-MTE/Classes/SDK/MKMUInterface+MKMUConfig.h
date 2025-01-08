@@ -141,6 +141,14 @@ NS_ASSUME_NONNULL_BEGIN
                                 sucBlock:(void (^)(void))sucBlock
                              failedBlock:(void (^)(NSError *error))failedBlock;
 
+/// Automatically power on after charging.
+/// @param isOn isOn
+/// @param sucBlock Success callback
+/// @param failedBlock Failure callback
++ (void)mu_configAutoPowerOnAfterCharging:(BOOL)isOn
+                                 sucBlock:(void (^)(void))sucBlock
+                              failedBlock:(void (^)(NSError *error))failedBlock;
+
 #pragma mark ****************************************蓝牙相关参数************************************************
 
 /// Do you need a password when configuring the device connection.
@@ -198,50 +206,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)mu_configDeviceName:(NSString *)deviceName
                    sucBlock:(void (^)(void))sucBlock
                 failedBlock:(void (^)(NSError *error))failedBlock;
-
-
-
-/// Start bluetooth advertisement.
-/// @param sucBlock Success callback
-/// @param failedBlock Failure callback
-+ (void)mu_startBleAdvWithSucBlock:(void (^)(void))sucBlock
-                       failedBlock:(void (^)(NSError *error))failedBlock;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// Automatically power on after charging.
-/// @param isOn isOn
-/// @param sucBlock Success callback
-/// @param failedBlock Failure callback
-+ (void)mu_configAutoPowerOnAfterCharging:(BOOL)isOn
-                                 sucBlock:(void (^)(void))sucBlock
-                              failedBlock:(void (^)(NSError *error))failedBlock;
-
-
-
-
-
-
-
-
 
 #pragma mark ****************************************模式相关参数************************************************
 /// Configure the working mode of the device.

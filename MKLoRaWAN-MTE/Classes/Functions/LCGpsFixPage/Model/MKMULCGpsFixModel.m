@@ -130,9 +130,12 @@
 //    if (self.advName.length > 16) {
 //        return NO;
 //    }
-//    if (!ValidStr(self.timeout) || [self.timeout integerValue] < 1 || [self.timeout integerValue] > 60) {
-//        return NO;
-//    }
+    if (!ValidStr(self.timeout) || [self.timeout integerValue] < 30 || [self.timeout integerValue] > 600) {
+        return NO;
+    }
+    if (!ValidStr(self.pdop) || [self.pdop integerValue] < 25 || [self.pdop integerValue] > 100) {
+        return NO;
+    }
     return YES;
 }
 

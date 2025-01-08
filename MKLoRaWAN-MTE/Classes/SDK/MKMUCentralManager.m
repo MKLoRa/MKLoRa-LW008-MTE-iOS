@@ -502,9 +502,9 @@ static dispatch_once_t onceToken;
     
     NSString *deviceType = [content substringWithRange:NSMakeRange(0, 2)];
     
-    if (![deviceType isEqualToString:@"10"]) {
-        return @{};
-    }
+//    if (![deviceType isEqualToString:@"10"]) {
+//        return @{};
+//    }
     
     NSString *tempMac = [[content substringWithRange:NSMakeRange(2, 12)] uppercaseString];
     NSString *macAddress = [NSString stringWithFormat:@"%@:%@:%@:%@:%@:%@",

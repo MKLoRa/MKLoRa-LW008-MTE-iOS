@@ -567,7 +567,7 @@ mk_mu_storageDataDelegate>
 }
 
 - (NSArray *)parseSynData:(NSString *)content {
-    content = [content substringFromIndex:10];
+    content = [content substringFromIndex:12];
     
     NSInteger index = 0;
     NSMutableArray *dataList = [NSMutableArray array];

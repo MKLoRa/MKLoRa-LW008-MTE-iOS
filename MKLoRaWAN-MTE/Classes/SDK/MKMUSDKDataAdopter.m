@@ -369,10 +369,10 @@
         
     for (NSInteger i = 0; i < dataList.count; i ++) {
         id <mk_mu_timeSegmentedModeTimePeriodSettingProtocol>data = dataList[i];
-        if (data.startHour < 0 || data.startHour > 23 || data.startMinuteGear < 0 || data.startMinuteGear > 59) {
+        if (data.startHour < 0 || data.startHour > 24 || data.startMinuteGear < 0 || data.startMinuteGear > 59) {
             return @"";
         }
-        if (data.endHour < 0 || data.endHour > 23 || data.endMinuteGear < 0 || data.endMinuteGear > 59) {
+        if (data.endHour < 0 || data.endHour > 24 || data.endMinuteGear < 0 || data.endMinuteGear > 59) {
             return @"";
         }
         if (data.interval < 30 || data.interval > 86400) {
@@ -380,17 +380,21 @@
         }
         NSInteger startTimeValue = 0;
         if (data.startHour == 0 && data.startMinuteGear == 0) {
+            startTimeValue = 0;
+        }else if (data.startHour == 24 && data.startMinuteGear == 0){
             startTimeValue = 1440;
         }else {
             startTimeValue = 60 * data.startHour + data.startMinuteGear;
         }
         NSInteger endTimeValue = 0;
         if (data.endHour == 0 && data.endMinuteGear == 0) {
+            endTimeValue = 0;
+        }else if (data.endHour == 24 && data.endMinuteGear == 0){
             endTimeValue = 1440;
         }else {
             endTimeValue = 60 * data.endHour + data.endMinuteGear;
         }
-        if (startTimeValue >= endTimeValue) {
+        if (startTimeValue > endTimeValue) {
             return @"";
         }
         
@@ -398,12 +402,14 @@
             id <mk_mu_timeSegmentedModeTimePeriodSettingProtocol>previousData = dataList[i - 1];
             NSInteger preEndTimeValue = 0;
             if (previousData.endHour == 0 && previousData.endMinuteGear == 0) {
+                preEndTimeValue = 0;
+            }else if (previousData.endHour == 24 && previousData.endMinuteGear == 0) {
                 preEndTimeValue = 1440;
             }else {
                 preEndTimeValue = 60 * previousData.endHour + previousData.endMinuteGear;
             }
             
-            if (startTimeValue <= preEndTimeValue) {
+            if (startTimeValue < preEndTimeValue) {
                 return @"";
             }
         }
@@ -433,7 +439,6 @@
         NSInteger hour = 0;
         NSInteger minuteGear = 0;
         if (tempValue < 1440) {
-            //如果是96，表示00:00
             hour = tempValue / 60;
             minuteGear = tempValue % 60;
         }
@@ -463,18 +468,22 @@
         NSInteger startHour = 0;
         NSInteger startMinuteGear = 0;
         if (startTempValue < 1440) {
-            //如果是96，表示00:00
             startHour = startTempValue / 60;
             startMinuteGear = startTempValue % 60;
+        }else if (startTempValue == 1440) {
+            startHour = 24;
+            startMinuteGear = 0;
         }
         
         NSInteger endTempValue = [MKBLEBaseSDKAdopter getDecimalWithHex:tempString range:NSMakeRange(4, 4)];
         NSInteger endHour = 0;
         NSInteger endMinuteGear = 0;
         if (endTempValue < 1440) {
-            //如果是96，表示00:00
             endHour = endTempValue / 60;
             endMinuteGear = endTempValue % 60;
+        }else if (endTempValue == 1440) {
+            endHour = 24;
+            endMinuteGear = 0;
         }
         
         NSString *interval = [MKBLEBaseSDKAdopter getDecimalStringWithHex:tempString range:NSMakeRange(8, 8)];

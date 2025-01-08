@@ -304,7 +304,7 @@ static CGFloat const hourButtonHeight = 25.f;
         [self.minuteGearList addObject:minute];
     }
     
-    for (NSInteger i = 0; i < 24; i ++) {
+    for (NSInteger i = 0; i < 25; i ++) {
         NSString *hour = [NSString stringWithFormat:@"%@",@(i)];
         if (hour.length == 1) {
             hour = [@"0" stringByAppendingString:hour];
@@ -326,7 +326,7 @@ static CGFloat const hourButtonHeight = 25.f;
     UIButton *hourButton = (start ? self.startHourButton : self.endHourButton);
     NSInteger selectedRow = 0;
     for (NSInteger i = 0; i < self.hourList.count; i ++) {
-        if ([hourButton.titleLabel.text isEqualToString:self.hourList]) {
+        if ([hourButton.titleLabel.text isEqualToString:self.hourList[i]]) {
             selectedRow = i;
             break;
         }
@@ -335,6 +335,14 @@ static CGFloat const hourButtonHeight = 25.f;
     MKPickerView *pickView = [[MKPickerView alloc] init];
     [pickView showPickViewWithDataList:self.hourList selectedRow:selectedRow block:^(NSInteger currentRow) {
         [hourButton setTitle:self.hourList[currentRow] forState:UIControlStateNormal];
+        UIButton *minButton = (start ? self.startMiniuteButton : self.endMiniuteButton);
+        if (currentRow == self.hourList.count - 1) {
+            //选中了24点
+            [minButton setTitle:@"00" forState:UIControlStateNormal];
+            [minButton setEnabled:NO];
+        }else {
+            [minButton setEnabled:YES];
+        }
         if ([self.delegate respondsToSelector:@selector(mu_timeSegmentedCell_hourButtonPressed:start:hour:)]) {
             [self.delegate mu_timeSegmentedCell_hourButtonPressed:self.dataModel.index start:start hour:currentRow];
         }
@@ -355,7 +363,7 @@ static CGFloat const hourButtonHeight = 25.f;
     
     NSInteger selectedRow = 0;
     for (NSInteger i = 0; i < self.minuteGearList.count; i ++) {
-        if ([miniuteButton.titleLabel.text isEqualToString:self.minuteGearList]) {
+        if ([miniuteButton.titleLabel.text isEqualToString:self.minuteGearList[i]]) {
             selectedRow = i;
             break;
         }

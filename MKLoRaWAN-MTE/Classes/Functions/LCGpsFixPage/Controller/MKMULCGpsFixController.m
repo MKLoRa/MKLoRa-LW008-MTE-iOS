@@ -143,7 +143,7 @@ MKTextFieldCellDelegate>
     cellModel1.index = 0;
     cellModel1.msg = @"Positioning Timeout";
     cellModel1.textFieldValue = self.dataModel.timeout;
-    cellModel1.textPlaceholder = @"60 ~ 600";
+    cellModel1.textPlaceholder = @"30 ~ 600";
     cellModel1.textFieldType = mk_realNumberOnly;
     cellModel1.unit = @"s";
     cellModel1.maxLength = 3;
