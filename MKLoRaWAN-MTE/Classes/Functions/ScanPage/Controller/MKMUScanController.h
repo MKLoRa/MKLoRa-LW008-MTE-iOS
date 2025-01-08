@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MKMUScanController : MKBaseViewController
 
+/// 0:LW008-MTE     1:LW008-PTE     2:LW001-BGE
+@property (nonatomic, assign)NSInteger deviceType;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -49,6 +49,8 @@ static dispatch_once_t onceToken;
 
 @property (nonatomic, assign)mk_mu_centralConnectStatus connectStatus;
 
+@property (nonatomic, assign)mk_mu_scanDeviceType scanDeviceType;
+
 @end
 
 @implementation MKMUCentralManager
@@ -214,7 +216,8 @@ static dispatch_once_t onceToken;
     : mk_mu_centralManagerStatusUnable;
 }
 
-- (void)startScan {
+- (void)startScanWithDeviceType:(mk_mu_scanDeviceType)deviceType {
+    self.scanDeviceType = deviceType;
     [[MKBLEBaseCentralManager shared] scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:@"AA12"]] options:nil];
 }
 
@@ -502,9 +505,16 @@ static dispatch_once_t onceToken;
     
     NSString *deviceType = [content substringWithRange:NSMakeRange(0, 2)];
     
-//    if (![deviceType isEqualToString:@"10"]) {
-//        return @{};
-//    }
+    if (self.scanDeviceType == mk_mu_scanDeviceType_mte && ![deviceType isEqualToString:@"00"]) {
+        //LW008-MTE的广播类型是00
+        return @{};
+    }else if (self.scanDeviceType == mk_mu_scanDeviceType_pte && ![deviceType isEqualToString:@"10"]) {
+        //LW008-PTE的广播类型是10
+        return @{};
+    }else if (self.scanDeviceType == mk_mu_scanDeviceType_bge && ![deviceType isEqualToString:@"20"]) {
+        //LW001-BGE的广播类型是20
+        return @{};
+    }
     
     NSString *tempMac = [[content substringWithRange:NSMakeRange(2, 12)] uppercaseString];
     NSString *macAddress = [NSString stringWithFormat:@"%@:%@:%@:%@:%@:%@",

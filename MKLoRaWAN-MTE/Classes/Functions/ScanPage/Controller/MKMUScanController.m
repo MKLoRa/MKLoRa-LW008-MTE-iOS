@@ -222,7 +222,7 @@ MKMUTabBarControllerDelegate>
     if (self.scanTimer) {
         dispatch_cancel(self.scanTimer);
     }
-    [[MKMUCentralManager shared] startScan];
+    [[MKMUCentralManager shared] startScanWithDeviceType:self.deviceType];
     self.scanTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,dispatch_get_global_queue(0, 0));
     //开始时间
     dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, 60 * NSEC_PER_SEC);
