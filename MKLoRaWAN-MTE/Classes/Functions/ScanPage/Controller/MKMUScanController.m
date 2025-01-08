@@ -89,6 +89,8 @@ MKMUTabBarControllerDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //记录下来当前设备类型
+    [[NSUserDefaults standardUserDefaults] setObject:@(self.deviceType) forKey:@"mu_deviceType"];
     [self loadSubViews];
     self.searchButton.dataModel = self.buttonModel;
     [self runloopObserver];

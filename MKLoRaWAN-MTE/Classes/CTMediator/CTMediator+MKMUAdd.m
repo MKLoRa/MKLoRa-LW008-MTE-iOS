@@ -13,9 +13,10 @@
 @implementation CTMediator (MKMUAdd)
 
 - (UIViewController *)CTMediator_LORAWAN_MU_AboutPage {
+    NSInteger deviceType = [[[NSUserDefaults standardUserDefaults] objectForKey:@"mu_deviceType"] integerValue];
     UIViewController *viewController = [self performTarget:kTarget_loRaApp_la_module
                                                     action:kAction_loRaApp_la_aboutPage
-                                                    params:@{}
+                                                    params:@{@"deviceType":[NSString stringWithFormat:@"%ld",(long)deviceType]}
                                          shouldCacheTarget:NO];
     if ([viewController isKindOfClass:[UIViewController class]]) {
         return viewController;
