@@ -274,12 +274,12 @@ mk_textSwitchCellDelegate>
     cellModel3.msg = @"Power Off";
     [self.section1List addObject:cellModel3];
     
-    MKTextSwitchCellModel *cellModel4 = [[MKTextSwitchCellModel alloc] init];
-    cellModel4.index = 3;
-    cellModel4.msg = @"Auto Power On";
-    cellModel4.isOn = self.dataModel.autoPowerOn;
-    cellModel4.noteMsg = @"*When the battery run out, the device will be turned on when the device is in charged.";
-    [self.section1List addObject:cellModel4];
+//    MKTextSwitchCellModel *cellModel4 = [[MKTextSwitchCellModel alloc] init];
+//    cellModel4.index = 3;
+//    cellModel4.msg = @"Auto Power On";
+//    cellModel4.isOn = self.dataModel.autoPowerOn;
+//    cellModel4.noteMsg = @"*When the battery run out, the device will be turned on when the device is in charged.";
+//    [self.section1List addObject:cellModel4];
 }
 
 #pragma mark - UI

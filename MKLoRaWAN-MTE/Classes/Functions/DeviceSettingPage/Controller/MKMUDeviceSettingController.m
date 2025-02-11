@@ -164,7 +164,8 @@ MKTextFieldCellDelegate>
         return self.section2List.count;
     }
     if (section == 3) {
-        return self.section3List.count;
+//        return self.section3List.count;
+        return 0;
     }
     if (section == 4) {
         return self.section4List.count;

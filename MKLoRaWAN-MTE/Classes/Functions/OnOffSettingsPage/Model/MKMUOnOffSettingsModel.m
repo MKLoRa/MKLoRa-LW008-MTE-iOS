@@ -39,10 +39,10 @@
             return;
         }
         
-        if (![self readAutoPowerOn]) {
-            [self operationFailedBlockWithMsg:@"Read Auto Power On Error" block:failedBlock];
-            return;
-        }
+//        if (![self readAutoPowerOn]) {
+//            [self operationFailedBlockWithMsg:@"Read Auto Power On Error" block:failedBlock];
+//            return;
+//        }
         
         moko_dispatch_main_safe(^{
             if (sucBlock) {
