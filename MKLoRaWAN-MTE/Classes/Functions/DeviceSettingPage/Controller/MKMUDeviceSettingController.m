@@ -26,6 +26,8 @@
 
 #import "MKTableSectionLineHeader.h"
 
+#import "MKMUConnectModel.h"
+
 #import "MKMUInterface+MKMUConfig.h"
 
 #import "MKMUDeviceSettingModel.h"
@@ -163,9 +165,9 @@ MKTextFieldCellDelegate>
     if (section == 2) {
         return self.section2List.count;
     }
-    if (section == 3) {
-//        return self.section3List.count;
-        return 0;
+    if (section == 3 && [[MKMUConnectModel shared].deviceType isEqualToString:@"30"]) {
+        //LW011-MT
+        return self.section3List.count;
     }
     if (section == 4) {
         return self.section4List.count;
@@ -320,8 +322,11 @@ MKTextFieldCellDelegate>
     MKTextButtonCellModel *timeZoneModel = self.section2List[0];
     timeZoneModel.dataListIndex = self.dataModel.timeZone;
     
-    MKTextButtonCellModel *promtModel = self.section3List[0];
-    promtModel.dataListIndex = self.dataModel.prompt;
+    if ([[MKMUConnectModel shared].deviceType isEqualToString:@"30"]) {
+        //LW011-MT
+        MKTextButtonCellModel *promtModel = self.section3List[0];
+        promtModel.dataListIndex = self.dataModel.prompt;
+    }
     
     MKTextSwitchCellModel *lowPowerPayloadModel = self.section4List[0];
     lowPowerPayloadModel.isOn = self.dataModel.lowPowerPayload;

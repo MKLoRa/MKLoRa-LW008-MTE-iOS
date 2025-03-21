@@ -514,6 +514,9 @@ static dispatch_once_t onceToken;
     }else if (self.scanDeviceType == mk_mu_scanDeviceType_bge && ![deviceType isEqualToString:@"20"]) {
         //LW001-BGE的广播类型是20
         return @{};
+    }else if (self.scanDeviceType == mk_mu_scanDeviceType_mt && ![deviceType isEqualToString:@"30"]) {
+        //LW011-MT的广播类型是30
+        return @{};
     }
     
     NSString *tempMac = [[content substringWithRange:NSMakeRange(2, 12)] uppercaseString];

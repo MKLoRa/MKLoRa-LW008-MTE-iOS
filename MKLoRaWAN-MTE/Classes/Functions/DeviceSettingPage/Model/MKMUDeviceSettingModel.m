@@ -10,6 +10,8 @@
 
 #import "MKMacroDefines.h"
 
+#import "MKMUConnectModel.h"
+
 #import "MKMUInterface.h"
 #import "MKMUInterface+MKMUConfig.h"
 
@@ -37,10 +39,13 @@
             [self operationFailedBlockWithMsg:@"Read Low-power Report Interval Error" block:failedBlock];
             return;
         }
-        if (![self readLowPowerPrompt]) {
-            [self operationFailedBlockWithMsg:@"Read Low-power Prompt Error" block:failedBlock];
-            return;
+        if ([[MKMUConnectModel shared].deviceType isEqualToString:@"30"]) {
+            if (![self readLowPowerPrompt]) {
+                [self operationFailedBlockWithMsg:@"Read Low-power Prompt Error" block:failedBlock];
+                return;
+            }
         }
+        
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();
@@ -67,10 +72,13 @@
             [self operationFailedBlockWithMsg:@"Config Low-power Report Interval Error" block:failedBlock];
             return;
         }
-        if (![self configLowPowerPrompt]) {
-            [self operationFailedBlockWithMsg:@"Config Low-power Prompt Error" block:failedBlock];
-            return;
+        if ([[MKMUConnectModel shared].deviceType isEqualToString:@"30"]) {
+            if (![self configLowPowerPrompt]) {
+                [self operationFailedBlockWithMsg:@"Config Low-power Prompt Error" block:failedBlock];
+                return;
+            }
         }
+        
         moko_dispatch_main_safe(^{
             if (sucBlock) {
                 sucBlock();

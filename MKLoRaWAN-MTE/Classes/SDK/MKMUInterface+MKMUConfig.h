@@ -117,7 +117,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)mu_batteryResetWithSucBlock:(void (^)(void))sucBlock
                         failedBlock:(void (^)(NSError *error))failedBlock;
 
-/// When the power of the device is lower than how much, it is judged as a low power state.
+/// When the power of the device is lower than how much, it is judged as a low power state.(LW011-MT only)
 /// @param prompt prompt
 /// @param sucBlock Success callback
 /// @param failedBlock Failure callback

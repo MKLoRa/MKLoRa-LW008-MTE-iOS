@@ -10,6 +10,8 @@
 
 #import "MKMacroDefines.h"
 
+#import "MKMUConnectModel.h"
+
 #import "MKMUInterface.h"
 
 @interface MKMUOnOffSettingsModel ()
@@ -38,11 +40,13 @@
             [self operationFailedBlockWithMsg:@"Read Off By Button Error" block:failedBlock];
             return;
         }
-        
-//        if (![self readAutoPowerOn]) {
-//            [self operationFailedBlockWithMsg:@"Read Auto Power On Error" block:failedBlock];
-//            return;
-//        }
+        if ([[MKMUConnectModel shared].deviceType isEqualToString:@"30"]) {
+            //LW011-MT
+            if (![self readAutoPowerOn]) {
+                [self operationFailedBlockWithMsg:@"Read Auto Power On Error" block:failedBlock];
+                return;
+            }
+        }
         
         moko_dispatch_main_safe(^{
             if (sucBlock) {

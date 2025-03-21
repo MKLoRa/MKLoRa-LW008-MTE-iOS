@@ -236,7 +236,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)mu_readAllCycleBatteryInformationWithSucBlock:(void (^)(id returnData))sucBlock
                                           failedBlock:(void (^)(NSError *error))failedBlock;
 
-/// When the power of the device is lower than how much, it is judged as a low power state.
+/// When the power of the device is lower than how much, it is judged as a low power state.(LW011-MT only)
 /*
     @{
     @"prompt":@"0",         //@"0":10%   @"1":20%   @"2":30%    @"3":40%    @"4":50%    @"5":60%

@@ -20,6 +20,8 @@
 #import "MKTextButtonCell.h"
 #import "MKTextSwitchCell.h"
 
+#import "MKMUConnectModel.h"
+
 #import "MKMUInterface+MKMUConfig.h"
 
 #import "MKMUOnOffSettingsModel.h"
@@ -34,6 +36,8 @@ mk_textSwitchCellDelegate>
 @property (nonatomic, strong)NSMutableArray *section0List;
 
 @property (nonatomic, strong)NSMutableArray *section1List;
+
+@property (nonatomic, strong)NSMutableArray *section2List;
 
 @property (nonatomic, strong)MKMUOnOffSettingsModel *dataModel;
 
@@ -60,12 +64,16 @@ mk_textSwitchCellDelegate>
         MKTextSwitchCellModel *cellModel = self.section1List[indexPath.row];
         return [cellModel cellHeightWithContentWidth:kViewWidth];
     }
+    if (indexPath.section == 2) {
+        MKTextSwitchCellModel *cellModel = self.section2List[indexPath.row];
+        return [cellModel cellHeightWithContentWidth:kViewWidth];
+    }
     return 0.f;
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -74,6 +82,10 @@ mk_textSwitchCellDelegate>
     }
     if (section == 1) {
         return self.section1List.count;
+    }
+    if (section == 2 && [[MKMUConnectModel shared].deviceType isEqualToString:@"30"]) {
+        //LW011-MT
+        return self.section2List.count;
     }
     
     return 0;
@@ -86,8 +98,14 @@ mk_textSwitchCellDelegate>
         cell.delegate = self;
         return cell;
     }
+    if (indexPath.section == 1) {
+        MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
+        cell.dataModel = self.section1List[indexPath.row];
+        cell.delegate = self;
+        return cell;
+    }
     MKTextSwitchCell *cell = [MKTextSwitchCell initCellWithTableView:tableView];
-    cell.dataModel = self.section1List[indexPath.row];
+    cell.dataModel = self.section2List[indexPath.row];
     cell.delegate = self;
     return cell;
 }
@@ -195,13 +213,13 @@ mk_textSwitchCellDelegate>
     [[MKHudManager share] showHUDWithTitle:@"Config..." inView:self.view isPenetration:NO];
     [MKMUInterface mu_configAutoPowerOnAfterCharging:isOn sucBlock:^{
         [[MKHudManager share] hide];
-        MKTextSwitchCellModel *cellModel = self.section1List[3];
+        MKTextSwitchCellModel *cellModel = self.section2List[0];
         cellModel.isOn = isOn;
         self.dataModel.autoPowerOn = isOn;
     } failedBlock:^(NSError * _Nonnull error) {
         [[MKHudManager share] hide];
         [self.view showCentralToast:error.userInfo[@"errorInfo"]];
-        [self.tableView mk_reloadRow:3 inSection:1 withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView mk_reloadRow:0 inSection:2 withRowAnimation:UITableViewRowAnimationNone];
     }];
 }
 
@@ -242,6 +260,7 @@ mk_textSwitchCellDelegate>
 - (void)loadSectionDatas {
     [self loadSection0Datas];
     [self loadSection1Datas];
+    [self loadSection2Datas];
     
     [self.tableView reloadData];
 }
@@ -273,13 +292,15 @@ mk_textSwitchCellDelegate>
     cellModel3.index = 2;
     cellModel3.msg = @"Power Off";
     [self.section1List addObject:cellModel3];
-    
-//    MKTextSwitchCellModel *cellModel4 = [[MKTextSwitchCellModel alloc] init];
-//    cellModel4.index = 3;
-//    cellModel4.msg = @"Auto Power On";
-//    cellModel4.isOn = self.dataModel.autoPowerOn;
-//    cellModel4.noteMsg = @"*When the battery run out, the device will be turned on when the device is in charged.";
-//    [self.section1List addObject:cellModel4];
+}
+
+- (void)loadSection2Datas {
+    MKTextSwitchCellModel *cellModel = [[MKTextSwitchCellModel alloc] init];
+    cellModel.index = 3;
+    cellModel.msg = @"Auto Power On";
+    cellModel.isOn = self.dataModel.autoPowerOn;
+    cellModel.noteMsg = @"*When the battery run out, the device will be turned on when the device is in charged.";
+    [self.section2List addObject:cellModel];
 }
 
 #pragma mark - UI
@@ -316,6 +337,13 @@ mk_textSwitchCellDelegate>
         _section1List = [NSMutableArray array];
     }
     return _section1List;
+}
+
+- (NSMutableArray *)section2List {
+    if (!_section2List) {
+        _section2List = [NSMutableArray array];
+    }
+    return _section2List;
 }
 
 - (MKMUOnOffSettingsModel *)dataModel {

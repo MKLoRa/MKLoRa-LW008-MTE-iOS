@@ -18,7 +18,8 @@ typedef NS_ENUM(NSInteger, mk_mu_centralManagerStatus) {
 typedef NS_ENUM(NSInteger, mk_mu_scanDeviceType) {
     mk_mu_scanDeviceType_mte,                           //008-MTE
     mk_mu_scanDeviceType_pte,                           //008-PTE
-    mk_mu_scanDeviceType_bge                            //001-BGE
+    mk_mu_scanDeviceType_bge,                           //001-BGE
+    mk_mu_scanDeviceType_mt,                            //011-MT
 };
 
 
