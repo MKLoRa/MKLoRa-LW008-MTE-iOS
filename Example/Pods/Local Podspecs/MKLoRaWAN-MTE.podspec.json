@@ -101,27 +101,6 @@
         {
           "name": "TextButtonCell",
           "source_files": "MKLoRaWAN-MTE/Classes/Expand/TextButtonCell/**"
-        },
-        {
-          "name": "FilterCell",
-          "subspecs": [
-            {
-              "name": "FilterBeaconCell",
-              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterBeaconCell/**"
-            },
-            {
-              "name": "FilterByRawDataCell",
-              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterByRawDataCell/**"
-            },
-            {
-              "name": "FilterEditSectionHeaderView",
-              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterEditSectionHeaderView/**"
-            },
-            {
-              "name": "FilterNormalTextFieldCell",
-              "source_files": "MKLoRaWAN-MTE/Classes/Expand/FilterCell/FilterNormalTextFieldCell/**"
-            }
-          ]
         }
       ]
     },
@@ -147,6 +126,12 @@
 
         ],
         "MKCustomUIModule": [
+
+        ],
+        "MKFilterPagesModule": [
+
+        ],
+        "MKLoRaDeviceModePageModule": [
 
         ],
         "HHTransition": [
@@ -245,7 +230,7 @@
                 "MKLoRaWAN-MTE/Functions/BleFixPage/View": [
 
                 ],
-                "MKLoRaWAN-MTE/Functions/FilterPages": [
+                "MKLoRaWAN-MTE/Functions/FilterByRawDataPage": [
 
                 ]
               }
@@ -340,22 +325,14 @@
               "name": "Controller",
               "source_files": "MKLoRaWAN-MTE/Classes/Functions/DeviceModePage/Controller/**",
               "dependencies": {
-                "MKLoRaWAN-MTE/Functions/StandbyModePage/Controller": [
-
-                ],
-                "MKLoRaWAN-MTE/Functions/TimingModePage/Controller": [
-
-                ],
-                "MKLoRaWAN-MTE/Functions/PeriodicModePage/Controller": [
-
-                ],
-                "MKLoRaWAN-MTE/Functions/MotionModePage/Controller": [
-
-                ],
-                "MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Controller": [
+                "MKLoRaWAN-MTE/Functions/DeviceModePage/Model": [
 
                 ]
               }
+            },
+            {
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/DeviceModePage/Model/**"
             }
           ]
         },
@@ -399,262 +376,20 @@
           ]
         },
         {
-          "name": "FilterPages",
+          "name": "FilterByRawDataPage",
           "subspecs": [
             {
-              "name": "FilterByAdvNamePage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByAdvNamePage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByAdvNamePage/Model": [
+              "name": "Controller",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterByRawDataPage/Controller/**",
+              "dependencies": {
+                "MKLoRaWAN-MTE/Functions/FilterByRawDataPage/Model": [
 
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByAdvNamePage/Model/**"
-                }
-              ]
+                ]
+              }
             },
             {
-              "name": "FilterByBeaconPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBeaconPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Header": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Header",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBeaconPage/Header/**"
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBeaconPage/Model/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Header": [
-
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "name": "FilterByMacPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByMacPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByMacPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByMacPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByOtherPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByOtherPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByOtherPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByOtherPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByPirPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByPirPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByPirPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByPirPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByRawDataPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByRawDataPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByRawDataPage/Model": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBeaconPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByUIDPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByURLPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTLMPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTofPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPButtonPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPTagPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByOtherPage/Controller": [
-
-                    ],
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByPirPage/Controller": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByRawDataPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByTofPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTofPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTofPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTofPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByTLMPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTLMPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByTLMPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByTLMPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByUIDPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByUIDPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByUIDPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByUIDPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByURLPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByURLPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByURLPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByURLPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByBXPButtonPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPButtonPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPButtonPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPButtonPage/Model/**"
-                }
-              ]
-            },
-            {
-              "name": "FilterByBXPTagPage",
-              "subspecs": [
-                {
-                  "name": "Controller",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPTagPage/Controller/**",
-                  "dependencies": {
-                    "MKLoRaWAN-MTE/Functions/FilterPages/FilterByBXPTagPage/Model": [
-
-                    ]
-                  }
-                },
-                {
-                  "name": "Model",
-                  "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterPages/FilterByBXPTagPage/Model/**"
-                }
-              ]
+              "name": "Model",
+              "source_files": "MKLoRaWAN-MTE/Classes/Functions/FilterByRawDataPage/Model/**"
             }
           ]
         },
@@ -824,24 +559,6 @@
           ]
         },
         {
-          "name": "MotionModePage",
-          "subspecs": [
-            {
-              "name": "Controller",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/MotionModePage/Controller/**",
-              "dependencies": {
-                "MKLoRaWAN-MTE/Functions/MotionModePage/Model": [
-
-                ]
-              }
-            },
-            {
-              "name": "Model",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/MotionModePage/Model/**"
-            }
-          ]
-        },
-        {
           "name": "OnOffSettingsPage",
           "subspecs": [
             {
@@ -874,24 +591,6 @@
             {
               "name": "Model",
               "source_files": "MKLoRaWAN-MTE/Classes/Functions/OutdoorFixPage/Model/**"
-            }
-          ]
-        },
-        {
-          "name": "PeriodicModePage",
-          "subspecs": [
-            {
-              "name": "Controller",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/PeriodicModePage/Controller/**",
-              "dependencies": {
-                "MKLoRaWAN-MTE/Functions/PeriodicModePage/Model": [
-
-                ]
-              }
-            },
-            {
-              "name": "Model",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/PeriodicModePage/Model/**"
             }
           ]
         },
@@ -981,24 +680,6 @@
           ]
         },
         {
-          "name": "StandbyModePage",
-          "subspecs": [
-            {
-              "name": "Controller",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/StandbyModePage/Controller/**",
-              "dependencies": {
-                "MKLoRaWAN-MTE/Functions/StandbyModePage/Model": [
-
-                ]
-              }
-            },
-            {
-              "name": "Model",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/StandbyModePage/Model/**"
-            }
-          ]
-        },
-        {
           "name": "SynDataPage",
           "subspecs": [
             {
@@ -1036,56 +717,6 @@
 
                 ]
               }
-            }
-          ]
-        },
-        {
-          "name": "TimeSegmentedModePage",
-          "subspecs": [
-            {
-              "name": "Controller",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/Controller/**",
-              "dependencies": {
-                "MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/Model": [
-
-                ],
-                "MKLoRaWAN-MTE/Functions/TimeSegmentedModePage/View": [
-
-                ]
-              }
-            },
-            {
-              "name": "Model",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/Model/**"
-            },
-            {
-              "name": "View",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimeSegmentedModePage/View/**"
-            }
-          ]
-        },
-        {
-          "name": "TimingModePage",
-          "subspecs": [
-            {
-              "name": "Controller",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimingModePage/Controller/**",
-              "dependencies": {
-                "MKLoRaWAN-MTE/Functions/TimingModePage/Model": [
-
-                ],
-                "MKLoRaWAN-MTE/Functions/TimingModePage/View": [
-
-                ]
-              }
-            },
-            {
-              "name": "Model",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimingModePage/Model/**"
-            },
-            {
-              "name": "View",
-              "source_files": "MKLoRaWAN-MTE/Classes/Functions/TimingModePage/View/**"
             }
           ]
         },

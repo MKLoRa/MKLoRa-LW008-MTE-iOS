@@ -22,11 +22,17 @@
 #import "MKMUInterface.h"
 #import "MKMUInterface+MKMUConfig.h"
 
-#import "MKMUStandbyModeModelController.h"
-#import "MKMUTimingModeController.h"
-#import "MKMUPeriodicModeController.h"
-#import "MKMUMotionModeController.h"
-#import "MKMUTimeSegmentedController.h"
+#import "MKStandbyModeController.h"
+#import "MKTimingModeController.h"
+#import "MKPeriodicModeController.h"
+#import "MKMotionModeController.h"
+#import "MKTimeSegmentedController.h"
+
+#import "MKMUMotionModeModel.h"
+#import "MKMUPeriodicModeModel.h"
+#import "MKMUStandbyModeModel.h"
+#import "MKMUTimeSegmentedModel.h"
+#import "MKMUTimingModeModel.h"
 
 @interface MKMUDeviceModeController ()<UITableViewDelegate,
 UITableViewDataSource,
@@ -66,31 +72,36 @@ MKTextButtonCellDelegate>
     
     if (indexPath.section == 1 && indexPath.row == 0) {
         //Standby Mode
-        MKMUStandbyModeModelController *vc = [[MKMUStandbyModeModelController alloc] init];
+        MKStandbyModeController *vc = [[MKStandbyModeController alloc] init];
+        vc.protocol = [[MKMUStandbyModeModel alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
     if (indexPath.section == 1 && indexPath.row == 1) {
         //Timing Mode
-        MKMUTimingModeController *vc = [[MKMUTimingModeController alloc] init];
+        MKTimingModeController *vc = [[MKTimingModeController alloc] init];
+        vc.protocol = [[MKMUTimingModeModel alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
     if (indexPath.section == 1 && indexPath.row == 2) {
         //Periodic Mode
-        MKMUPeriodicModeController *vc = [[MKMUPeriodicModeController alloc] init];
+        MKPeriodicModeController *vc = [[MKPeriodicModeController alloc] init];
+        vc.protocol = [[MKMUPeriodicModeModel alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
     if (indexPath.section == 1 && indexPath.row == 3) {
         //Motion Mode
-        MKMUMotionModeController *vc = [[MKMUMotionModeController alloc] init];
+        MKMotionModeController *vc = [[MKMotionModeController alloc] init];
+        vc.protocol = [[MKMUMotionModeModel alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
     if (indexPath.section == 1 && indexPath.row == 4) {
         //Time-Segmented Mode
-        MKMUTimeSegmentedController *vc = [[MKMUTimeSegmentedController alloc] init];
+        MKTimeSegmentedController *vc = [[MKTimeSegmentedController alloc] init];
+        vc.protocol = [[MKMUTimeSegmentedModel alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }

@@ -1,0 +1,6 @@
+framework module MKFilterPagesModule {
+  umbrella header "MKFilterPagesModule-umbrella.h"
+
+  export *
+  module * { export * }
+}
