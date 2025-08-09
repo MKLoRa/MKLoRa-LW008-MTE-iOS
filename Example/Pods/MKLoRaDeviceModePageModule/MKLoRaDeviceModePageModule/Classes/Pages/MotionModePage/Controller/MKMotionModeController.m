@@ -498,7 +498,7 @@ MKTextButtonCellDelegate>
     MKTextFieldCellModel *cellModel1 = [[MKTextFieldCellModel alloc] init];
     cellModel1.index = 2;
     cellModel1.msg = @"Trip End Timeout";
-    cellModel1.textPlaceholder = @"3~180";
+    cellModel1.textPlaceholder = @"1~180";
     cellModel1.textFieldType = mk_realNumberOnly;
     cellModel1.maxLength = 3;
     cellModel1.unit = @"x10s";

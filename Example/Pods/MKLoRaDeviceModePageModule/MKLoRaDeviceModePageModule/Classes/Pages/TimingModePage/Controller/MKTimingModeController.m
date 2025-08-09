@@ -120,9 +120,9 @@ MKReportTimePointCellDelegate>
 
 #pragma mark - MKTimingModeAddCellDelegate
 - (void)mk_addButtonPressed {
-    if (self.section2List.count >= 10) {
+    if (self.section2List.count >= 3) {
         //最多10组
-        [self.view showCentralToast:@"You can set up to 10 time points!"];
+        [self.view showCentralToast:@"You can set up to 3 time points!"];
         return;
     }
     MKReportTimePointCellModel *cellModel = [[MKReportTimePointCellModel alloc] init];
