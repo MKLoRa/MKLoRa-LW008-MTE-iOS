@@ -30,6 +30,13 @@
 
 @implementation MKMUTimingModeModel
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.maxPointList = 10;
+    }
+    return self;
+}
+
 - (void)readDataWithSucBlock:(void (^)(void))sucBlock failedBlock:(void (^)(NSError *error))failedBlock {
     dispatch_async(self.readQueue, ^{
         if (![self readStrategy]) {

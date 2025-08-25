@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MKMUTimeSegmentedModel : NSObject<MKTimeSegmentedPageProtocol>
 
+/// 最大可以添加的时间点个数，默认3
+@property (nonatomic, assign)NSInteger maxPointList;
+
 /*
  0:BLE
  1:GPS

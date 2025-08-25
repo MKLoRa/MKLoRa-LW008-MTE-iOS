@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MKMUTimingModeModel : NSObject<MKTimingModePageProtocol>
 
+/// 最大可以添加的时间点个数，默认10
+@property (nonatomic, assign)NSInteger maxPointList;
+
 /*
  0:BLE
  1:GPS
